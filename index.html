@@ -32,7 +32,6 @@ input,select,textarea{font-family:inherit;font-size:14px}
 .btn.xs{padding:6px 12px;font-size:12.5px;border-radius:8px}
 .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;pointer-events:none}
 
-/* Login */
 .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f766e 0%,#0d9488 45%,#14b8a6 100%);padding:20px}
 .login-card{background:#fff;border-radius:22px;padding:38px 34px;width:100%;max-width:400px;box-shadow:0 25px 60px rgba(0,0,0,.28)}
 .login-card .logo{width:72px;height:72px;border-radius:18px;margin:0 auto 16px;background:linear-gradient(135deg,var(--primary),#14b8a6);display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;box-shadow:0 10px 24px rgba(13,148,136,.35);overflow:hidden}
@@ -40,7 +39,6 @@ input,select,textarea{font-family:inherit;font-size:14px}
 .login-card h1{text-align:center;font-size:21px;margin-bottom:4px}
 .login-card .sub{text-align:center;color:var(--muted);font-size:13px;margin-bottom:24px}
 
-/* Forms */
 .field{margin-bottom:15px}
 .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#334155}
 .field input,.field select,.field textarea{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;transition:.15s;color:var(--ink)}
@@ -52,7 +50,6 @@ input,select,textarea{font-family:inherit;font-size:14px}
 .field-head .btn{padding:5px 11px;font-size:11.5px}
 .req{color:var(--danger)}
 
-/* App shell */
 .app{min-height:100vh;display:flex;flex-direction:column}
 .topbar{background:#fff;border-bottom:1px solid var(--line);padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(15,23,42,.04)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px}
@@ -65,14 +62,12 @@ input,select,textarea{font-family:inherit;font-size:14px}
 .tab.active{color:var(--primary);border-bottom-color:var(--primary);background:#f0fdfa}
 main{flex:1;padding:24px 22px 60px;max-width:1280px;width:100%;margin:0 auto}
 
-/* Cards */
 .card{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:20px;border:1px solid #eef2f6}
 .card h2{font-size:17px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
 .card .desc{font-size:13px;color:var(--muted);margin-bottom:18px}
 .card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
 .card-head h2{margin:0}
 
-/* Table */
 .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--line)}
 table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:700px}
 thead th{background:#f8fafc;padding:13px 14px;text-align:right;font-weight:700;color:#334155;font-size:12.5px;border-bottom:2px solid var(--line);white-space:nowrap}
@@ -97,7 +92,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .pill:hover{border-color:var(--primary);color:var(--primary)}
 .pill.active{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(13,148,136,.25)}
 
-/* Images */
 .image-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:12px 0}
 .image-card{border:1.5px solid var(--line);border-radius:12px;overflow:hidden;position:relative;background:#f8fafc;transition:.15s}
 .image-card:hover{border-color:var(--primary)}
@@ -115,7 +109,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .image-card .img-btn.replace:hover{background:var(--blue);color:#fff}
 .image-card .img-check{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
 
-/* Reader */
 .reader{font-size:14.5px;line-height:2.1;color:#1e293b}
 .reader h4{font-size:15px;color:var(--primary-dark);margin:22px 0 8px;padding-right:10px;border-right:4px solid var(--primary);border-radius:2px}
 .reader h4:first-child{margin-top:0}
@@ -124,7 +117,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .reader figure.article-img{margin:16px 0;text-align:center}
 .reader figure.article-img img{max-width:100%;max-height:420px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);display:inline-block}
 
-/* Modals */
 .modal{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;z-index:200;padding:28px 16px;overflow-y:auto}
 .modal.show{display:flex}
 .modal-box{background:#fff;border-radius:18px;width:100%;max-width:840px;box-shadow:0 30px 70px rgba(0,0,0,.3);animation:pop .2s ease;margin:auto}
@@ -155,7 +147,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 #toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(120px);background:#0f172a;color:#fff;padding:12px 24px;border-radius:12px;font-size:13.5px;z-index:1000;transition:.3s;opacity:0;box-shadow:0 12px 30px rgba(0,0,0,.3);max-width:88vw;text-align:center}
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
-/* History box */
 .history-box{background:#f0fdfa;padding:14px;border-radius:12px;border:1.5px solid var(--primary-light);margin-bottom:18px}
 .history-box .history-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
 .history-box .history-title span{font-size:13px;font-weight:700;color:var(--primary-dark)}
@@ -194,7 +185,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
   </div>
 
   <main>
-    <!-- BANK -->
     <section id="tab-bank">
       <div class="card">
         <div class="card-head">
@@ -213,12 +203,10 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
       </div>
     </section>
 
-    <!-- NEW -->
     <section id="tab-new" class="hidden">
       <div class="card">
         <div class="card-head"><h2 id="formTitle">➕ ایجاد مقاله جدید</h2><span id="draftBadge" class="badge hidden">پیش‌نویس ذخیره شده</span></div>
-        <p class="desc">فیلدهای ستاره‌دار الزامی هستند. برای درج تصویر در متن، ابتدا تصاویر را در بخش «پیوست تصاویر» اضافه کنید، سپس با دکمه «🖼 تصویر» بالای هر بخش، تصویر را در متن درج نمایید.</p>
-
+        <p class="desc">فیلدهای ستاره‌دار الزامی هستند. برای درج تصویر در متن، ابتدا تصاویر را در بخش «پیوست تصاویر» اضافه کنید.</p>
         <div class="grid2">
           <div class="field"><label>موضوع مقاله <span class="req">*</span></label><input id="fTitle" placeholder="عنوان مقاله" oninput="autoDraft()"></div>
           <div class="field"><label>ماهیت مقاله <span class="req">*</span></label>
@@ -229,24 +217,18 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
             </select>
           </div>
         </div>
-
         <div class="field">
-          <div class="field-head">
-            <label>🖼 پیوست تصاویر مقاله</label>
-            <span class="hint" id="imagesSummary">۰ تصویر</span>
-          </div>
+          <div class="field-head"><label>🖼 پیوست تصاویر مقاله</label><span class="hint" id="imagesSummary">۰ تصویر</span></div>
           <p class="hint" style="margin-bottom:8px">تصاویری که در متن استفاده می‌شوند، ابتدا باید در این بخش پیوست شوند.</p>
           <div id="articleImagesGrid" class="image-grid"></div>
           <input type="file" id="articleImageInput" accept="image/*" multiple style="display:none" onchange="handleArticleImageUpload(event)">
           <button class="btn ghost xs" onclick="document.getElementById('articleImageInput').click()">➕ پیوست تصویر جدید</button>
         </div>
-
         <div class="field">
           <div class="field-head"><label>سپاسگزاری <span style="color:var(--muted);font-weight:400">(اختیاری)</span></label>
             <button class="btn ghost xs" onclick="openImagePicker('fThanks')">🖼 تصویر</button></div>
           <textarea id="fThanks" placeholder="متن سپاسگزاری…" style="min-height:80px" oninput="autoDraft()"></textarea>
         </div>
-
         <div class="field">
           <div class="field-head"><label>چکیده</label>
             <div style="display:flex;gap:6px">
@@ -256,28 +238,20 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
           </div>
           <textarea id="fAbstract" placeholder="چکیده مقاله…" oninput="autoDraft()"></textarea>
         </div>
-
         <div class="field">
-          <div class="field-head"><label>مقدمه</label>
-            <button class="btn ghost xs" onclick="openImagePicker('fIntro')">🖼 تصویر</button></div>
+          <div class="field-head"><label>مقدمه</label><button class="btn ghost xs" onclick="openImagePicker('fIntro')">🖼 تصویر</button></div>
           <textarea id="fIntro" placeholder="متن مقدمه…" oninput="autoDraft()"></textarea>
         </div>
-
         <div class="field">
-          <div class="field-head"><label>متن</label>
-            <button class="btn ghost xs" onclick="openImagePicker('fBody')">🖼 تصویر</button></div>
+          <div class="field-head"><label>متن</label><button class="btn ghost xs" onclick="openImagePicker('fBody')">🖼 تصویر</button></div>
           <textarea id="fBody" placeholder="متن اصلی…" style="min-height:240px" oninput="autoDraft()"></textarea>
           <div class="hint" id="wordCount">۰ کلمه</div>
         </div>
-
         <div class="field">
-          <div class="field-head"><label>نتیجه‌گیری</label>
-            <button class="btn ghost xs" onclick="openImagePicker('fConclusion')">🖼 تصویر</button></div>
+          <div class="field-head"><label>نتیجه‌گیری</label><button class="btn ghost xs" onclick="openImagePicker('fConclusion')">🖼 تصویر</button></div>
           <textarea id="fConclusion" placeholder="متن نتیجه‌گیری…" oninput="autoDraft()"></textarea>
         </div>
-
         <div class="field"><label>منابع</label><textarea id="fRefs" placeholder="هر منبع در یک خط…" style="min-height:110px" oninput="autoDraft()"></textarea></div>
-
         <div class="form-actions">
           <button class="btn" onclick="saveArticle()">💾 ذخیره مقاله</button>
           <button class="btn ghost" onclick="resetForm()">پاک کردن فرم</button>
@@ -286,11 +260,10 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
       </div>
     </section>
 
-    <!-- SMART -->
     <section id="tab-smart" class="hidden">
       <div class="card">
         <h2>✨ استخراج هوشمند مقاله از وب</h2>
-        <p class="desc">موضوع را وارد کنید؛ منابع مرتبط جستجو می‌شوند. پس از انتخاب، <b>دو نسخه</b> ساخته می‌شود: نسخه مختصر و نسخه کامل (چند صفحه).</p>
+        <p class="desc">موضوع را وارد کنید؛ منابع مرتبط جستجو می‌شوند. سامانه به‌طور هوشمند جمله‌های تکراری را حذف و دو نسخه کامل و مختصر تولید می‌کند.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <input id="smartTopic" placeholder="مثال: هوش مصنوعی و آینده آموزش" style="flex:1;min-width:240px;padding:12px 15px;border:1.5px solid var(--line);border-radius:11px;font-size:14px">
           <button class="btn" onclick="smartSearch()">🔍 جستجو در فضای ابری</button>
@@ -315,11 +288,10 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
       </div>
     </section>
 
-    <!-- ADMINS -->
     <section id="tab-admins" class="hidden">
       <div class="card">
         <div class="card-head"><h2>👥 مدیران سامانه</h2><button class="btn xs" onclick="openAdminForm()">➕ افزودن مدیر جدید</button></div>
-        <p class="desc">فقط مدیر جاری می‌تواند مدیران را مدیریت کند. آخرین مدیر قابل حذف نیست و نمی‌توانید حساب خود را حذف کنید.</p>
+        <p class="desc">فقط مدیر جاری می‌تواند مدیران را مدیریت کند.</p>
         <div class="table-wrap">
           <table>
             <thead><tr><th style="width:34%">نام و نام خانوادگی</th><th style="width:22%">نام کاربری</th><th style="width:18%">تاریخ ایجاد</th><th style="width:13%">ویرایش</th><th style="width:13%">حذف</th></tr></thead>
@@ -327,7 +299,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
           </table>
         </div>
       </div>
-
       <div class="card">
         <div class="card-head">
           <h2>🕋 تصاویر بسم الله</h2>
@@ -336,14 +307,14 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
             <button class="btn xs" onclick="document.getElementById('bismAdminUpload').click()">➕ افزودن تصویر</button>
           </div>
         </div>
-        <p class="desc">تصاویر ذخیره‌شده در این بخش، در خروجی PDF به‌عنوان گزینه قابل انتخاب هستند. در صورت خالی بودن، متن «بسم الله الرحمن الرحیم» نمایش داده می‌شود.</p>
+        <p class="desc">تصاویر ذخیره‌شده در این بخش، در خروجی PDF به‌عنوان گزینه قابل انتخاب هستند.</p>
         <div id="bismAdminGrid" class="image-grid"></div>
       </div>
     </section>
   </main>
 </div>
 
-<!-- VIEW MODAL -->
+<!-- MODALS -->
 <div id="viewModal" class="modal">
   <div class="modal-box">
     <div class="modal-head"><h3 id="viewTitle">مشاهده مقاله</h3><button class="close-x" onclick="closeModal('viewModal')">✕</button></div>
@@ -355,7 +326,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
   </div>
 </div>
 
-<!-- IMAGE PICKER MODAL -->
 <div id="imagePickerModal" class="modal">
   <div class="modal-box" style="max-width:680px">
     <div class="modal-head"><h3>🖼 انتخاب تصویر برای درج در متن</h3><button class="close-x" onclick="closeModal('imagePickerModal')">✕</button></div>
@@ -371,13 +341,10 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
   </div>
 </div>
 
-<!-- EXPORT MODAL -->
 <div id="exportModal" class="modal">
   <div class="modal-box">
     <div class="modal-head"><h3>📑 خروجی استاندارد PDF</h3><button class="close-x" onclick="closeModal('exportModal')">✕</button></div>
     <div class="modal-body">
-
-      <!-- SAVED COLLECTORS -->
       <div class="history-box">
         <div class="history-title">
           <span>📋 مشخصات گردآورنده از سابقه</span>
@@ -385,13 +352,7 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
         </div>
         <div class="table-wrap">
           <table>
-            <thead>
-              <tr>
-                <th style="width:50%">مشخصات</th>
-                <th style="width:20%">نوع</th>
-                <th style="width:30%">عملیات</th>
-              </tr>
-            </thead>
+            <thead><tr><th style="width:50%">مشخصات</th><th style="width:20%">نوع</th><th style="width:30%">عملیات</th></tr></thead>
             <tbody id="savedCollectorsBody"></tbody>
           </table>
         </div>
@@ -438,7 +399,7 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
           <span style="font-weight:600;font-size:13px">درج صفحه «بسم الله الرحمن الرحیم» (اختیاری)</span>
         </label>
         <div id="bismillahBlock" style="margin-top:12px">
-          <p class="hint" style="margin-bottom:8px">تصویر بسم‌الله (اختیاری — با انتخاب هیچ تصویری، متن نمایش داده می‌شود):</p>
+          <p class="hint" style="margin-bottom:8px">تصویر بسم‌الله (اختیاری):</p>
           <div id="bismillahSelectGrid" class="image-grid"></div>
           <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
             <input type="file" id="bismillahUploadInput" accept="image/*" style="display:none" onchange="handleBismillahUpload(event)">
@@ -462,7 +423,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
   </div>
 </div>
 
-<!-- ADMIN MODAL -->
 <div id="adminModal" class="modal">
   <div class="modal-box" style="max-width:520px">
     <div class="modal-head"><h3 id="adminModalTitle">افزودن مدیر جدید</h3><button class="close-x" onclick="closeModal('adminModal')">✕</button></div>
@@ -483,11 +443,11 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 
 <script>
 /* ============================================================
-   داده‌ها + مهاجرت
+   داده‌ها
    ============================================================ */
-const STORAGE_KEY = 'articleBank_v4';
-const DRAFT_KEY   = 'articleBank_draft_v4';
-const LEGACY_KEYS = ['articleBank_v3','articleBank_v2','articleBank_v1'];
+const STORAGE_KEY = 'articleBank_v5';
+const DRAFT_KEY   = 'articleBank_draft_v5';
+const LEGACY_KEYS = ['articleBank_v4','articleBank_v3','articleBank_v2','articleBank_v1'];
 
 let DB = loadDB();
 let editingId = null;
@@ -514,10 +474,10 @@ function loadDB(){
       title:'هوش مصنوعی و کاربردهای آن در آموزش',
       nature:'علمی-پژوهشی',
       thanks:'از اساتید گرانقدر و همه عزیزانی که در تهیه این مقاله همراهی کردند سپاسگزاریم.',
-      abstract:'هوش مصنوعی به‌عنوان یکی از مهم‌ترین فناوری‌های قرن حاضر، تحولات گسترده‌ای در نظام‌های آموزشی ایجاد کرده است. این مقاله به بررسی کاربردهای هوش مصنوعی در فرایند یاددهی-یادگیری، شخصی‌سازی آموزش و ارزیابی هوشمند می‌پردازد.',
+      abstract:'هوش مصنوعی به‌عنوان یکی از مهم‌ترین فناوری‌های قرن حاضر، تحولات گسترده‌ای در نظام‌های آموزشی ایجاد کرده است.',
       intro:'در دهه‌های اخیر پیشرفت سریع فناوری اطلاعات و ارتباطات، الگوهای سنتی آموزش را دگرگون ساخته است. هوش مصنوعی با بهره‌گیری از الگوریتم‌های یادگیری ماشین می‌تواند به بهبود کیفیت آموزش کمک کند.',
       body:'هوش مصنوعی در آموزش شامل مجموعه‌ای از فناوری‌هاست که به سیستم‌های آموزشی امکان می‌دهد تا نیازهای یادگیرندگان را تشخیص داده و محتوای مناسب را ارائه دهند.\n\nیکی از مهم‌ترین کاربردها، سیستم‌های تدریس هوشمند است که با تحلیل رفتار یادگیرنده، مسیر یادگیری را شخصی‌سازی می‌کنند.\n\nارزیابی خودکار و بازخورد فوری نیز از دیگر دستاوردهای این فناوری است.',
-      conclusion:'هوش مصنوعی می‌تواند به‌عنوان ابزاری توانمند در خدمت نظام آموزشی قرار گیرد، مشروط بر آنکه زیرساخت‌های لازم فراهم و اصول اخلاقی رعایت شود.',
+      conclusion:'هوش مصنوعی می‌تواند به‌عنوان ابزاری توانمند در خدمت نظام آموزشی قرار گیرد.',
       refs:'۱. رضایی، م. (۱۴۰۲). هوش مصنوعی در آموزش. انتشارات دانشگاه تهران.\n۲. صادقی، ن. (۱۴۰۱). فناوری‌های نوین آموزشی. مجله پژوهش در آموزش، ۱۲(۳)، ۴۵-۶۲.',
       images:[],
       createdAt: Date.now()
@@ -540,20 +500,15 @@ function migrate(obj){
   return obj;
 }
 function saveDB(){
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(DB));
-    return true;
-  } catch(e) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(DB)); return true; }
+  catch(e) {
     if(e.name === 'QuotaExceededError' || /quota/i.test(e.message)){
       toast('⚠️ فضای ذخیره‌سازی پر شده. تصاویر کمتری پیوست کنید.');
-    } else {
-      toast('⚠️ خطا در ذخیره: ' + e.message);
-    }
+    } else { toast('⚠️ خطا در ذخیره: ' + e.message); }
     return false;
   }
 }
 
-/* ---------- ابزار ---------- */
 const $  = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
 const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -565,7 +520,59 @@ function openModal(id){ document.getElementById(id).classList.add('show'); }
 function closeModal(id){ document.getElementById(id).classList.remove('show'); }
 function getCurrentAdmin(){ return DB.admins.find(a => a.u === sessionStorage.getItem('loggedIn')) || null; }
 
-/* ---------- تصاویر ---------- */
+/* ============================================================
+   هوشمندسازی: نرمال‌سازی، حذف تکرار، خلاصه‌سازی
+   ============================================================ */
+function normalizeSentence(s){
+  return String(s)
+    .replace(/[\u200c\u200d\u200e\u200f\u064b-\u0652]/g, '')
+    .replace(/[.,!؟?،؛:«»"'؛]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .toLowerCase();
+}
+
+/* حذف جمله‌های عیناً تکراری در کل مقاله (حفظ ساختار پاراگراف‌ها) */
+function dedupeArticle(text){
+  if(!text) return '';
+  const paragraphs = String(text).split(/\n\n+/);
+  const globalSeen = new Set();
+  const resultParas = [];
+  for(const para of paragraphs){
+    if(!para.trim()) continue;
+    const sentences = para.split(/(?<=[.!؟?])\s+/);
+    const kept = [];
+    for(const s of sentences){
+      const trimmed = s.trim();
+      if(!trimmed) continue;
+      const key = normalizeSentence(trimmed);
+      if(!key || key.length < 5){ kept.push(trimmed); continue; }
+      if(globalSeen.has(key)) continue;
+      globalSeen.add(key);
+      kept.push(trimmed);
+    }
+    if(kept.length > 0) resultParas.push(kept.join(' '));
+  }
+  return resultParas.join('\n\n');
+}
+
+/* خلاصه‌سازی: نگه‌داشتن نسبت مشخصی از جمله‌های کلیدی (پیش‌فرض یک‌سوم) */
+function summarizeText(text, ratio = 1/3){
+  if(!text) return '';
+  const paragraphs = String(text).split(/\n\n+/).filter(p => p.trim());
+  const allSentences = [];
+  for(const p of paragraphs){
+    const s = p.split(/(?<=[.!؟?])\s+/).filter(x => x.trim());
+    allSentences.push(...s.map(x => x.trim()));
+  }
+  if(allSentences.length === 0) return String(text).trim();
+  const keepCount = Math.max(1, Math.ceil(allSentences.length * ratio));
+  return allSentences.slice(0, keepCount).join(' ');
+}
+
+/* ============================================================
+   تصاویر
+   ============================================================ */
 function formatBytes(b){
   if(b < 1024) return b + ' B';
   if(b < 1024*1024) return (b/1024).toFixed(1) + ' KB';
@@ -611,7 +618,10 @@ function richPara(text, imageMap){
   let html = '', buffer = '';
   const flush = () => {
     if(buffer.trim()){
-      html += buffer.split(/\n+/).map(s => s.trim()).filter(Boolean).map(s => '<p>'+esc(s)+'</p>').join('');
+      html += buffer.split(/\n+/).map(s => s.trim()).filter(Boolean).map(s => {
+        if(/^بخش\s/.test(s)) return `<h5 class="sub-heading">${esc(s)}</h5>`;
+        return '<p>'+esc(s)+'</p>';
+      }).join('');
       buffer = '';
     }
   };
@@ -627,7 +637,9 @@ function richPara(text, imageMap){
   return html;
 }
 
-/* ---------- ورود ---------- */
+/* ============================================================
+   ورود
+   ============================================================ */
 function doLogin(){
   const u = $('#loginUser').value.trim();
   const p = $('#loginPass').value;
@@ -657,7 +669,6 @@ function switchTab(name){
   if(name === 'admins'){ renderAdmins(); renderBismAdmin(); }
 }
 
-/* ---------- شروع مقاله جدید ---------- */
 function hasFormContent(){
   const fields = ['fTitle','fThanks','fAbstract','fIntro','fBody','fConclusion','fRefs'];
   return fields.some(id => $('#'+id).value.trim()) || currentArticleImages.length > 0;
@@ -671,7 +682,9 @@ function startNewArticle(){
   setTimeout(() => $('#fTitle').focus(), 100);
 }
 
-/* ---------- جدول بانک ---------- */
+/* ============================================================
+   جدول بانک
+   ============================================================ */
 function renderTable(){
   const q = ($('#searchBox')?.value || '').trim().toLowerCase();
   const list = DB.articles.filter(a => !q || (a.title + ' ' + (a.nature||'')).toLowerCase().includes(q));
@@ -702,7 +715,9 @@ function deleteArticle(id){
   if(saveDB()){ renderTable(); toast('🗑 مقاله حذف شد.'); }
 }
 
-/* ---------- مشاهده ---------- */
+/* ============================================================
+   مشاهده مقاله
+   ============================================================ */
 function viewArticle(id, version){
   const a = DB.articles.find(x => x.id === id);
   if(!a) return;
@@ -714,21 +729,23 @@ function viewArticle(id, version){
   if(version === 'brief'){
     const bd = a.briefData;
     if(bd){
-      if(bd.abstract)   html += `<h4>چکیده</h4>${richPara(bd.abstract, imap)}`;
       if(bd.intro)      html += `<h4>مقدمه</h4>${richPara(bd.intro, imap)}`;
+      if(bd.abstract)   html += `<h4>چکیده</h4>${richPara(bd.abstract, imap)}`;
       if(bd.body)       html += `<h4>متن</h4>${richPara(bd.body, imap)}`;
       if(bd.conclusion) html += `<h4>نتیجه‌گیری</h4>${richPara(bd.conclusion, imap)}`;
       if(bd.refs)       html += `<h4>منابع</h4>${richPara(bd.refs, imap)}`;
     } else {
       const b = a.brief || a.abstract || '';
-      if(b)             html += `<h4>چکیده</h4>${richPara(b, imap)}`;
-      if(a.conclusion)  html += `<h4>نتیجه‌گیری</h4>${richPara(a.conclusion, imap)}`;
-      if(a.refs)        html += `<h4>منابع</h4>${richPara(a.refs, imap)}`;
+      if(a.intro)      html += `<h4>مقدمه</h4>${richPara(summarizeText(a.intro, 1/3), imap)}`;
+      if(b)            html += `<h4>چکیده</h4>${richPara(b, imap)}`;
+      if(a.body)       html += `<h4>متن</h4>${richPara(summarizeText(a.body, 1/3), imap)}`;
+      if(a.conclusion) html += `<h4>نتیجه‌گیری</h4>${richPara(a.conclusion, imap)}`;
+      if(a.refs)       html += `<h4>منابع</h4>${richPara(a.refs, imap)}`;
     }
   } else {
     if(a.thanks)     html += `<h4>سپاسگزاری</h4>${richPara(a.thanks, imap)}`;
-    if(a.abstract)   html += `<h4>چکیده</h4>${richPara(a.abstract, imap)}`;
     if(a.intro)      html += `<h4>مقدمه</h4>${richPara(a.intro, imap)}`;
+    if(a.abstract)   html += `<h4>چکیده</h4>${richPara(a.abstract, imap)}`;
     if(a.body)       html += `<h4>متن</h4>${richPara(a.body, imap)}`;
     if(a.conclusion) html += `<h4>نتیجه‌گیری</h4>${richPara(a.conclusion, imap)}`;
     if(a.refs)       html += `<h4>منابع</h4>${richPara(a.refs, imap)}`;
@@ -738,7 +755,9 @@ function viewArticle(id, version){
 }
 function exportFromView(){ closeModal('viewModal'); if(viewingId) openExport(viewingId); }
 
-/* ---------- فرم مقاله ---------- */
+/* ============================================================
+   فرم مقاله
+   ============================================================ */
 function editArticle(id){
   const a = DB.articles.find(x => x.id === id);
   if(!a) return;
@@ -807,7 +826,7 @@ function renderArticleImages(){
     return;
   }
   box.innerHTML = currentArticleImages.map(img => `
-    <div class="image-card" data-id="${img.id}">
+    <div class="image-card">
       <img class="img-thumb" src="${img.data}" alt="${esc(img.name)}">
       <div class="img-actions">
         <button class="img-btn replace" title="تغییر تصویر" onclick="replaceArticleImage('${img.id}')">✎</button>
@@ -829,28 +848,17 @@ async function handleArticleImageUpload(e){
     if(file.size > 15 * 1024 * 1024){ toast('⚠️ تصویر «' + file.name + '» بیش از ۱۵ مگابایت است.'); continue; }
     try{
       const data = await resizeImage(file);
-      currentArticleImages.push({
-        id: 'img_' + uid(),
-        name: file.name,
-        data,
-        size: Math.round(data.length * 0.75)
-      });
+      currentArticleImages.push({ id: 'img_' + uid(), name: file.name, data, size: Math.round(data.length * 0.75) });
       added++;
     }catch(err){ toast('⚠️ خطا در پردازش «' + file.name + '»'); }
   }
   e.target.value = '';
-  if(added){
-    renderArticleImages();
-    autoDraft();
-    toast('✅ ' + faNum(added) + ' تصویر پیوست شد.');
-  }
+  if(added){ renderArticleImages(); autoDraft(); toast('✅ ' + faNum(added) + ' تصویر پیوست شد.'); }
 }
 function removeArticleImage(imgId){
   if(!confirm('حذف این تصویر؟ مارکرهای آن در متن نیز بی‌اثر خواهند شد.')) return;
   currentArticleImages = currentArticleImages.filter(i => i.id !== imgId);
-  renderArticleImages();
-  autoDraft();
-  toast('🗑 تصویر حذف شد.');
+  renderArticleImages(); autoDraft(); toast('🗑 تصویر حذف شد.');
 }
 function replaceArticleImage(imgId){
   const input = document.createElement('input');
@@ -858,21 +866,13 @@ function replaceArticleImage(imgId){
   input.accept = 'image/*';
   input.onchange = async (e) => {
     const file = e.target.files[0];
-    if(!file) return;
-    if(!file.type.startsWith('image/')){ toast('⚠️ فایل معتبر نیست.'); return; }
+    if(!file || !file.type.startsWith('image/')){ toast('⚠️ فایل معتبر نیست.'); return; }
     try{
       const data = await resizeImage(file);
       const idx = currentArticleImages.findIndex(i => i.id === imgId);
       if(idx > -1){
-        currentArticleImages[idx] = {
-          ...currentArticleImages[idx],
-          name: file.name,
-          data,
-          size: Math.round(data.length * 0.75)
-        };
-        renderArticleImages();
-        autoDraft();
-        toast('✅ تصویر جایگزین شد.');
+        currentArticleImages[idx] = { ...currentArticleImages[idx], name: file.name, data, size: Math.round(data.length * 0.75) };
+        renderArticleImages(); autoDraft(); toast('✅ تصویر جایگزین شد.');
       }
     }catch(err){ toast('⚠️ خطا در پردازش تصویر.'); }
   };
@@ -889,7 +889,7 @@ function renderPickerImages(){
   const box = $('#pickerImagesGrid');
   if(!box) return;
   if(currentArticleImages.length === 0){
-    box.innerHTML = '<div style="grid-column:1/-1;padding:18px;text-align:center;color:var(--muted);font-size:12.5px;border:1.5px dashed var(--line);border-radius:12px;background:#f8fafc">هنوز تصویری پیوست نشده. از دکمه پایین اضافه کنید.</div>';
+    box.innerHTML = '<div style="grid-column:1/-1;padding:18px;text-align:center;color:var(--muted);font-size:12.5px;border:1.5px dashed var(--line);border-radius:12px;background:#f8fafc">هنوز تصویری پیوست نشده.</div>';
     return;
   }
   box.innerHTML = currentArticleImages.map(img => `
@@ -905,9 +905,7 @@ function selectPickerImage(imgId){
   const marker = '\n\n[[IMG:' + imgId + ']]\n\n';
   const start = ta.selectionStart ?? ta.value.length;
   const end = ta.selectionEnd ?? ta.value.length;
-  const before = ta.value.substring(0, start);
-  const after = ta.value.substring(end);
-  ta.value = before + marker + after;
+  ta.value = ta.value.substring(0, start) + marker + ta.value.substring(end);
   ta.selectionStart = ta.selectionEnd = start + marker.length;
   ta.focus();
   autoDraft();
@@ -923,12 +921,7 @@ async function handlePickerUpload(e){
     if(file.size > 15 * 1024 * 1024){ toast('⚠️ تصویر بزرگ است.'); continue; }
     try{
       const data = await resizeImage(file);
-      currentArticleImages.push({
-        id: 'img_' + uid(),
-        name: file.name,
-        data,
-        size: Math.round(data.length * 0.75)
-      });
+      currentArticleImages.push({ id: 'img_' + uid(), name: file.name, data, size: Math.round(data.length * 0.75) });
       added++;
     }catch(err){ toast('⚠️ خطا در پردازش.'); }
   }
@@ -949,10 +942,7 @@ function autoDraft(){
       images: currentArticleImages
     };
     if(Object.values(d).some(v => (Array.isArray(v) ? v.length : (v && v.trim())))){
-      try{
-        localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
-        $('#draftBadge').classList.remove('hidden');
-      }catch(e){ /* پیش‌نویس بزرگ - نادیده بگیر */ }
+      try{ localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); $('#draftBadge').classList.remove('hidden'); }catch(e){}
     }
     updateWordCount();
   }, 500);
@@ -1047,83 +1037,139 @@ function buildMockResults(topic){
       content:`رویکردهای نوین در حوزه ${t} بر استفاده از فناوری‌های دیجیتال و همکاری بین‌رشته‌ای تأکید دارند.\n\nبه‌کارگیری این رویکردها می‌تواند به افزایش کارایی منجر شود.` }
   ];
 }
+
+/* ---------- ۲۰ قالب یکتا (همه با s.title) ---------- */
 const EXPAND_TEMPLATES = [
-  (t,s) => `در بررسی ${s.title}، آنچه بیش از همه جلب توجه می‌کند، جامعیت رویکرد نویسندگان به موضوع ${t} است. این منبع با تکیه بر شواهد تجربی و تحلیل داده‌های گردآوری‌شده، تصویری چندبعدی از وضعیت کنونی ${t} ارائه می‌دهد.`,
-  (t,s) => `از منظر مبانی نظری، ${((s.content||'').split(/[.。\n]/)[0]||t)}. این چارچوب نظری به پژوهشگران امکان می‌دهد تا پدیده ${t} را در بستری گسترده‌تر تحلیل کنند.`,
-  (t,s) => `در حوزه کاربرد عملی، یافته‌های این منبع نشان می‌دهد که ${t} می‌تواند در عرصه‌های گوناگون از جمله آموزش، پژوهش، مدیریت و سیاست‌گذاری مورد بهره‌برداری قرار گیرد.`,
-  (t,s) => `با این حال، نمی‌توان از چالش‌های پیش روی ${t} غافل شد. کمبود منابع، محدودیت‌های ساختاری، مقاومت‌های فرهنگی و نبود سیاست‌های حمایتی از جمله موانع هستند.`,
-  (t,s) => `مقایسه یافته‌های این منبع با سایر پژوهش‌های انجام‌شده در حوزه ${t} نشان می‌دهد که علیرغم اشتراک در کلیات، تفاوت‌های معناداری در جزئیات وجود دارد.`,
-  (t,s) => `از حیث روش‌شناسی، این منبع بر استفاده از روش‌های ترکیبی تأکید دارد و معتقد است که تکیه صرف بر یک روش نمی‌تواند تصویری کامل از ${t} ارائه دهد.`,
-  (t,s) => `نمونه‌های موردی ارائه‌شده در این منبع، گویای آن است که ${t} در بسترهای مختلف می‌تواند نمودهای متفاوتی داشته باشد.`,
-  (t,s) => `یکی از نکات مهم مورد تأکید این منبع، نقش ذی‌نفعان مختلف در توسعه ${t} است. از سیاست‌گذاران و متخصصان گرفته تا عموم مردم.`,
-  (t,s) => `این منبع به اهمیت پایش و ارزیابی مستمر در حوزه ${t} اشاره می‌کند و معتقد است که بدون سنجش دقیق شاخص‌ها، امکان اصلاح مسیر وجود ندارد.`,
-  (t,s) => `از منظر سرمایه انسانی، ${t} نیازمند تربیت نیروی متخصص و کارآمدی است که هم از دانش نظری کافی برخوردار باشد و هم مهارت‌های عملی داشته باشد.`,
-  (t,s) => `نگاهی به تجربه کشورهای پیشرو در حوزه ${t} نشان می‌دهد که موفقیت در این زمینه مستلزم عزم ملی و تداوم سرمایه‌گذاری است.`,
-  (t,s) => `سرانجام، افق پیش روی ${t} را می‌توان روشن توصیف کرد، مشروط بر آنکه سیاست‌گذاران و پژوهشگران با نگاهی آینده‌نگر عمل کنند.`
+  (t,s) => `در بررسی ${s.title}، آنچه بیش از همه جلب توجه می‌کند، جامعیت رویکرد نویسندگان به موضوع ${t} است. این منبع با تکیه بر شواهد تجربی و تحلیل داده‌های گردآوری‌شده، تصویری چندبعدی از وضعیت کنونی ارائه می‌دهد.`,
+  (t,s) => `از منظر مبانی نظری، ${s.title} چارچوبی فراهم می‌آورد که به پژوهشگران امکان می‌دهد پدیده ${t} را در بستری گسترده‌تر تحلیل کنند و ارتباط آن را با حوزه‌های مرتبط بهتر درک نمایند.`,
+  (t,s) => `در حوزه کاربرد عملی، یافته‌های ${s.title} نشان می‌دهد که ${t} می‌تواند در عرصه‌های گوناگون از جمله آموزش، پژوهش، مدیریت و سیاست‌گذاری مورد بهره‌برداری قرار گیرد.`,
+  (t,s) => `با این حال، ${s.title} از چالش‌های پیش روی ${t} نیز غافل نشده و کمبود منابع، محدودیت‌های ساختاری و نبود سیاست‌های حمایتی را از موانع مهم برمی‌شمارد.`,
+  (t,s) => `مقایسه یافته‌های ${s.title} با سایر پژوهش‌های انجام‌شده در حوزه ${t} نشان می‌دهد که علیرغم اشتراک در کلیات، تفاوت‌های معناداری در جزئیات و روش‌شناسی وجود دارد.`,
+  (t,s) => `از حیث روش‌شناسی، ${s.title} بر استفاده از روش‌های ترکیبی تأکید دارد و معتقد است که تکیه صرف بر یک روش نمی‌تواند تصویری کامل از ${t} ارائه دهد.`,
+  (t,s) => `نمونه‌های موردی ارائه‌شده در ${s.title} گویای آن است که ${t} در بسترهای مختلف می‌تواند نمودهای متفاوتی داشته باشد و این تنوع، ضرورت توجه به زمینه‌های بومی را برجسته می‌سازد.`,
+  (t,s) => `${s.title} نقش ذی‌نفعان مختلف را در توسعه ${t} مورد تأکید قرار می‌دهد و معتقد است که بدون مشارکت فعال همه گروه‌ها، پیشرفت پایدار دشوار خواهد بود.`,
+  (t,s) => `${s.title} به اهمیت پایش و ارزیابی مستمر در حوزه ${t} اشاره می‌کند و بدون سنجش دقیق شاخص‌ها، امکان اصلاح مسیر و بهبود عملکرد وجود نخواهد داشت.`,
+  (t,s) => `از منظر سرمایه انسانی، ${s.title} تصریح می‌کند که ${t} نیازمند تربیت نیروی متخصص و کارآمدی است که هم از دانش نظری کافی برخوردار باشد و هم مهارت‌های عملی داشته باشد.`,
+  (t,s) => `${s.title} با نگاهی به تجربه کشورهای پیشرو در حوزه ${t} نتیجه می‌گیرد که موفقیت در این زمینه مستلزم عزم ملی، ثبات سیاستی و تداوم سرمایه‌گذاری است.`,
+  (t,s) => `سرانجام، ${s.title} افق پیش روی ${t} را روشن توصیف می‌کند، مشروط بر آنکه سیاست‌گذاران و پژوهشگران با نگاهی آینده‌نگر و مبتنی بر شواهد علمی، مسیر توسعه این حوزه را هدایت کنند.`,
+  (t,s) => `${s.title} بر اهمیت همکاری بین‌رشته‌ای در مطالعات مرتبط با ${t} تأکید می‌کند و معتقد است که زاویه دید تک‌رشته‌ای نمی‌تواند ابعاد پیچیده این حوزه را به‌طور کامل روشن کند.`,
+  (t,s) => `در بخش جمع‌بندی، ${s.title} خاطرنشان می‌سازد که توسعه ${t} نیازمند برنامه‌ریزی بلندمدت و هماهنگی نهادی است و اقدامات مقطعی نمی‌تواند نتایج پایدار به همراه داشته باشد.`,
+  (t,s) => `${s.title} به ابعاد اخلاقی و اجتماعی ${t} نیز اشاره می‌کند و معتقد است که توجه به این ابعاد، برای تضمین پذیرش عمومی و مشروعیت اقدامات ضروری است.`,
+  (t,s) => `از دیدگاه ${s.title}، ارزیابی دقیق نیازها و اولویت‌بندی درست، پیش‌نیاز هرگونه اقدام مؤثر در حوزه ${t} است و بدون آن، تلاش‌ها ممکن است بی‌نتیجه بماند.`,
+  (t,s) => `${s.title} با تحلیل روندهای گذشته، چشم‌اندازی از تحولات آینده ${t} ترسیم می‌کند و بر ضرورت آمادگی نهادی تأکید می‌ورزد.`,
+  (t,s) => `${s.title} نمونه‌های موفق و ناموفق در حوزه ${t} را بررسی می‌کند و درس‌های آموخته از آنها را برای سیاست‌گذاران و پژوهشگران برمی‌شمارد.`,
+  (t,s) => `${s.title} بر نقش آموزش و آگاهی‌بخشی عمومی در ارتقای ${t} تأکید می‌کند و آن را یکی از ارکان اصلی توسعه پایدار می‌داند.`,
+  (t,s) => `در پایان، ${s.title} با ارائه پیشنهادهای عملی، مسیر حرکت به سوی وضعیت مطلوب در حوزه ${t} را ترسیم می‌کند و بر ضرورت پیگیری مستمر تأکید می‌ورزد.`
 ];
 function expandSource(topic, source, sourceIdx, numParagraphs){
   const out = [];
+  const len = EXPAND_TEMPLATES.length;
   for(let i = 0; i < numParagraphs; i++){
-    const tpl = EXPAND_TEMPLATES[(sourceIdx * 3 + i) % EXPAND_TEMPLATES.length];
+    const tpl = EXPAND_TEMPLATES[(sourceIdx * 3 + i) % len];
     out.push(tpl(topic, source));
   }
   return out;
 }
+
 function mergeSelected(){
   if(smartSelected.size === 0){ toast('⚠️ حداقل یک منبع را انتخاب کنید.'); return; }
   const topic = $('#smartTopic').value.trim();
   const chosen = [...smartSelected].map(i => smartResults[i]);
   const n = chosen.length;
 
-  const briefAbstract = `این مقاله با هدف بررسی جامع «${topic}» تدوین شده است. بدین منظور، ${n} منبع علمی معتبر بررسی و یافته‌های آنها تلفیق شده است.`;
-  const briefIntro = `امروزه ${topic} به یکی از مباحث کلیدی در عرصه‌های علمی و کاربردی تبدیل شده است.\n\nمقاله حاضر با تلفیق یافته‌های ${n} منبع معتبر، تصویری جامع ارائه می‌دهد.`;
-  const briefBody = chosen.map((c,i) => `بخش ${faNum(i+1)}: ${c.title}\n${c.content}`).join('\n\n');
-  const briefConclusion = `بر اساس بررسی‌ها می‌توان نتیجه گرفت که ${topic} حوزه‌ای چندبُعدی است که نیازمند نگاهی جامع است.`;
-  const briefRefs = chosen.map((c,i) => `${faNum(i+1)}. ${c.title}. ${c.source}، ${c.year}.`).join('\n');
-  const briefData = { abstract: briefAbstract, intro: briefIntro, body: briefBody, conclusion: briefConclusion, refs: briefRefs };
-
-  const perSource = Math.max(10, Math.ceil(30 / n));
+  /* ====== ۱) نسخه کامل ====== */
+  const perSource = Math.max(12, Math.ceil(60 / n));
   const allParagraphs = [];
   chosen.forEach((c, idx) => {
     allParagraphs.push(`بخش ${faNum(idx+1)}: ${c.title}`);
     allParagraphs.push(...expandSource(topic, c, idx, perSource));
   });
+  const fullBody = dedupeArticle(allParagraphs.join('\n\n'));
 
-  const fullAbstract = `پژوهش حاضر با هدف بررسی جامع و نظام‌مند «${topic}» تدوین شده است. بدین منظور، ${n} منبع علمی معتبر بررسی و تحلیل محتوایی شده‌اند. یافته‌ها نشان می‌دهد که ${topic} از منظر مبانی نظری، کاربردهای عملی، چالش‌ها و افق‌های پیش رو ابعاد گوناگونی دارد.`;
-  const fullIntro = `امروزه ${topic} به یکی از مباحث کلیدی در عرصه‌های علمی، آموزشی، اقتصادی و اجتماعی تبدیل شده است.\n\nمقاله حاضر با تلفیق یافته‌های ${n} منبع معتبر، تلاش می‌کند تصویری جامع از وضعیت کنونی ارائه دهد.\n\nساختار مقاله: هر منبع به تفصیل بررسی می‌شود، سپس یافته‌ها تلفیق و نهایتاً نتیجه‌گیری ارائه می‌گردد.`;
-  const fullBody = allParagraphs.join('\n\n');
-  const fullConclusion = `بر اساس بررسی‌های جامع انجام‌شده، می‌توان نتیجه گرفت که ${topic} حوزه‌ای چندبُعدی، پیچیده و پرظرفیت است.\n\nاز منظر نظری، پژوهش‌های انجام‌شده چارچوب‌های متنوعی ارائه داده‌اند. با این حال، فقدان یک چارچوب جامع از خلأهای موجود است.\n\nپیشنهادهای کاربردی: تدوین سیاست‌های حمایتی، تقویت زیرساخت‌ها، ترویج فرهنگ استفاده از شواهد علمی، و تشویق همکاری‌های بین‌المللی.`;
+  const fullAbstract = dedupeArticle(
+    `پژوهش حاضر با هدف بررسی جامع و نظام‌مند «${topic}» تدوین شده است. ` +
+    `بدین منظور، ${n} منبع علمی معتبر شامل مقالات، کتاب‌ها و منابع دانشنامه‌ای بررسی و تحلیل محتوایی شده‌اند. ` +
+    `یافته‌ها نشان می‌دهد که ${topic} از منظر مبانی نظری، کاربردهای عملی، چالش‌ها و افق‌های پیش رو ابعاد گوناگونی دارد.`
+  );
+
+  const fullIntro = dedupeArticle(
+    `امروزه ${topic} به یکی از مباحث کلیدی در عرصه‌های علمی، آموزشی، اقتصادی و اجتماعی تبدیل شده است.\n\n` +
+    `مقاله حاضر با تلفیق یافته‌های ${n} منبع معتبر، تلاش می‌کند تصویری جامع از وضعیت کنونی، چالش‌ها و افق‌های آینده ارائه دهد.\n\n` +
+    `ساختار مقاله به این ترتیب است: هر منبع به تفصیل بررسی می‌شود، سپس یافته‌ها تلفیق و نهایتاً نتیجه‌گیری ارائه می‌گردد.`
+  );
+
+  const fullConclusion = dedupeArticle(
+    `بر اساس بررسی‌های جامع انجام‌شده، می‌توان نتیجه گرفت که ${topic} حوزه‌ای چندبُعدی، پیچیده و پرظرفیت است که نیازمند نگاهی نظام‌مند و بین‌رشته‌ای است.\n\n` +
+    `از منظر نظری، پژوهش‌های انجام‌شده چارچوب‌های متنوعی ارائه داده‌اند. با این حال، فقدان یک چارچوب جامع از خلأهای موجود است.\n\n` +
+    `پیشنهادهای کاربردی: تدوین سیاست‌های حمایتی، تقویت زیرساخت‌ها، ترویج فرهنگ استفاده از شواهد علمی، و تشویق همکاری‌های بین‌المللی.`
+  );
+
+  const fullRefs = chosen.map((c,i) => `${faNum(i+1)}. ${c.title}. ${c.source}، ${c.year}.`).join('\n');
+
+  /* ====== ۲) نسخه مختصر (بر پایه نسخه کامل) ====== */
+  const briefIntro = dedupeArticle(summarizeText(fullIntro, 1/3));
+
+  const briefAbstract = dedupeArticle(
+    `این مقاله با هدف بررسی جامع «${topic}» تدوین شده است. ` +
+    `${n} منبع علمی معتبر بررسی و یافته‌های آنها تلفیق شده است. ` +
+    `${topic} از ابعاد گوناگون نظری، کاربردی و چالش‌محور قابل مطالعه است.`
+  );
+
+  const briefBody = dedupeArticle(
+    chosen.map((c,i) => `بخش ${faNum(i+1)}: ${c.title}\n${c.content}`).join('\n\n')
+  );
+
+  const briefConclusion = dedupeArticle(
+    `بر اساس بررسی‌ها می‌توان نتیجه گرفت که ${topic} حوزه‌ای چندبُعدی است که نیازمند نگاهی جامع و بین‌رشته‌ای است. ` +
+    `با وجود پیشرفت‌های قابل توجه، زمینه‌های بسیاری برای پژوهش و اقدام عملی وجود دارد.`
+  );
+
+  const briefData = {
+    intro: briefIntro,
+    abstract: briefAbstract,
+    body: briefBody,
+    conclusion: briefConclusion,
+    refs: fullRefs
+  };
 
   smartMerged = {
     title: topic, nature:'علمی-پژوهشی',
-    thanks:'از تمامی پژوهشگران و نویسندگانی که منابع این مقاله بر پایه آثار ارزشمند آنان تدوین شده است، صمیمانه سپاسگزاریم.',
-    abstract: fullAbstract, intro: fullIntro, body: fullBody,
-    conclusion: fullConclusion, refs: briefRefs,
-    briefData, brief: briefAbstract + '\n\n' + briefConclusion,
+    thanks: 'از تمامی پژوهشگران و نویسندگانی که منابع این مقاله بر پایه آثار ارزشمند آنان تدوین شده است، صمیمانه سپاسگزاریم.',
+    intro: fullIntro,
+    abstract: fullAbstract,
+    body: fullBody,
+    conclusion: fullConclusion,
+    refs: fullRefs,
+    briefData,
+    brief: briefData.abstract + '\n\n' + briefData.conclusion,
     images: []
   };
 
   renderSmartPreview('full');
   $('#smartPreviewCard').classList.remove('hidden');
   $('#smartPreviewCard').scrollIntoView({behavior:'smooth', block:'start'});
-  toast('🧩 نسخه کامل و مختصر تولید شد.');
+  toast('🧩 نسخه کامل + مختصر تولید شد (تکرارها حذف شدند).');
 }
+
 function renderSmartPreview(version){
   $('#pvFullBtn').classList.toggle('active', version === 'full');
   $('#pvBriefBtn').classList.toggle('active', version === 'brief');
   if(!smartMerged) return;
   const m = smartMerged;
   const data = version === 'full'
-    ? { abstract: m.abstract, intro: m.intro, body: m.body, conclusion: m.conclusion, refs: m.refs }
+    ? { intro: m.intro, abstract: m.abstract, body: m.body, conclusion: m.conclusion, refs: m.refs }
     : m.briefData;
-  const para = t => String(t||'').split(/\n+/).filter(s=>s.trim()).map(s=>'<p>'+esc(s)+'</p>').join('');
-  const words = [data.abstract, data.intro, data.body, data.conclusion].join(' ').split(/\s+/).filter(Boolean).length;
+  const para = t => String(t||'').split(/\n+/).filter(s=>s.trim()).map(s => {
+    if(/^بخش\s/.test(s)) return `<h5 class="sub-heading" style="font-size:13.5px;color:var(--primary-dark);margin:14px 0 6px">${esc(s)}</h5>`;
+    return '<p>'+esc(s)+'</p>';
+  }).join('');
+  const words = [data.intro, data.abstract, data.body, data.conclusion].join(' ').split(/\s+/).filter(Boolean).length;
   const estPages = Math.ceil(words / 300);
   $('#smartPreview').innerHTML = `
     <h4 style="border:none;padding:0;font-size:17px;color:var(--ink)">${esc(m.title)}</h4>
     <div class="meta">${version === 'full' ? 'نسخه کامل' : 'نسخه مختصر'} · ${faNum(words)} کلمه${version === 'full' ? ' · حدود ' + faNum(estPages) + ' صفحه' : ''}</div>
-    <h4>چکیده</h4>${para(data.abstract)}
     <h4>مقدمه</h4>${para(data.intro)}
+    <h4>چکیده</h4>${para(data.abstract)}
     <h4>متن</h4>${para(data.body)}
     <h4>نتیجه‌گیری</h4>${para(data.conclusion)}
     <h4>منابع</h4>${para(data.refs)}`;
@@ -1139,7 +1185,7 @@ function confirmSmartAdd(){
   $('#smartMergeBar').classList.add('hidden');
   $('#smartTopic').value = '';
   renderTable(); switchTab('bank');
-  toast('✅ نسخه کامل و مختصر به بانک اضافه شد.');
+  toast('✅ هر دو نسخه به بانک اضافه شد.');
 }
 
 /* ============================================================
@@ -1261,12 +1307,8 @@ async function handleBismillahUploadGeneric(e){
   }
   e.target.value = '';
   if(addedIds.length){
-    if(saveDB()){
-      toast('✅ ' + faNum(addedIds.length) + ' تصویر ذخیره شد.');
-    } else {
-      // rollback
-      DB.bismillahImages = DB.bismillahImages.filter(img => !addedIds.includes(img.id));
-    }
+    if(saveDB()){ toast('✅ ' + faNum(addedIds.length) + ' تصویر ذخیره شد.'); }
+    else { DB.bismillahImages = DB.bismillahImages.filter(img => !addedIds.includes(img.id)); }
   }
 }
 function deleteBismillah(id){
@@ -1309,7 +1351,7 @@ function clearBismillahSelection(){
 }
 
 /* ============================================================
-   PDF Export + سابقه مشخصات گردآورنده
+   PDF Export
    ============================================================ */
 let expState = { articleId:null, version:'full', type:'student', mode:'single', collectors:[''], bismillahImageId:null, loadedCollectorId:null };
 
@@ -1397,17 +1439,13 @@ function renderSavedCollectors(){
   const tb = $('#savedCollectorsBody');
   if(!tb) return;
   if(!Array.isArray(DB.savedCollectors) || DB.savedCollectors.length === 0){
-    tb.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--muted);padding:14px;font-size:12.5px">هنوز مشخصاتی ذخیره نشده است. پس از تکمیل فیلدها، دکمه «💾 ذخیره این مشخصات در سابقه» را بزنید.</td></tr>';
+    tb.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--muted);padding:14px;font-size:12.5px">هنوز مشخصاتی ذخیره نشده است.</td></tr>';
     return;
   }
   tb.innerHTML = DB.savedCollectors.map(p => {
     const isLoaded = expState.loadedCollectorId === p.id;
-    return `
-    <tr>
-      <td>
-        ${esc(p.label)}
-        ${isLoaded ? '<span class="badge history-badge">بارگذاری شده</span>' : ''}
-      </td>
+    return `<tr>
+      <td>${esc(p.label)}${isLoaded ? '<span class="badge history-badge">بارگذاری شده</span>' : ''}</td>
       <td><span class="badge">${esc(TYPE_LABELS[p.type] || p.type)}</span></td>
       <td style="display:flex;gap:6px;flex-wrap:wrap">
         <button class="btn ghost xs" onclick="loadSavedCollector('${p.id}')">استفاده</button>
@@ -1423,85 +1461,52 @@ function loadSavedCollector(id){
   expState.type = p.type;
   expState.mode = p.mode || 'single';
   expState.collectors = Array.isArray(p.collectors) ? [...p.collectors] : [''];
-
   $$('#typePills .pill').forEach(el => el.classList.toggle('active', el.dataset.t === p.type));
   $('#modeSingle').classList.toggle('active', expState.mode === 'single');
   $('#modeMulti').classList.toggle('active', expState.mode === 'multi');
-
   renderCollectors();
   renderTypeFields();
-
   const fields = p.fields || {};
   Object.keys(fields).forEach(k => {
     const el = document.getElementById('tf_' + k);
     if(el) el.value = fields[k] || '';
   });
-
   renderSavedCollectors();
   toast('✅ مشخصات بارگذاری شد. می‌توانید ویرایش کنید.');
 }
 function saveCollectorToHistory(){
   const collectors = expState.collectors.map(c => c.trim()).filter(Boolean);
   if(collectors.length === 0){ toast('⚠️ ابتدا نام گردآورنده را وارد کنید.'); return; }
-
   const fields = {};
   TYPE_FIELDS[expState.type].forEach(f => {
     const el = document.getElementById('tf_' + f.k);
     fields[f.k] = el ? el.value.trim() : '';
   });
-
   const typeLabel = TYPE_LABELS[expState.type];
   const label = collectors.join(' و ') + ' (' + typeLabel + ')';
+  const profile = { id: 'col_' + uid(), label, type: expState.type, typeLabel, mode: expState.mode, collectors, fields, createdAt: Date.now() };
 
-  const profile = {
-    id: 'col_' + uid(),
-    label,
-    type: expState.type,
-    typeLabel,
-    mode: expState.mode,
-    collectors: collectors,
-    fields,
-    createdAt: Date.now()
-  };
-
-  // اگر از سابقه بارگذاری شده بود
   if(expState.loadedCollectorId){
     const idx = DB.savedCollectors.findIndex(c => c.id === expState.loadedCollectorId);
     if(idx > -1){
       const existing = DB.savedCollectors[idx];
-      const sameAsExisting =
-        JSON.stringify(existing.collectors) === JSON.stringify(profile.collectors) &&
-        existing.type === profile.type &&
-        existing.mode === profile.mode &&
+      const same = JSON.stringify(existing.collectors) === JSON.stringify(profile.collectors) &&
+        existing.type === profile.type && existing.mode === profile.mode &&
         JSON.stringify(existing.fields) === JSON.stringify(profile.fields);
-      if(sameAsExisting){
-        toast('ℹ️ تغییری نسبت به سابقه ذخیره‌شده وجود ندارد.');
-        return;
-      }
+      if(same){ toast('ℹ️ تغییری نسبت به سابقه ذخیره‌شده وجود ندارد.'); return; }
       if(confirm('سابقه بارگذاری‌شده به‌روزرسانی شود؟\n(خیر = ذخیره به‌عنوان سابقه جدید)')){
         profile.id = expState.loadedCollectorId;
         const backup = DB.savedCollectors[idx];
         DB.savedCollectors[idx] = profile;
-        if(saveDB()){
-          renderSavedCollectors();
-          toast('✅ سابقه به‌روزرسانی شد.');
-        } else {
-          DB.savedCollectors[idx] = backup;
-        }
+        if(saveDB()){ renderSavedCollectors(); toast('✅ سابقه به‌روزرسانی شد.'); }
+        else { DB.savedCollectors[idx] = backup; }
         return;
       }
     }
   }
-
-  // ذخیره به‌عنوان جدید
   DB.savedCollectors.unshift(profile);
-  if(saveDB()){
-    expState.loadedCollectorId = profile.id;
-    renderSavedCollectors();
-    toast('✅ در سابقه ذخیره شد.');
-  } else {
-    DB.savedCollectors.shift();
-  }
+  if(saveDB()){ expState.loadedCollectorId = profile.id; renderSavedCollectors(); toast('✅ در سابقه ذخیره شد.'); }
+  else { DB.savedCollectors.shift(); }
 }
 function deleteSavedCollector(id){
   if(!confirm('این سابقه حذف شود؟')) return;
@@ -1559,13 +1564,17 @@ function buildPrintDocument(){
   }
 
   const e = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
   const rp = (text) => {
     if(!text) return '';
     const parts = String(text).split(/(\[\[IMG:[a-zA-Z0-9_]+\]\])/g);
     let html = '', buffer = '';
     const flush = () => {
       if(buffer.trim()){
-        html += buffer.split(/\n+/).map(s => s.trim()).filter(Boolean).map(s => '<p>'+e(s)+'</p>').join('');
+        html += buffer.split(/\n+/).map(s => s.trim()).filter(Boolean).map(s => {
+          if(/^بخش\s/.test(s)) return `<h3 class="sub-title">${e(s)}</h3>`;
+          return `<p>${e(s)}</p>`;
+        }).join('');
         buffer = '';
       }
     };
@@ -1600,18 +1609,22 @@ function buildPrintDocument(){
   if(isBrief){
     const bd = a.briefData;
     if(bd){
-      if(bd.abstract)   body += `<div class="page section"><h2 class="section-title">چکیده</h2><div class="section-body">${rp(bd.abstract)}</div></div>`;
+      /* ترتیب: مقدمه ← چکیده ← متن ← نتیجه‌گیری ← منابع */
       if(bd.intro)      body += `<div class="page section"><h2 class="section-title">مقدمه</h2><div class="section-body">${rp(bd.intro)}</div></div>`;
+      if(bd.abstract)   body += `<div class="page section"><h2 class="section-title">چکیده</h2><div class="section-body">${rp(bd.abstract)}</div></div>`;
       if(bd.body)       body += `<div class="page section"><h2 class="section-title">متن</h2><div class="section-body">${rp(bd.body)}</div></div>`;
       if(bd.conclusion) body += `<div class="page section"><h2 class="section-title">نتیجه‌گیری</h2><div class="section-body">${rp(bd.conclusion)}</div></div>`;
       if(bd.refs)       body += `<div class="page section"><h2 class="section-title">منابع</h2><div class="section-body">${rp(bd.refs)}</div></div>`;
     } else {
       const b = a.brief || a.abstract || '';
-      if(b) body += `<div class="page section"><h2 class="section-title">چکیده</h2><div class="section-body">${rp(b)}</div></div>`;
+      if(a.intro)      body += `<div class="page section"><h2 class="section-title">مقدمه</h2><div class="section-body">${rp(summarizeText(a.intro, 1/3))}</div></div>`;
+      if(b)            body += `<div class="page section"><h2 class="section-title">چکیده</h2><div class="section-body">${rp(b)}</div></div>`;
+      if(a.body)       body += `<div class="page section"><h2 class="section-title">متن</h2><div class="section-body">${rp(summarizeText(a.body, 1/3))}</div></div>`;
       if(a.conclusion) body += `<div class="page section"><h2 class="section-title">نتیجه‌گیری</h2><div class="section-body">${rp(a.conclusion)}</div></div>`;
-      if(a.refs) body += `<div class="page section"><h2 class="section-title">منابع</h2><div class="section-body">${rp(a.refs)}</div></div>`;
+      if(a.refs)       body += `<div class="page section"><h2 class="section-title">منابع</h2><div class="section-body">${rp(a.refs)}</div></div>`;
     }
   } else {
+    /* ترتیب: مقدمه ← چکیده ← متن ← نتیجه‌گیری ← منابع */
     if(a.intro)      body += `<div class="page section"><h2 class="section-title">مقدمه</h2><div class="section-body">${rp(a.intro)}</div></div>`;
     if(a.abstract)   body += `<div class="page section"><h2 class="section-title">چکیده</h2><div class="section-body">${rp(a.abstract)}</div></div>`;
     if(a.body)       body += `<div class="page section"><h2 class="section-title">متن</h2><div class="section-body">${rp(a.body)}</div></div>`;
@@ -1629,6 +1642,8 @@ function buildPrintDocument(){
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{font-family:Vazirmatn,'Iranian Sans',Tahoma,Arial,sans-serif;font-size:12pt;line-height:2;color:#000;direction:rtl;background:#fff}
 .page:not(:last-child){page-break-after:always;break-after:page}
+
+/* ---- جلد ---- */
 .cover{height:246mm;display:flex;flex-direction:column;justify-content:space-between;text-align:center}
 .cover-top{padding-top:28mm}
 .cover-title{font-size:25pt;font-weight:900;line-height:1.65;margin:0 0 18mm;word-wrap:break-word;overflow-wrap:break-word}
@@ -1636,13 +1651,51 @@ html,body{font-family:Vazirmatn,'Iranian Sans',Tahoma,Arial,sans-serif;font-size
 .cover-info>div{margin-bottom:3mm}
 .cover-bottom{font-size:13pt;font-weight:700;line-height:2.05;padding-bottom:2mm}
 .cover-bottom>div{margin-bottom:2mm}
+
+/* ---- بسم‌الله ---- */
 .bismillah{height:246mm;display:flex;align-items:center;justify-content:center;font-size:24pt;font-weight:700}
 .bismillah-img{height:246mm;display:flex;align-items:center;justify-content:center}
 .bismillah-img img{max-width:90%;max-height:90%;object-fit:contain}
-.section-title{font-size:17pt;font-weight:800;text-align:center;margin:0 0 10mm;padding-bottom:4mm;border-bottom:2px solid #000}
-.section-body p{font-size:12pt;line-height:2.15;text-align:justify;text-align-last:right;margin:0 0 5mm;word-wrap:break-word;overflow-wrap:break-word}
-.section-body figure.article-img{margin:5mm auto;text-align:center;page-break-inside:avoid;break-inside:avoid}
-.section-body figure.article-img img{max-width:100%;max-height:100mm;height:auto;display:inline-block;border-radius:3px}
+
+/* ---- سرفصل‌ها ---- */
+.section-title{
+  font-size:16pt;font-weight:800;text-align:center;
+  margin:0 0 8mm;padding-bottom:3mm;border-bottom:1.5px solid #333;
+  page-break-after:avoid;break-after:avoid;
+  page-break-inside:avoid;break-inside:avoid;
+}
+
+/* ---- پاراگراف‌ها ---- */
+.section-body > p{
+  font-size:12pt;line-height:2.1;
+  text-align:justify;text-align-last:right;text-justify:inter-word;
+  margin:0 0 5mm;
+  orphans:2;widows:2;
+  page-break-inside:avoid;break-inside:avoid;
+  word-wrap:break-word;overflow-wrap:break-word;
+}
+.section-body > p:last-child{margin-bottom:0}
+
+/* ---- زیرعنوان‌ها (بخش N) ---- */
+.section-body > h3.sub-title{
+  font-size:13pt;font-weight:800;color:#000;
+  margin:8mm 0 3mm;padding-right:0;
+  text-align:right;
+  page-break-after:avoid;break-after:avoid;
+  page-break-inside:avoid;break-inside:avoid;
+}
+.section-body > h3.sub-title + p{margin-top:0}
+
+/* ---- تصاویر ---- */
+.section-body figure.article-img{
+  margin:5mm auto;text-align:center;
+  page-break-inside:avoid;break-inside:avoid;
+}
+.section-body figure.article-img img{
+  max-width:100%;max-height:100mm;height:auto;
+  display:inline-block;border-radius:3px;
+}
+
 @media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head>
@@ -1663,11 +1716,7 @@ function generatePDF(){
   let win = null;
   try { win = window.open('', '_blank', 'width=1000,height=800'); } catch(e){ win = null; }
 
-  if(!win){
-    // Fallback: iframe
-    printViaIframe(doc);
-    return;
-  }
+  if(!win){ printViaIframe(doc); return; }
 
   try {
     win.document.open();
@@ -1677,10 +1726,8 @@ function generatePDF(){
     printViaIframe(doc);
     return;
   }
-
   waitForPrint(win);
 }
-
 function waitForPrint(win){
   let attempts = 0;
   const maxAttempts = 60;
@@ -1696,8 +1743,7 @@ function waitForPrint(win){
           if(!imgs[i].complete){ imgsReady = false; break; }
         }
       }
-    } catch(e){ /* cross-origin - unlikely */ }
-
+    } catch(e){}
     if((ready && (imgsReady || attempts > 30)) || attempts >= maxAttempts){
       setTimeout(() => {
         try { win.focus(); win.print(); } catch(e){}
@@ -1710,7 +1756,6 @@ function waitForPrint(win){
   };
   setTimeout(check, 300);
 }
-
 function printViaIframe(doc){
   const iframe = document.createElement('iframe');
   iframe.style.position = 'fixed';
@@ -1728,13 +1773,11 @@ function printViaIframe(doc){
     iframeDoc.write(doc);
     iframeDoc.close();
   } catch(e){
-    toast('⛔ ساخت پیش‌نمایش ناموفق. لطفاً از مرورگر دیگری امتحان کنید.');
+    toast('⛔ ساخت پیش‌نمایش ناموفق.');
     document.body.removeChild(iframe);
     $('#overlay').classList.add('hidden');
     return;
   }
-
-  // صبر برای لود تصاویر و فونت
   let attempts = 0;
   const tryPrint = () => {
     attempts++;
@@ -1746,15 +1789,10 @@ function printViaIframe(doc){
         if(!imgs[i].complete){ imgsReady = false; break; }
       }
     } catch(e){}
-
     if((ready && imgsReady) || attempts > 30){
       setTimeout(() => {
-        try {
-          iframe.contentWindow.focus();
-          iframe.contentWindow.print();
-        } catch(e){
-          toast('⚠️ لطفاً پاپ‌آپ را برای این سایت مجاز کنید.');
-        }
+        try { iframe.contentWindow.focus(); iframe.contentWindow.print(); }
+        catch(e){ toast('⚠️ لطفاً پاپ‌آپ را برای این سایت مجاز کنید.'); }
         setTimeout(() => {
           if(iframe.parentNode) document.body.removeChild(iframe);
           $('#overlay').classList.add('hidden');
