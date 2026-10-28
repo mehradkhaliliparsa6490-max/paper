@@ -3,24 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0d9488">
 <title>بانک مقاله</title>
-<link rel="manifest" href="./manifest.json">
-<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
-<link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--primary:#0d9488;--primary-dark:#0f766e;--primary-light:#ccfbf1;
-  --ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--bg:#f1f5f9;
-  --danger:#e11d48;--warn:#f59e0b;--blue:#2563eb;--radius:14px;--shadow:0 4px 20px rgba(15,23,42,.08)}
+:root{--primary:#0d9488;--primary-dark:#0f766e;--primary-light:#ccfbf1;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--bg:#f1f5f9;--danger:#e11d48;--warn:#f59e0b;--blue:#2563eb;--radius:14px;--shadow:0 4px 20px rgba(15,23,42,.08)}
 body{font-family:Vazirmatn,Tahoma,sans-serif;background:var(--bg);color:var(--ink);direction:rtl;line-height:1.7;min-height:100vh}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 input,select,textarea{font-family:inherit;font-size:14px}
 .hidden{display:none!important}
-
-/* Buttons */
 .btn{display:inline-flex;align-items:center;gap:6px;justify-content:center;padding:10px 18px;border-radius:10px;font-size:14px;font-weight:600;background:var(--primary);color:#fff;transition:.18s;white-space:nowrap;border:1px solid transparent}
 .btn:hover{background:var(--primary-dark);transform:translateY(-1px)}
 .btn.ghost{background:#fff;color:var(--ink);border-color:var(--line)}
@@ -33,16 +24,10 @@ input,select,textarea{font-family:inherit;font-size:14px}
 .btn.pdf:hover{background:var(--warn);color:#fff}
 .btn.xs{padding:6px 12px;font-size:12.5px;border-radius:8px}
 .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;pointer-events:none}
-
-/* Login */
 .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f766e 0%,#0d9488 45%,#14b8a6 100%);padding:20px}
 .login-card{background:#fff;border-radius:22px;padding:38px 34px;width:100%;max-width:400px;box-shadow:0 25px 60px rgba(0,0,0,.28)}
-.login-card .logo{width:72px;height:72px;border-radius:18px;margin:0 auto 16px;background:linear-gradient(135deg,var(--primary),#14b8a6);display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;box-shadow:0 10px 24px rgba(13,148,136,.35);overflow:hidden}
-.login-card .logo img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}
 .login-card h1{text-align:center;font-size:21px;margin-bottom:4px}
 .login-card .sub{text-align:center;color:var(--muted);font-size:13px;margin-bottom:24px}
-
-/* Forms */
 .field{margin-bottom:15px}
 .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#334155}
 .field input,.field select,.field textarea{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;transition:.15s;color:var(--ink)}
@@ -53,28 +38,20 @@ input,select,textarea{font-family:inherit;font-size:14px}
 .field-head label{margin:0}
 .field-head .btn{padding:5px 11px;font-size:11.5px}
 .req{color:var(--danger)}
-
-/* App Shell */
 .app{min-height:100vh;display:flex;flex-direction:column}
 .topbar{background:#fff;border-bottom:1px solid var(--line);padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(15,23,42,.04)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px}
-.brand .mark{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--primary),#14b8a6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;overflow:hidden}
-.brand .mark img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}
 .topbar .user{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
 .tabs{display:flex;gap:6px;padding:14px 22px 0;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto}
 .tab{padding:11px 20px;border-radius:11px 11px 0 0;font-size:14px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;transition:.15s;white-space:nowrap}
 .tab:hover{color:var(--primary)}
 .tab.active{color:var(--primary);border-bottom-color:var(--primary);background:#f0fdfa}
 main{flex:1;padding:24px 22px 60px;max-width:1280px;width:100%;margin:0 auto}
-
-/* Cards */
 .card{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:20px;border:1px solid #eef2f6}
 .card h2{font-size:17px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
 .card .desc{font-size:13px;color:var(--muted);margin-bottom:18px}
 .card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
 .card-head h2{margin:0}
-
-/* Tables */
 .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--line)}
 table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:700px}
 thead th{background:#f8fafc;padding:13px 14px;text-align:right;font-weight:700;color:#334155;font-size:12.5px;border-bottom:2px solid var(--line);white-space:nowrap}
@@ -86,14 +63,11 @@ tbody tr:hover{background:#f8fafc}
 .badge.self{background:#dbeafe;color:#1e40af;margin-right:6px}
 .badge.admin{background:#fef3c7;color:#92400e;margin-right:6px}
 .badge.img-badge{background:#ede9fe;color:#6d28d9;margin-right:6px;font-size:11px;padding:2px 8px}
-.badge.history-badge{background:#fef3c7;color:#92400e;margin-right:6px;font-size:11px;padding:2px 8px}
 .badge.ai-on{background:#dcfce7;color:#166534}
 .badge.ai-off{background:#fee2e2;color:#991b1b}
 .col-actions{display:flex;gap:6px;flex-wrap:wrap}
 .empty{text-align:center;color:var(--muted);padding:40px!important;font-size:13.5px}
 code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;border-radius:6px;font-size:12.5px;color:#334155}
-
-/* Grid & Utils */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:820px){.grid2{grid-template-columns:1fr}}
 .form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
@@ -101,8 +75,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .pill{padding:9px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-size:13px;font-weight:600;color:#475569;transition:.15s}
 .pill:hover{border-color:var(--primary);color:var(--primary)}
 .pill.active{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(13,148,136,.25)}
-
-/* Images Grid */
 .image-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:12px 0}
 .image-card{border:1.5px solid var(--line);border-radius:12px;overflow:hidden;position:relative;background:#f8fafc;transition:.15s}
 .image-card:hover{border-color:var(--primary)}
@@ -119,8 +91,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .image-card .img-btn.replace{color:var(--blue)}
 .image-card .img-btn.replace:hover{background:var(--blue);color:#fff}
 .image-card .img-check{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
-
-/* Reader */
 .reader{font-size:14.5px;line-height:2.1;color:#1e293b}
 .reader h4{font-size:15px;color:var(--primary-dark);margin:22px 0 8px;padding-right:10px;border-right:4px solid var(--primary);border-radius:2px}
 .reader h4:first-child{margin-top:0}
@@ -128,8 +98,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .reader .meta{font-size:12.5px;color:var(--muted);margin-bottom:16px}
 .reader figure.article-img{margin:16px 0;text-align:center}
 .reader figure.article-img img{max-width:100%;max-height:420px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);display:inline-block}
-
-/* Modals */
 .modal{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;z-index:200;padding:28px 16px;overflow-y:auto}
 .modal.show{display:flex}
 .modal-box{background:#fff;border-radius:18px;width:100%;max-width:840px;box-shadow:0 30px 70px rgba(0,0,0,.3);animation:pop .2s ease;margin:auto}
@@ -140,8 +108,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .modal-foot{padding:16px 22px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-start;position:sticky;bottom:0;background:#fff;border-radius:0 0 18px 18px;flex-wrap:wrap}
 .close-x{width:34px;height:34px;border-radius:9px;background:#f1f5f9;color:#475569;font-size:18px;display:flex;align-items:center;justify-content:center;transition:.15s}
 .close-x:hover{background:#fee2e2;color:var(--danger)}
-
-/* Collectors */
 .collector-row{display:flex;gap:8px;margin-bottom:8px}
 .collector-row input{flex:1}
 .icon-btn{width:40px;height:40px;border-radius:10px;background:#f8fafc;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;color:#64748b;font-size:16px;flex-shrink:0}
@@ -153,8 +119,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .history-box table{min-width:auto;font-size:12.5px}
 .history-box thead th{padding:9px 12px;font-size:11.5px}
 .history-box tbody td{padding:9px 12px}
-
-/* Smart Results */
 .result{border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;transition:.15s;background:#fff}
 .result:hover{border-color:var(--primary);background:#f0fdfa}
 .result input[type=checkbox]{width:18px;height:18px;margin-top:3px;accent-color:var(--primary);flex-shrink:0}
@@ -162,46 +126,37 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .result .r-title{font-weight:700;font-size:13.5px;margin-bottom:3px}
 .result .r-src{font-size:11.5px;color:var(--muted);margin-bottom:6px}
 .result .r-snip{font-size:12.5px;color:#475569;line-height:1.8}
-
-/* Overlay & Toast */
 .overlay{position:fixed;inset:0;background:rgba(15,23,42,.7);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:#fff}
 .spinner{width:52px;height:52px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 #toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(120px);background:#0f172a;color:#fff;padding:12px 24px;border-radius:12px;font-size:13.5px;z-index:1000;transition:.3s;opacity:0;box-shadow:0 12px 30px rgba(0,0,0,.3);max-width:88vw;text-align:center}
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-
-/* AI Settings */
 details.ai-settings{background:#f8fafc;padding:14px;border-radius:12px;border:1px solid var(--line);margin-bottom:18px}
 details.ai-settings summary{cursor:pointer;font-weight:700;font-size:14px;list-style:none}
 details.ai-settings summary::-webkit-details-marker{display:none}
 details.ai-settings summary::before{content:'▸ ';color:var(--primary)}
 details.ai-settings[open] summary::before{content:'▾ '}
 details.ai-settings[open] summary{margin-bottom:14px}
-
-/* Debug Panel */
 .debug-panel{background:#0f172a;color:#38bdf8;font-family:ui-monospace,monospace;font-size:12px;padding:16px;border-radius:12px;margin-top:20px;max-height:350px;overflow-y:auto;direction:ltr;text-align:left;line-height:1.5;border:2px solid #334155}
 .debug-line{margin-bottom:6px;word-break:break-all;}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="loginScreen" class="login-screen">
   <div class="login-card">
-    <div class="logo"><img src="./icon-192.png" alt="بانک مقاله" onerror="this.style.display='none';this.parentNode.textContent='📚';"></div>
     <h1>بانک مقاله</h1>
     <p class="sub">سامانه هوشمند مدیریت و تولید مقاله</p>
-    <div class="field"><label>نام کاربری</label><input id="loginUser" placeholder="نام کاربری مدیر" autocomplete="username"></div>
-    <div class="field"><label>کلمه عبور</label><input id="loginPass" type="password" placeholder="••••••••" autocomplete="current-password"></div>
+    <div class="field"><label>نام کاربری</label><input id="loginUser" placeholder="admin" autocomplete="username"></div>
+    <div class="field"><label>کلمه عبور</label><input id="loginPass" type="password" placeholder="admin123" autocomplete="current-password"></div>
     <button class="btn" style="width:100%;margin-top:8px" onclick="doLogin()">ورود به سامانه</button>
-    <p class="hint" style="text-align:center;margin-top:16px;font-size:12px;color:#94a3b8">دسترسی پیش‌فرض: admin / admin123</p>
+    <p class="hint" style="text-align:center;margin-top:16px;font-size:12px;color:#94a3b8">پیش‌فرض: admin / admin123</p>
   </div>
 </div>
 
-<!-- APP -->
 <div id="app" class="app hidden">
   <div class="topbar">
-    <div class="brand"><div class="mark"><img src="./icon-192.png" alt="بانک مقاله" onerror="this.style.display='none';this.parentNode.textContent='📚';"></div> بانک مقاله</div>
+    <div class="brand">📚 بانک مقاله</div>
     <div class="user"><span id="currentAdminLabel">مدیر</span><button class="btn ghost xs" onclick="doLogout()">خروج</button></div>
   </div>
   <div class="tabs">
@@ -213,7 +168,6 @@ details.ai-settings[open] summary{margin-bottom:14px}
   </div>
 
   <main>
-    <!-- BANK -->
     <section id="tab-bank">
       <div class="card">
         <div class="card-head">
@@ -232,11 +186,10 @@ details.ai-settings[open] summary{margin-bottom:14px}
       </div>
     </section>
 
-    <!-- NEW -->
     <section id="tab-new" class="hidden">
       <div class="card">
         <div class="card-head"><h2 id="formTitle">➕ ایجاد مقاله جدید</h2><span id="draftBadge" class="badge hidden">پیش‌نویس ذخیره شده</span></div>
-        <p class="desc">فیلدهای ستاره‌دار الزامی هستند. برای درج تصویر در متن، ابتدا تصاویر را در بخش «پیوست تصاویر» اضافه کنید، سپس با دکمه «🖼 تصویر» بالای هر بخش، تصویر را در متن درج نمایید.</p>
+        <p class="desc">فیلدهای ستاره‌دار الزامی هستند.</p>
         <div class="grid2">
           <div class="field"><label>موضوع مقاله <span class="req">*</span></label><input id="fTitle" placeholder="عنوان مقاله" oninput="autoDraft()"></div>
           <div class="field"><label>ماهیت مقاله <span class="req">*</span></label>
@@ -249,7 +202,6 @@ details.ai-settings[open] summary{margin-bottom:14px}
         </div>
         <div class="field">
           <div class="field-head"><label>🖼 پیوست تصاویر مقاله</label><span class="hint" id="imagesSummary">۰ تصویر</span></div>
-          <p class="hint" style="margin-bottom:8px">تصاویری که در متن استفاده می‌شوند، ابتدا باید در این بخش پیوست شوند.</p>
           <div id="articleImagesGrid" class="image-grid"></div>
           <input type="file" id="articleImageInput" accept="image/*" multiple style="display:none" onchange="handleArticleImageUpload(event)">
           <button class="btn ghost xs" onclick="document.getElementById('articleImageInput').click()">➕ پیوست تصویر جدید</button>
@@ -290,11 +242,10 @@ details.ai-settings[open] summary{margin-bottom:14px}
       </div>
     </section>
 
-    <!-- SMART -->
     <section id="tab-smart" class="hidden">
       <div class="card">
         <h2>✨ استخراج هوشمند مقاله از وب</h2>
-        <p class="desc">موضوع را وارد کنید؛ منابع مرتبط جستجو می‌شوند. سامانه به‌طور هوشمند جمله‌های تکراری را حذف و دو نسخه کامل و مختصر تولید می‌کند.</p>
+        <p class="desc">موضوع را وارد کنید؛ منابع مرتبط جستجو می‌شوند.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <input id="smartTopic" placeholder="مثال: هوش مصنوعی و آینده آموزش" style="flex:1;min-width:240px;padding:12px 15px;border:1.5px solid var(--line);border-radius:11px;font-size:14px">
           <button class="btn" onclick="smartSearch()">🔍 جستجو در فضای ابری</button>
@@ -319,7 +270,6 @@ details.ai-settings[open] summary{margin-bottom:14px}
       </div>
     </section>
 
-    <!-- AI -->
     <section id="tab-ai" class="hidden">
       <div class="card">
         <div class="card-head">
@@ -390,7 +340,6 @@ details.ai-settings[open] summary{margin-bottom:14px}
       </div>
     </section>
 
-    <!-- ADMINS & BISMILLAH -->
     <section id="tab-admins" class="hidden">
       <div class="card">
         <div class="card-head"><h2>👥 مدیران سامانه</h2><button class="btn xs" onclick="openAdminForm()">➕ افزودن مدیر</button></div>
@@ -415,7 +364,6 @@ details.ai-settings[open] summary{margin-bottom:14px}
   </main>
 </div>
 
-<!-- MODALS -->
 <div id="viewModal" class="modal">
   <div class="modal-box">
     <div class="modal-head"><h3 id="viewTitle">مشاهده مقاله</h3><button class="close-x" onclick="closeModal('viewModal')">✕</button></div>
@@ -645,9 +593,6 @@ function viewArticle(id, version){
 }
 function exportFromView(){ closeModal('viewModal'); if(viewingId) openExport(viewingId); }
 
-/* ============================================================
-   5. فرم ایجاد/ویرایش مقاله
-   ============================================================ */
 function editArticle(id){
   const a = DB.articles.find(x => x.id === id); if(!a) return;
   editingId = id; currentArticleImages = JSON.parse(JSON.stringify(a.images || []));
@@ -672,7 +617,7 @@ function autoDraft(){ clearTimeout(draftTimer); draftTimer = setTimeout(() => { 
 function restoreDraft(){ try{ const raw = localStorage.getItem(DRAFT_KEY); if(!raw) return; const d = JSON.parse(raw); $('#fTitle').value = d.title || ''; $('#fNature').value = d.nature || ''; $('#fThanks').value = d.thanks || ''; $('#fAbstract').value = d.abstract || ''; $('#fIntro').value = d.intro || ''; $('#fBody').value = d.body || ''; $('#fConclusion').value = d.conclusion || ''; $('#fRefs').value = d.refs || ''; currentArticleImages = d.images || []; renderArticleImages(); $('#draftBadge').classList.remove('hidden'); updateWordCount(); }catch(e){} }
 
 /* ============================================================
-   6. مدیریت تصاویر (پیوست و درج در متن)
+   5. مدیریت تصاویر
    ============================================================ */
 function formatBytes(b){ if(b < 1024) return b + ' B'; if(b < 1024*1024) return (b/1024).toFixed(1) + ' KB'; return (b/(1024*1024)).toFixed(1) + ' MB'; }
 function resizeImage(file, maxDim = 1200, quality = 0.82, format = 'jpeg'){
@@ -715,7 +660,7 @@ function selectPickerImage(id){ const ta = document.getElementById(pickerTargetT
 async function handlePickerUpload(e){ await handleArticleImageUpload(e); openImagePicker(pickerTargetTextarea); }
 
 /* ============================================================
-   7. استخراج هوشمند (Smart Extraction)
+   6. استخراج هوشمند
    ============================================================ */
 let smartResults = [], smartSelected = new Set(), smartMerged = null;
 const SOURCES = ['نورمگز — پایگاه استنادی علوم جهان اسلام','مگیران — بانک اطلاعات نشریات کشور','SID — مرکز اطلاعات علمی جهاد دانشگاهی','ویکی‌پدیای فارسی','پایگاه مجلات تخصصی نور','پژوهشگاه علوم انسانی و مطالعات فرهنگی'];
@@ -833,7 +778,7 @@ function confirmSmartAdd(){
 }
 
 /* ============================================================
-   8. هوش مصنوعی (DeepSeek + Proxy)
+   7. هوش مصنوعی (DeepSeek + Proxy)
    ============================================================ */
 let aiState = { full: null, brief: null, generating: false };
 const WORKER_PROXY_URL = 'https://deepseek.mehradkhaliliparsa6490.workers.dev/';
@@ -862,7 +807,7 @@ async function callAI(prompt, systemPrompt){
     model,
     messages: [{ role: 'system', content: systemPrompt || '' }, { role: 'user', content: prompt }],
     temperature: 0.7, 
-    max_tokens: 4000, // کاهش برای جلوگیری از تایم‌اوت 522
+    max_tokens: 2500, // 👈 کاهش برای جلوگیری از تایم‌اوت 522
     response_format: { type: 'json_object' }
   };
 
@@ -891,12 +836,12 @@ async function callAI(prompt, systemPrompt){
 }
 
 function buildAIPrompt(topic, extra){
+  // 👈 دستور بسیار کوتاه‌تر برای سرعت بیشتر
   let p = `موضوع مقاله: «${topic}»\n\n`;
   if(extra) p += `توضیحات: ${extra}\n\n`;
-  p += `یک مقاله علمی-پژوهشی جامع به زبان فارسی درباره این موضوع بنویس.\n`;
-  p += `محتوای «متن» باید شامل این ۹ بخش باشد و هر بخش دقیقاً با «بخش N: عنوان» شروع شود:\n`;
-  p += `بخش ۱: تاریخچه\nبخش ۲: اصل بنیادین\nبخش ۳: ظهور در ایران\nبخش ۴: نقاط قوت\nبخش ۵: نقاط ضعف\nبخش ۶: موانع\nبخش ۷: مزایا\nبخش ۸: مزیت رقابتی\nبخش ۹: چشم‌انداز\n\n`;
-  p += `پاسخ را دقیقاً در قالب JSON زیر برگردان:\n`;
+  p += `یک مقاله علمی-پژوهشی فارسی درباره این موضوع بنویس.\n`;
+  p += `محتوای «متن» شامل ۹ بخش با این عناوین باشد: بخش ۱: تاریخچه\nبخش ۲: اصل بنیادین\nبخش ۳: ظهور در ایران\nبخش ۴: نقاط قوت\nبخش ۵: نقاط ضعف\nبخش ۶: موانع\nبخش ۷: مزایا\nبخش ۸: مزیت رقابتی\nبخش ۹: چشم‌انداز\n\n`;
+  p += `پاسخ را دقیقاً در قالب JSON زیر برگردان (متن‌ها را بسیار مختصر و مفید بنویس تا سریع تولید شوند):\n`;
   p += `{"full":{"intro":"...","abstract":"...","body":"بخش ۱: ...","conclusion":"...","refs":"..."},"brief":{"intro":"...","abstract":"...","body":"...","conclusion":"...","refs":"..."}}`;
   return p;
 }
@@ -948,7 +893,7 @@ function saveAIArticle(){
 function discardAIArticle(){ aiState.full = null; aiState.brief = null; $('#aiPreviewCard').classList.add('hidden'); }
 
 /* ============================================================
-   9. مدیران و تصاویر بسم‌الله
+   8. مدیران و تصاویر بسم‌الله
    ============================================================ */
 function renderAdmins(){ $('#adminsBody').innerHTML = DB.admins.map(a => `<tr><td>${esc(a.name)}</td><td><code>${esc(a.u)}</code></td><td><button class="btn xs edit" onclick="openAdminForm('${a.id}')">ویرایش</button></td><td><button class="btn xs danger" onclick="deleteAdmin('${a.id}')">حذف</button></td></tr>`).join(''); }
 function openAdminForm(id){ editingAdminId = id || null; if(id){ const a = DB.admins.find(x=>x.id===id); $('#adminName').value=a.name; $('#adminUser').value=a.u; $('#adminPass').value=''; } else { $('#adminName').value=''; $('#adminUser').value=''; $('#adminPass').value=''; } openModal('adminModal'); }
@@ -983,7 +928,7 @@ function selectBismillahImage(id){ expState.bismillahImageId = expState.bismilla
 function clearBismillahSelection(){ expState.bismillahImageId = null; renderBismillahSelect(); }
 
 /* ============================================================
-   10. PDF Export (تنظیمات کامل و تاریخچه)
+   9. PDF Export
    ============================================================ */
 let expState = { articleId:null, version:'full', type:'student', mode:'single', collectors:[''], bismillahImageId:null, loadedCollectorId:null };
 const TYPE_FIELDS = {
@@ -1100,7 +1045,7 @@ function generatePDF(){
 }
 
 /* ============================================================
-   11. شروع برنامه
+   10. شروع برنامه
    ============================================================ */
 $$('.modal').forEach(m => m.addEventListener('click', e => { if(e.target === m) m.classList.remove('show'); }));
 document.addEventListener('keydown', e => { if(e.key === 'Escape') $$('.modal').forEach(m => m.classList.remove('show')); });
