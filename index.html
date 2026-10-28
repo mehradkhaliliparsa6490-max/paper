@@ -80,6 +80,8 @@ tbody tr:hover{background:#f8fafc}
 .badge.admin{background:#fef3c7;color:#92400e;margin-right:6px}
 .badge.img-badge{background:#ede9fe;color:#6d28d9;margin-right:6px;font-size:11px;padding:2px 8px}
 .badge.history-badge{background:#fef3c7;color:#92400e;margin-right:6px;font-size:11px;padding:2px 8px}
+.badge.ai-on{background:#dcfce7;color:#166534}
+.badge.ai-off{background:#fee2e2;color:#991b1b}
 .col-actions{display:flex;gap:6px;flex-wrap:wrap}
 .empty{text-align:center;color:var(--muted);padding:40px!important;font-size:13.5px}
 code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;border-radius:6px;font-size:12.5px;color:#334155}
@@ -154,6 +156,13 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .history-box table{min-width:auto;font-size:12.5px}
 .history-box thead th{padding:9px 12px;font-size:11.5px}
 .history-box tbody td{padding:9px 12px}
+
+details.ai-settings{background:#f8fafc;padding:14px;border-radius:12px;border:1px solid var(--line);margin-bottom:18px}
+details.ai-settings summary{cursor:pointer;font-weight:700;font-size:14px;list-style:none}
+details.ai-settings summary::-webkit-details-marker{display:none}
+details.ai-settings summary::before{content:'▸ ';color:var(--primary)}
+details.ai-settings[open] summary::before{content:'▾ '}
+details.ai-settings[open] summary{margin-bottom:14px}
 </style>
 </head>
 <body>
@@ -181,10 +190,12 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
     <button class="tab active" data-tab="bank" onclick="switchTab('bank')">🗂 بانک مقاله</button>
     <button class="tab" data-tab="new" onclick="switchTab('new')">➕ ایجاد مقاله</button>
     <button class="tab" data-tab="smart" onclick="switchTab('smart')">✨ استخراج هوشمند</button>
+    <button class="tab" data-tab="ai" onclick="switchTab('ai')">🤖 هوش مصنوعی</button>
     <button class="tab" data-tab="admins" onclick="switchTab('admins')">👥 مدیریت</button>
   </div>
 
   <main>
+    <!-- BANK -->
     <section id="tab-bank">
       <div class="card">
         <div class="card-head">
@@ -203,6 +214,7 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
       </div>
     </section>
 
+    <!-- NEW -->
     <section id="tab-new" class="hidden">
       <div class="card">
         <div class="card-head"><h2 id="formTitle">➕ ایجاد مقاله جدید</h2><span id="draftBadge" class="badge hidden">پیش‌نویس ذخیره شده</span></div>
@@ -219,7 +231,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
         </div>
         <div class="field">
           <div class="field-head"><label>🖼 پیوست تصاویر مقاله</label><span class="hint" id="imagesSummary">۰ تصویر</span></div>
-          <p class="hint" style="margin-bottom:8px">تصاویری که در متن استفاده می‌شوند، ابتدا باید در این بخش پیوست شوند.</p>
           <div id="articleImagesGrid" class="image-grid"></div>
           <input type="file" id="articleImageInput" accept="image/*" multiple style="display:none" onchange="handleArticleImageUpload(event)">
           <button class="btn ghost xs" onclick="document.getElementById('articleImageInput').click()">➕ پیوست تصویر جدید</button>
@@ -260,6 +271,7 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
       </div>
     </section>
 
+    <!-- SMART -->
     <section id="tab-smart" class="hidden">
       <div class="card">
         <h2>✨ استخراج هوشمند مقاله از وب</h2>
@@ -288,6 +300,81 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
       </div>
     </section>
 
+    <!-- AI -->
+    <section id="tab-ai" class="hidden">
+      <div class="card">
+        <div class="card-head">
+          <h2>🤖 تولید مقاله با هوش مصنوعی</h2>
+          <span id="aiStatusBadge" class="badge ai-off">متصل نشده</span>
+        </div>
+        <p class="desc">
+          با اتصال به یک سرویس هوش مصنوعی (مانند هرمز / دیپ‌سیک)، مقاله‌ای جامع در دو نسخه کامل و مختصر با ساختار تحلیلی استاندارد تولید کنید:
+          تاریخچه و خاستگاه، مهم‌ترین اصل بنیادین، ظهور در ایران، نقاط قوت، نقاط ضعف، موانع گسترش، مزایای اصلی، مزیت رقابتی، چشم‌انداز آینده.
+        </p>
+
+        <details class="ai-settings" id="aiSettingsDetails">
+          <summary>⚙️ تنظیمات اتصال به هوش مصنوعی</summary>
+          <div class="grid2">
+            <div class="field">
+              <label>سرویس‌دهنده</label>
+              <select id="aiProvider" onchange="onAIProviderChange()"></select>
+            </div>
+            <div class="field">
+              <label>مدل</label>
+              <select id="aiModel"></select>
+            </div>
+          </div>
+          <div class="field">
+            <label>کلید API</label>
+            <div style="display:flex;gap:8px">
+              <input id="aiApiKey" type="password" placeholder="API Key را وارد کنید" autocomplete="off">
+              <button class="btn ghost xs" style="flex-shrink:0" onclick="toggleApiKeyVisibility()" id="apiKeyToggle" title="نمایش/پنهان">👁</button>
+            </div>
+            <div class="hint" id="aiKeyHint"></div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+            <button class="btn ghost xs" onclick="saveAIConfig()">💾 ذخیره تنظیمات</button>
+            <button class="btn ghost xs" onclick="testAIConnection()">🔌 تست اتصال</button>
+            <a class="btn ghost xs" id="aiKeyLink" target="_blank" rel="noopener" style="text-decoration:none">🔗 دریافت کلید API</a>
+          </div>
+          <p class="hint" style="margin-top:12px;padding:10px;background:#fef3c7;border-radius:8px;font-size:11.5px;color:#92400e">
+            🔒 <b>توجه امنیتی:</b> کلید API در حافظه مرورگر شما (localStorage) ذخیره می‌شود. برای امنیت بیشتر، از یک کلید با محدودیت مصرف استفاده کنید.
+          </p>
+        </details>
+
+        <div class="field">
+          <label>موضوع مقاله <span class="req">*</span></label>
+          <input id="aiTopic" placeholder="مثال: هوش مصنوعی در آموزش، انرژی‌های تجدیدپذیر در ایران، ...">
+        </div>
+        <div class="field">
+          <label>توضیحات تکمیلی (اختیاری)</label>
+          <textarea id="aiExtra" placeholder="مثلاً: تأکید بر جنبه‌های اقتصادی، بررسی مقایسه‌ای با کشورهای منطقه..." style="min-height:80px"></textarea>
+        </div>
+        <div class="form-actions" style="margin-top:14px;padding-top:14px">
+          <button class="btn" id="aiGenerateBtn" onclick="generateAIArticle()">🚀 تولید مقاله (کامل + مختصر)</button>
+          <span id="aiStatusText" class="hint" style="align-self:center"></span>
+        </div>
+      </div>
+
+      <div id="aiPreviewCard" class="card hidden">
+        <div class="card-head">
+          <h2>📄 پیش‌نمایش مقاله تولیدشده</h2>
+          <span class="badge">آماده ذخیره در بانک</span>
+        </div>
+        <div class="pills" style="margin-bottom:16px">
+          <button class="pill active" id="aiPvFullBtn" onclick="renderAIPreview('full')">نسخه کامل</button>
+          <button class="pill" id="aiPvBriefBtn" onclick="renderAIPreview('brief')">نسخه مختصر</button>
+        </div>
+        <div id="aiPreviewBody" class="reader"></div>
+        <div class="form-actions">
+          <button class="btn" onclick="saveAIArticle()">💾 ذخیره در بانک مقاله</button>
+          <button class="btn ghost" onclick="discardAIArticle()">انصراف</button>
+        </div>
+        <p class="hint" style="margin-top:12px">پس از ذخیره، می‌توانید از طریق دکمه «ویرایش» در بانک مقاله، هر بخش را تغییر دهید یا تصویر اضافه کنید.</p>
+      </div>
+    </section>
+
+    <!-- ADMINS -->
     <section id="tab-admins" class="hidden">
       <div class="card">
         <div class="card-head"><h2>👥 مدیران سامانه</h2><button class="btn xs" onclick="openAdminForm()">➕ افزودن مدیر جدید</button></div>
@@ -307,7 +394,6 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
             <button class="btn xs" onclick="document.getElementById('bismAdminUpload').click()">➕ افزودن تصویر</button>
           </div>
         </div>
-        <p class="desc">تصاویر ذخیره‌شده در این بخش، در خروجی PDF به‌عنوان گزینه قابل انتخاب هستند.</p>
         <div id="bismAdminGrid" class="image-grid"></div>
       </div>
     </section>
@@ -438,7 +524,7 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
   </div>
 </div>
 
-<div id="overlay" class="overlay hidden"><div class="spinner"></div><p>در حال آماده‌سازی سند چاپ…</p></div>
+<div id="overlay" class="overlay hidden"><div class="spinner"></div><p id="overlayMsg">در حال آماده‌سازی…</p></div>
 <div id="toast"></div>
 
 <script>
@@ -447,6 +533,7 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
    ============================================================ */
 const STORAGE_KEY = 'articleBank_v5';
 const DRAFT_KEY   = 'articleBank_draft_v5';
+const AI_SETTINGS_KEY = 'articleBank_ai_settings_v1';
 const LEGACY_KEYS = ['articleBank_v4','articleBank_v3','articleBank_v2','articleBank_v1'];
 
 let DB = loadDB();
@@ -469,19 +556,7 @@ function loadDB(){
     admins:[{ id:'adm_root', name:'مدیر اصلی', u:'admin', p:'admin123', createdAt:Date.now() }],
     bismillahImages:[],
     savedCollectors:[],
-    articles:[{
-      id:'seed1',
-      title:'هوش مصنوعی و کاربردهای آن در آموزش',
-      nature:'علمی-پژوهشی',
-      thanks:'از اساتید گرانقدر و همه عزیزانی که در تهیه این مقاله همراهی کردند سپاسگزاریم.',
-      abstract:'هوش مصنوعی به‌عنوان یکی از مهم‌ترین فناوری‌های قرن حاضر، تحولات گسترده‌ای در نظام‌های آموزشی ایجاد کرده است.',
-      intro:'در دهه‌های اخیر پیشرفت سریع فناوری اطلاعات و ارتباطات، الگوهای سنتی آموزش را دگرگون ساخته است. هوش مصنوعی با بهره‌گیری از الگوریتم‌های یادگیری ماشین می‌تواند به بهبود کیفیت آموزش کمک کند.',
-      body:'هوش مصنوعی در آموزش شامل مجموعه‌ای از فناوری‌هاست که به سیستم‌های آموزشی امکان می‌دهد تا نیازهای یادگیرندگان را تشخیص داده و محتوای مناسب را ارائه دهند.\n\nیکی از مهم‌ترین کاربردها، سیستم‌های تدریس هوشمند است که با تحلیل رفتار یادگیرنده، مسیر یادگیری را شخصی‌سازی می‌کنند.\n\nارزیابی خودکار و بازخورد فوری نیز از دیگر دستاوردهای این فناوری است.',
-      conclusion:'هوش مصنوعی می‌تواند به‌عنوان ابزاری توانمند در خدمت نظام آموزشی قرار گیرد.',
-      refs:'۱. رضایی، م. (۱۴۰۲). هوش مصنوعی در آموزش. انتشارات دانشگاه تهران.\n۲. صادقی، ن. (۱۴۰۱). فناوری‌های نوین آموزشی. مجله پژوهش در آموزش، ۱۲(۳)، ۴۵-۶۲.',
-      images:[],
-      createdAt: Date.now()
-    }]
+    articles:[]
   };
   try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(seed)); }catch(e){}
   return seed;
@@ -515,59 +590,51 @@ const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 const uid = () => 'x' + Date.now().toString(36) + Math.random().toString(36).slice(2,6);
 const faNum = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
 
-function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),3200); }
+function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),3800); }
 function openModal(id){ document.getElementById(id).classList.add('show'); }
 function closeModal(id){ document.getElementById(id).classList.remove('show'); }
 function getCurrentAdmin(){ return DB.admins.find(a => a.u === sessionStorage.getItem('loggedIn')) || null; }
+function showOverlay(msg){ $('#overlayMsg').textContent = msg || 'در حال آماده‌سازی…'; $('#overlay').classList.remove('hidden'); }
+function hideOverlay(){ $('#overlay').classList.add('hidden'); }
 
 /* ============================================================
-   هوشمندسازی: نرمال‌سازی، حذف تکرار، خلاصه‌سازی
+   هوشمندسازی متن
    ============================================================ */
 function normalizeSentence(s){
-  return String(s)
-    .replace(/[\u200c\u200d\u200e\u200f\u064b-\u0652]/g, '')
-    .replace(/[.,!؟?،؛:«»"'؛]/g, '')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .toLowerCase();
+  return String(s).replace(/[\u200c\u200d\u200e\u200f\u064b-\u0652]/g, '')
+    .replace(/[.,!؟?،؛:«»"'؛]/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
 }
-
-/* حذف جمله‌های عیناً تکراری در کل مقاله (حفظ ساختار پاراگراف‌ها) */
 function dedupeArticle(text){
   if(!text) return '';
   const paragraphs = String(text).split(/\n\n+/);
-  const globalSeen = new Set();
+  const seen = new Set();
   const resultParas = [];
   for(const para of paragraphs){
     if(!para.trim()) continue;
     const sentences = para.split(/(?<=[.!؟?])\s+/);
     const kept = [];
     for(const s of sentences){
-      const trimmed = s.trim();
-      if(!trimmed) continue;
-      const key = normalizeSentence(trimmed);
-      if(!key || key.length < 5){ kept.push(trimmed); continue; }
-      if(globalSeen.has(key)) continue;
-      globalSeen.add(key);
-      kept.push(trimmed);
+      const t = s.trim(); if(!t) continue;
+      const key = normalizeSentence(t);
+      if(!key || key.length < 5){ kept.push(t); continue; }
+      if(seen.has(key)) continue;
+      seen.add(key); kept.push(t);
     }
     if(kept.length > 0) resultParas.push(kept.join(' '));
   }
   return resultParas.join('\n\n');
 }
-
-/* خلاصه‌سازی: نگه‌داشتن نسبت مشخصی از جمله‌های کلیدی (پیش‌فرض یک‌سوم) */
 function summarizeText(text, ratio = 1/3){
   if(!text) return '';
   const paragraphs = String(text).split(/\n\n+/).filter(p => p.trim());
-  const allSentences = [];
+  const all = [];
   for(const p of paragraphs){
     const s = p.split(/(?<=[.!؟?])\s+/).filter(x => x.trim());
-    allSentences.push(...s.map(x => x.trim()));
+    all.push(...s.map(x => x.trim()));
   }
-  if(allSentences.length === 0) return String(text).trim();
-  const keepCount = Math.max(1, Math.ceil(allSentences.length * ratio));
-  return allSentences.slice(0, keepCount).join(' ');
+  if(all.length === 0) return String(text).trim();
+  const keepCount = Math.max(1, Math.ceil(all.length * ratio));
+  return all.slice(0, keepCount).join(' ');
 }
 
 /* ============================================================
@@ -593,12 +660,10 @@ function resizeImage(file, maxDim = 1200, quality = 0.82, format = 'jpeg'){
       canvas.width = w; canvas.height = h;
       const ctx = canvas.getContext('2d');
       if(format === 'png'){
-        ctx.clearRect(0,0,w,h);
-        ctx.drawImage(img, 0, 0, w, h);
+        ctx.clearRect(0,0,w,h); ctx.drawImage(img, 0, 0, w, h);
         resolve(canvas.toDataURL('image/png'));
       } else {
-        ctx.fillStyle = '#fff';
-        ctx.fillRect(0,0,w,h);
+        ctx.fillStyle = '#fff'; ctx.fillRect(0,0,w,h);
         ctx.drawImage(img, 0, 0, w, h);
         resolve(canvas.toDataURL('image/jpeg', quality));
       }
@@ -607,11 +672,7 @@ function resizeImage(file, maxDim = 1200, quality = 0.82, format = 'jpeg'){
     img.src = url;
   });
 }
-function getImageMap(images){
-  const m = {};
-  (images||[]).forEach(i => { m[i.id] = i; });
-  return m;
-}
+function getImageMap(images){ const m = {}; (images||[]).forEach(i => { m[i.id] = i; }); return m; }
 function richPara(text, imageMap){
   if(!text) return '';
   const parts = String(text).split(/(\[\[IMG:[a-zA-Z0-9_]+\]\])/g);
@@ -619,7 +680,7 @@ function richPara(text, imageMap){
   const flush = () => {
     if(buffer.trim()){
       html += buffer.split(/\n+/).map(s => s.trim()).filter(Boolean).map(s => {
-        if(/^بخش\s/.test(s)) return `<h5 class="sub-heading">${esc(s)}</h5>`;
+        if(/^بخش\s/.test(s)) return `<h5 class="sub-heading" style="font-size:13.5px;color:var(--primary-dark);margin:14px 0 6px">${esc(s)}</h5>`;
         return '<p>'+esc(s)+'</p>';
       }).join('');
       buffer = '';
@@ -638,7 +699,7 @@ function richPara(text, imageMap){
 }
 
 /* ============================================================
-   ورود
+   ورود / خروج
    ============================================================ */
 function doLogin(){
   const u = $('#loginUser').value.trim();
@@ -658,17 +719,21 @@ function enterApp(){
   $('#app').classList.remove('hidden');
   const me = getCurrentAdmin();
   if(me) $('#currentAdminLabel').textContent = me.name || me.u;
-  renderTable(); restoreDraft();
+  renderTable(); restoreDraft(); initAI();
 }
 $('#loginPass').addEventListener('keydown', e => { if(e.key === 'Enter') doLogin(); });
 
 function switchTab(name){
   $$('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
-  ['bank','new','smart','admins'].forEach(n => $('#tab-'+n).classList.toggle('hidden', n !== name));
+  ['bank','new','smart','ai','admins'].forEach(n => $('#tab-'+n).classList.toggle('hidden', n !== name));
   if(name === 'bank') renderTable();
   if(name === 'admins'){ renderAdmins(); renderBismAdmin(); }
+  if(name === 'ai') initAI();
 }
 
+/* ============================================================
+   بانک مقاله
+   ============================================================ */
 function hasFormContent(){
   const fields = ['fTitle','fThanks','fAbstract','fIntro','fBody','fConclusion','fRefs'];
   return fields.some(id => $('#'+id).value.trim()) || currentArticleImages.length > 0;
@@ -677,14 +742,9 @@ function startNewArticle(){
   if(editingId || hasFormContent()){
     if(!confirm('فرم پاک شود و مقاله جدید شروع شود؟')) return;
   }
-  resetForm();
-  switchTab('new');
+  resetForm(); switchTab('new');
   setTimeout(() => $('#fTitle').focus(), 100);
 }
-
-/* ============================================================
-   جدول بانک
-   ============================================================ */
 function renderTable(){
   const q = ($('#searchBox')?.value || '').trim().toLowerCase();
   const list = DB.articles.filter(a => !q || (a.title + ' ' + (a.nature||'')).toLowerCase().includes(q));
@@ -692,7 +752,7 @@ function renderTable(){
   if(list.length === 0){ tb.innerHTML = '<tr><td colspan="5" class="empty">مقاله‌ای یافت نشد.</td></tr>'; return; }
   tb.innerHTML = list.map(a => {
     const imgCount = (a.images||[]).length;
-    const imgBadge = imgCount ? `<span class="badge img-badge" title="تعداد تصاویر پیوست">🖼 ${faNum(imgCount)}</span>` : '';
+    const imgBadge = imgCount ? `<span class="badge img-badge" title="تصاویر">🖼 ${faNum(imgCount)}</span>` : '';
     return `
     <tr>
       <td class="col-title">${esc(a.title)} ${imgBadge}</td>
@@ -715,9 +775,6 @@ function deleteArticle(id){
   if(saveDB()){ renderTable(); toast('🗑 مقاله حذف شد.'); }
 }
 
-/* ============================================================
-   مشاهده مقاله
-   ============================================================ */
 function viewArticle(id, version){
   const a = DB.articles.find(x => x.id === id);
   if(!a) return;
@@ -725,7 +782,7 @@ function viewArticle(id, version){
   $('#viewTitle').textContent = version === 'brief' ? 'مشاهده نسخه مختصر' : 'مشاهده نسخه کامل';
   const imap = getImageMap(a.images);
   let html = `<h4 style="border:none;padding:0;font-size:17px;color:var(--ink);margin-bottom:4px">${esc(a.title)}</h4>
-              <div class="meta">ماهیت: ${esc(a.nature||'—')}${(a.images||[]).length ? ' · 🖼 ' + faNum(a.images.length) + ' تصویر' : ''}</div>`;
+              <div class="meta">ماهیت: ${esc(a.nature||'—')}${(a.images||[]).length ? ' · 🖼 ' + faNum(a.images.length) : ''}</div>`;
   if(version === 'brief'){
     const bd = a.briefData;
     if(bd){
@@ -755,9 +812,7 @@ function viewArticle(id, version){
 }
 function exportFromView(){ closeModal('viewModal'); if(viewingId) openExport(viewingId); }
 
-/* ============================================================
-   فرم مقاله
-   ============================================================ */
+/* ---------- فرم مقاله ---------- */
 function editArticle(id){
   const a = DB.articles.find(x => x.id === id);
   if(!a) return;
@@ -815,7 +870,7 @@ function resetForm(){
   updateWordCount();
 }
 
-/* ---------- پیوست تصاویر ---------- */
+/* ---------- تصاویر مقاله ---------- */
 function renderArticleImages(){
   const box = $('#articleImagesGrid');
   const sum = $('#imagesSummary');
@@ -829,7 +884,7 @@ function renderArticleImages(){
     <div class="image-card">
       <img class="img-thumb" src="${img.data}" alt="${esc(img.name)}">
       <div class="img-actions">
-        <button class="img-btn replace" title="تغییر تصویر" onclick="replaceArticleImage('${img.id}')">✎</button>
+        <button class="img-btn replace" title="تغییر" onclick="replaceArticleImage('${img.id}')">✎</button>
         <button class="img-btn del" title="حذف" onclick="removeArticleImage('${img.id}')">✕</button>
       </div>
       <div class="img-info">
@@ -862,8 +917,7 @@ function removeArticleImage(imgId){
 }
 function replaceArticleImage(imgId){
   const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = 'image/*';
+  input.type = 'file'; input.accept = 'image/*';
   input.onchange = async (e) => {
     const file = e.target.files[0];
     if(!file || !file.type.startsWith('image/')){ toast('⚠️ فایل معتبر نیست.'); return; }
@@ -879,7 +933,7 @@ function replaceArticleImage(imgId){
   input.click();
 }
 
-/* ---------- انتخاب تصویر برای درج ---------- */
+/* ---------- انتخاب تصویر ---------- */
 function openImagePicker(targetTextareaId){
   pickerTargetTextarea = targetTextareaId;
   renderPickerImages();
@@ -907,9 +961,7 @@ function selectPickerImage(imgId){
   const end = ta.selectionEnd ?? ta.value.length;
   ta.value = ta.value.substring(0, start) + marker + ta.value.substring(end);
   ta.selectionStart = ta.selectionEnd = start + marker.length;
-  ta.focus();
-  autoDraft();
-  closeModal('imagePickerModal');
+  ta.focus(); autoDraft(); closeModal('imagePickerModal');
   toast('✅ تصویر در متن درج شد.');
 }
 async function handlePickerUpload(e){
@@ -965,8 +1017,7 @@ function restoreDraft(){
 function updateWordCount(){
   const t = $('#fBody').value.trim();
   const n = t ? t.split(/\s+/).length : 0;
-  const el = $('#wordCount');
-  if(el) el.textContent = faNum(n) + ' کلمه';
+  const el = $('#wordCount'); if(el) el.textContent = faNum(n) + ' کلمه';
 }
 function autoAbstract(){
   const body = $('#fBody').value.trim(), intro = $('#fIntro').value.trim();
@@ -981,7 +1032,7 @@ function autoAbstract(){
 }
 
 /* ============================================================
-   استخراج هوشمند
+   استخراج هوشمند (mock)
    ============================================================ */
 let smartResults = [], smartSelected = new Set(), smartMerged = null;
 const SOURCES = ['نورمگز — پایگاه استنادی علوم جهان اسلام','مگیران — بانک اطلاعات نشریات کشور',
@@ -1022,62 +1073,48 @@ function buildMockResults(topic){
   return [
     { title:`${t}: مبانی نظری و مفاهیم بنیادین`, source:SOURCES[0], year:'۱۴۰۲',
       snippet:`این پژوهش به بررسی مفاهیم پایه و چارچوب‌های نظری مرتبط با ${t} می‌پردازد.`,
-      content:`${t} یکی از موضوعات مهم و پرکاربرد در حوزه مطالعات امروزی است. در سال‌های اخیر توجه پژوهشگران به ابعاد گوناگون آن افزایش یافته و چارچوب‌های نظری متعددی برای تبیین آن ارائه شده است.\n\nاز منظر نظری، ${t} را می‌توان در قالب رویکردهای ساختارگرا، کارکردگرا و تفسیری بررسی کرد.` },
+      content:`${t} یکی از موضوعات مهم و پرکاربرد در حوزه مطالعات امروزی است.\n\nاز منظر نظری، ${t} را می‌توان در قالب رویکردهای ساختارگرا و تفسیری بررسی کرد.` },
     { title:`بررسی تحلیلی ${t} در ایران`, source:SOURCES[1], year:'۱۴۰۱',
       snippet:`مقاله حاضر با روش تحلیلی-توصیفی، وضعیت ${t} در ایران را بررسی می‌کند.`,
-      content:`بررسی وضعیت ${t} در ایران نشان می‌دهد که طی سال‌های گذشته گام‌های مهمی در این زمینه برداشته شده است، اما هنوز فاصله معناداری با استانداردهای جهانی وجود دارد.\n\nاز مهم‌ترین چالش‌ها می‌توان به کمبود زیرساخت‌ها، محدودیت منابع و نبود نیروی متخصص اشاره کرد.` },
+      content:`بررسی وضعیت ${t} در ایران نشان می‌دهد که طی سال‌های گذشته گام‌های مهمی برداشته شده است.\n\nاز چالش‌ها می‌توان به کمبود زیرساخت‌ها اشاره کرد.` },
     { title:`${t}: چالش‌ها و راهکارها`, source:SOURCES[2], year:'۱۴۰۳',
-      snippet:`این مقاله چالش‌های پیش روی ${t} را دسته‌بندی و راهکارهای عملی ارائه می‌دهد.`,
-      content:`چالش‌های مرتبط با ${t} را می‌توان در سه دسته ساختاری، فرهنگی و فنی طبقه‌بندی کرد.\n\nراهکارهای پیشنهادی شامل تقویت آموزش، سرمایه‌گذاری هدفمند و تدوین سیاست‌های حمایتی است.` },
+      snippet:`این مقاله چالش‌های پیش روی ${t} را دسته‌بندی می‌کند.`,
+      content:`چالش‌های مرتبط با ${t} را می‌توان در سه دسته ساختاری، فرهنگی و فنی طبقه‌بندی کرد.` },
     { title:`${t} — دانشنامه آزاد`, source:SOURCES[3], year:'۱۴۰۳',
-      snippet:`مدخل دانشنامه‌ای درباره ${t}، تعاریف، تاریخچه و کاربردها.`,
-      content:`${t} اصطلاحی است که در حوزه‌های گوناگون کاربرد دارد. تاریخچه شکل‌گیری آن به دهه‌های گذشته بازمی‌گردد.` },
+      snippet:`مدخل دانشنامه‌ای درباره ${t}.`,
+      content:`${t} اصطلاحی است که در حوزه‌های گوناگون کاربرد دارد.` },
     { title:`رویکردهای نوین به ${t}`, source:SOURCES[4], year:'۱۴۰۰',
       snippet:`این پژوهش رویکردهای نوین را در حوزه ${t} معرفی می‌کند.`,
-      content:`رویکردهای نوین در حوزه ${t} بر استفاده از فناوری‌های دیجیتال و همکاری بین‌رشته‌ای تأکید دارند.\n\nبه‌کارگیری این رویکردها می‌تواند به افزایش کارایی منجر شود.` }
+      content:`رویکردهای نوین در حوزه ${t} بر استفاده از فناوری‌های دیجیتال تأکید دارند.` }
   ];
 }
-
-/* ---------- ۲۰ قالب یکتا (همه با s.title) ---------- */
 const EXPAND_TEMPLATES = [
-  (t,s) => `در بررسی ${s.title}، آنچه بیش از همه جلب توجه می‌کند، جامعیت رویکرد نویسندگان به موضوع ${t} است. این منبع با تکیه بر شواهد تجربی و تحلیل داده‌های گردآوری‌شده، تصویری چندبعدی از وضعیت کنونی ارائه می‌دهد.`,
-  (t,s) => `از منظر مبانی نظری، ${s.title} چارچوبی فراهم می‌آورد که به پژوهشگران امکان می‌دهد پدیده ${t} را در بستری گسترده‌تر تحلیل کنند و ارتباط آن را با حوزه‌های مرتبط بهتر درک نمایند.`,
-  (t,s) => `در حوزه کاربرد عملی، یافته‌های ${s.title} نشان می‌دهد که ${t} می‌تواند در عرصه‌های گوناگون از جمله آموزش، پژوهش، مدیریت و سیاست‌گذاری مورد بهره‌برداری قرار گیرد.`,
-  (t,s) => `با این حال، ${s.title} از چالش‌های پیش روی ${t} نیز غافل نشده و کمبود منابع، محدودیت‌های ساختاری و نبود سیاست‌های حمایتی را از موانع مهم برمی‌شمارد.`,
-  (t,s) => `مقایسه یافته‌های ${s.title} با سایر پژوهش‌های انجام‌شده در حوزه ${t} نشان می‌دهد که علیرغم اشتراک در کلیات، تفاوت‌های معناداری در جزئیات و روش‌شناسی وجود دارد.`,
-  (t,s) => `از حیث روش‌شناسی، ${s.title} بر استفاده از روش‌های ترکیبی تأکید دارد و معتقد است که تکیه صرف بر یک روش نمی‌تواند تصویری کامل از ${t} ارائه دهد.`,
-  (t,s) => `نمونه‌های موردی ارائه‌شده در ${s.title} گویای آن است که ${t} در بسترهای مختلف می‌تواند نمودهای متفاوتی داشته باشد و این تنوع، ضرورت توجه به زمینه‌های بومی را برجسته می‌سازد.`,
-  (t,s) => `${s.title} نقش ذی‌نفعان مختلف را در توسعه ${t} مورد تأکید قرار می‌دهد و معتقد است که بدون مشارکت فعال همه گروه‌ها، پیشرفت پایدار دشوار خواهد بود.`,
-  (t,s) => `${s.title} به اهمیت پایش و ارزیابی مستمر در حوزه ${t} اشاره می‌کند و بدون سنجش دقیق شاخص‌ها، امکان اصلاح مسیر و بهبود عملکرد وجود نخواهد داشت.`,
-  (t,s) => `از منظر سرمایه انسانی، ${s.title} تصریح می‌کند که ${t} نیازمند تربیت نیروی متخصص و کارآمدی است که هم از دانش نظری کافی برخوردار باشد و هم مهارت‌های عملی داشته باشد.`,
-  (t,s) => `${s.title} با نگاهی به تجربه کشورهای پیشرو در حوزه ${t} نتیجه می‌گیرد که موفقیت در این زمینه مستلزم عزم ملی، ثبات سیاستی و تداوم سرمایه‌گذاری است.`,
-  (t,s) => `سرانجام، ${s.title} افق پیش روی ${t} را روشن توصیف می‌کند، مشروط بر آنکه سیاست‌گذاران و پژوهشگران با نگاهی آینده‌نگر و مبتنی بر شواهد علمی، مسیر توسعه این حوزه را هدایت کنند.`,
-  (t,s) => `${s.title} بر اهمیت همکاری بین‌رشته‌ای در مطالعات مرتبط با ${t} تأکید می‌کند و معتقد است که زاویه دید تک‌رشته‌ای نمی‌تواند ابعاد پیچیده این حوزه را به‌طور کامل روشن کند.`,
-  (t,s) => `در بخش جمع‌بندی، ${s.title} خاطرنشان می‌سازد که توسعه ${t} نیازمند برنامه‌ریزی بلندمدت و هماهنگی نهادی است و اقدامات مقطعی نمی‌تواند نتایج پایدار به همراه داشته باشد.`,
-  (t,s) => `${s.title} به ابعاد اخلاقی و اجتماعی ${t} نیز اشاره می‌کند و معتقد است که توجه به این ابعاد، برای تضمین پذیرش عمومی و مشروعیت اقدامات ضروری است.`,
-  (t,s) => `از دیدگاه ${s.title}، ارزیابی دقیق نیازها و اولویت‌بندی درست، پیش‌نیاز هرگونه اقدام مؤثر در حوزه ${t} است و بدون آن، تلاش‌ها ممکن است بی‌نتیجه بماند.`,
-  (t,s) => `${s.title} با تحلیل روندهای گذشته، چشم‌اندازی از تحولات آینده ${t} ترسیم می‌کند و بر ضرورت آمادگی نهادی تأکید می‌ورزد.`,
-  (t,s) => `${s.title} نمونه‌های موفق و ناموفق در حوزه ${t} را بررسی می‌کند و درس‌های آموخته از آنها را برای سیاست‌گذاران و پژوهشگران برمی‌شمارد.`,
-  (t,s) => `${s.title} بر نقش آموزش و آگاهی‌بخشی عمومی در ارتقای ${t} تأکید می‌کند و آن را یکی از ارکان اصلی توسعه پایدار می‌داند.`,
-  (t,s) => `در پایان، ${s.title} با ارائه پیشنهادهای عملی، مسیر حرکت به سوی وضعیت مطلوب در حوزه ${t} را ترسیم می‌کند و بر ضرورت پیگیری مستمر تأکید می‌ورزد.`
+  (t,s) => `در بررسی ${s.title}، جامعیت رویکرد نویسندگان به موضوع ${t} جلب توجه می‌کند.`,
+  (t,s) => `از منظر مبانی نظری، ${s.title} چارچوبی فراهم می‌آورد که تحلیل ${t} را ممکن می‌سازد.`,
+  (t,s) => `در حوزه کاربرد عملی، یافته‌های ${s.title} نشان می‌دهد که ${t} می‌تواند در عرصه‌های گوناگون به کار رود.`,
+  (t,s) => `${s.title} از چالش‌های پیش روی ${t} غافل نشده و کمبود منابع را برمی‌شمارد.`,
+  (t,s) => `مقایسه یافته‌های ${s.title} با سایر پژوهش‌ها نشان از تفاوت‌های معنادار دارد.`,
+  (t,s) => `از حیث روش‌شناسی، ${s.title} بر استفاده از روش‌های ترکیبی تأکید دارد.`,
+  (t,s) => `نمونه‌های موردی ${s.title} گویای تنوع نمودهای ${t} در بسترهای مختلف است.`,
+  (t,s) => `${s.title} نقش ذی‌نفعان مختلف را در توسعه ${t} مورد تأکید قرار می‌دهد.`,
+  (t,s) => `${s.title} به اهمیت پایش مستمر در حوزه ${t} اشاره می‌کند.`,
+  (t,s) => `از منظر سرمایه انسانی، ${s.title} نیاز ${t} به نیروی متخصص را برجسته می‌سازد.`,
+  (t,s) => `${s.title} با نگاهی به تجربه کشورهای پیشرو نتیجه‌گیری می‌کند که عزم ملی لازم است.`,
+  (t,s) => `${s.title} افق پیش روی ${t} را روشن توصیف می‌کند.`
 ];
 function expandSource(topic, source, sourceIdx, numParagraphs){
   const out = [];
-  const len = EXPAND_TEMPLATES.length;
   for(let i = 0; i < numParagraphs; i++){
-    const tpl = EXPAND_TEMPLATES[(sourceIdx * 3 + i) % len];
-    out.push(tpl(topic, source));
+    out.push(EXPAND_TEMPLATES[(sourceIdx * 3 + i) % EXPAND_TEMPLATES.length](topic, source));
   }
   return out;
 }
-
 function mergeSelected(){
   if(smartSelected.size === 0){ toast('⚠️ حداقل یک منبع را انتخاب کنید.'); return; }
   const topic = $('#smartTopic').value.trim();
   const chosen = [...smartSelected].map(i => smartResults[i]);
   const n = chosen.length;
 
-  /* ====== ۱) نسخه کامل ====== */
   const perSource = Math.max(12, Math.ceil(60 / n));
   const allParagraphs = [];
   chosen.forEach((c, idx) => {
@@ -1085,63 +1122,25 @@ function mergeSelected(){
     allParagraphs.push(...expandSource(topic, c, idx, perSource));
   });
   const fullBody = dedupeArticle(allParagraphs.join('\n\n'));
-
-  const fullAbstract = dedupeArticle(
-    `پژوهش حاضر با هدف بررسی جامع و نظام‌مند «${topic}» تدوین شده است. ` +
-    `بدین منظور، ${n} منبع علمی معتبر شامل مقالات، کتاب‌ها و منابع دانشنامه‌ای بررسی و تحلیل محتوایی شده‌اند. ` +
-    `یافته‌ها نشان می‌دهد که ${topic} از منظر مبانی نظری، کاربردهای عملی، چالش‌ها و افق‌های پیش رو ابعاد گوناگونی دارد.`
-  );
-
-  const fullIntro = dedupeArticle(
-    `امروزه ${topic} به یکی از مباحث کلیدی در عرصه‌های علمی، آموزشی، اقتصادی و اجتماعی تبدیل شده است.\n\n` +
-    `مقاله حاضر با تلفیق یافته‌های ${n} منبع معتبر، تلاش می‌کند تصویری جامع از وضعیت کنونی، چالش‌ها و افق‌های آینده ارائه دهد.\n\n` +
-    `ساختار مقاله به این ترتیب است: هر منبع به تفصیل بررسی می‌شود، سپس یافته‌ها تلفیق و نهایتاً نتیجه‌گیری ارائه می‌گردد.`
-  );
-
-  const fullConclusion = dedupeArticle(
-    `بر اساس بررسی‌های جامع انجام‌شده، می‌توان نتیجه گرفت که ${topic} حوزه‌ای چندبُعدی، پیچیده و پرظرفیت است که نیازمند نگاهی نظام‌مند و بین‌رشته‌ای است.\n\n` +
-    `از منظر نظری، پژوهش‌های انجام‌شده چارچوب‌های متنوعی ارائه داده‌اند. با این حال، فقدان یک چارچوب جامع از خلأهای موجود است.\n\n` +
-    `پیشنهادهای کاربردی: تدوین سیاست‌های حمایتی، تقویت زیرساخت‌ها، ترویج فرهنگ استفاده از شواهد علمی، و تشویق همکاری‌های بین‌المللی.`
-  );
-
+  const fullIntro = dedupeArticle(`امروزه ${topic} به یکی از مباحث کلیدی تبدیل شده است.\n\nمقاله حاضر با تلفیق یافته‌های ${n} منبع معتبر، تصویری جامع ارائه می‌دهد.`);
+  const fullAbstract = dedupeArticle(`پژوهش حاضر با هدف بررسی جامع «${topic}» تدوین شده است. ${n} منبع معتبر بررسی و تحلیل شده‌اند.`);
+  const fullConclusion = dedupeArticle(`بر اساس بررسی‌های انجام‌شده می‌توان نتیجه گرفت که ${topic} حوزه‌ای چندبُعدی است.`);
   const fullRefs = chosen.map((c,i) => `${faNum(i+1)}. ${c.title}. ${c.source}، ${c.year}.`).join('\n');
 
-  /* ====== ۲) نسخه مختصر (بر پایه نسخه کامل) ====== */
-  const briefIntro = dedupeArticle(summarizeText(fullIntro, 1/3));
-
-  const briefAbstract = dedupeArticle(
-    `این مقاله با هدف بررسی جامع «${topic}» تدوین شده است. ` +
-    `${n} منبع علمی معتبر بررسی و یافته‌های آنها تلفیق شده است. ` +
-    `${topic} از ابعاد گوناگون نظری، کاربردی و چالش‌محور قابل مطالعه است.`
-  );
-
-  const briefBody = dedupeArticle(
-    chosen.map((c,i) => `بخش ${faNum(i+1)}: ${c.title}\n${c.content}`).join('\n\n')
-  );
-
-  const briefConclusion = dedupeArticle(
-    `بر اساس بررسی‌ها می‌توان نتیجه گرفت که ${topic} حوزه‌ای چندبُعدی است که نیازمند نگاهی جامع و بین‌رشته‌ای است. ` +
-    `با وجود پیشرفت‌های قابل توجه، زمینه‌های بسیاری برای پژوهش و اقدام عملی وجود دارد.`
-  );
-
   const briefData = {
-    intro: briefIntro,
-    abstract: briefAbstract,
-    body: briefBody,
-    conclusion: briefConclusion,
+    intro: dedupeArticle(summarizeText(fullIntro, 1/3)),
+    abstract: dedupeArticle(`این مقاله «${topic}» را بررسی می‌کند. ${n} منبع تلفیق شده است.`),
+    body: dedupeArticle(chosen.map((c,i) => `بخش ${faNum(i+1)}: ${c.title}\n${c.content}`).join('\n\n')),
+    conclusion: dedupeArticle(`نتیجه: ${topic} نیازمند نگاهی جامع است.`),
     refs: fullRefs
   };
 
   smartMerged = {
     title: topic, nature:'علمی-پژوهشی',
-    thanks: 'از تمامی پژوهشگران و نویسندگانی که منابع این مقاله بر پایه آثار ارزشمند آنان تدوین شده است، صمیمانه سپاسگزاریم.',
-    intro: fullIntro,
-    abstract: fullAbstract,
-    body: fullBody,
-    conclusion: fullConclusion,
-    refs: fullRefs,
-    briefData,
-    brief: briefData.abstract + '\n\n' + briefData.conclusion,
+    thanks: 'از پژوهشگرانی که منابع این مقاله بر پایه آثار آنان تدوین شده است سپاسگزاریم.',
+    intro: fullIntro, abstract: fullAbstract, body: fullBody,
+    conclusion: fullConclusion, refs: fullRefs,
+    briefData, brief: briefData.abstract + '\n\n' + briefData.conclusion,
     images: []
   };
 
@@ -1150,7 +1149,6 @@ function mergeSelected(){
   $('#smartPreviewCard').scrollIntoView({behavior:'smooth', block:'start'});
   toast('🧩 نسخه کامل + مختصر تولید شد (تکرارها حذف شدند).');
 }
-
 function renderSmartPreview(version){
   $('#pvFullBtn').classList.toggle('active', version === 'full');
   $('#pvBriefBtn').classList.toggle('active', version === 'brief');
@@ -1186,6 +1184,393 @@ function confirmSmartAdd(){
   $('#smartTopic').value = '';
   renderTable(); switchTab('bank');
   toast('✅ هر دو نسخه به بانک اضافه شد.');
+}
+
+/* ============================================================
+   هوش مصنوعی (AI)
+   ============================================================ */
+const AI_PROVIDERS = {
+  hormoz: {
+    label: 'Hormoz AI (DeepSeek)',
+    free: false,
+    models: [
+      { value: 'deepseek/deepseek-v4.1-flash', label: 'DeepSeek V4.1 Flash (پیشنهادی)' },
+      { value: 'deepseek/deepseek-v3.2', label: 'DeepSeek V3.2' }
+    ],
+    keyUrl: 'https://hormouz.net',
+    keyHint: 'کلید را از پنل هرمز دریافت کنید. پرداخت ریالی و بدون نیاز به VPN.'
+  },
+  gemini: {
+    label: 'Google Gemini',
+    free: true,
+    models: [
+      { value: 'gemini-2.0-flash-exp', label: 'Gemini 2.0 Flash (پیشنهادی)' },
+      { value: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' },
+      { value: 'gemini-1.5-pro', label: 'Gemini 1.5 Pro (دقیق)' }
+    ],
+    keyUrl: 'https://aistudio.google.com/app/apikey',
+    keyHint: 'کلید را به‌صورت رایگان از Google AI Studio دریافت کنید.'
+  },
+  groq: {
+    label: 'Groq (Llama)',
+    free: true,
+    models: [
+      { value: 'llama-3.3-70b-versatile', label: 'Llama 3.3 70B (پیشنهادی)' },
+      { value: 'llama-3.1-8b-instant', label: 'Llama 3.1 8B (سریع)' }
+    ],
+    keyUrl: 'https://console.groq.com/keys',
+    keyHint: 'کلید را به‌صورت رایگان از Groq Console دریافت کنید.'
+  },
+  openai: {
+    label: 'OpenAI',
+    free: false,
+    models: [
+      { value: 'gpt-4o-mini', label: 'GPT-4o mini (پیشنهادی)' },
+      { value: 'gpt-4o', label: 'GPT-4o' },
+      { value: 'gpt-4-turbo', label: 'GPT-4 Turbo' }
+    ],
+    keyUrl: 'https://platform.openai.com/api-keys',
+    keyHint: 'کلید از پنل OpenAI (پولی) دریافت می‌شود.'
+  },
+  openrouter: {
+    label: 'OpenRouter',
+    free: false,
+    models: [
+      { value: 'google/gemini-2.0-flash-exp:free', label: 'Gemini 2.0 Flash (رایگان)' },
+      { value: 'meta-llama/llama-3.3-70b-instruct', label: 'Llama 3.3 70B' },
+      { value: 'anthropic/claude-3.5-sonnet', label: 'Claude 3.5 Sonnet' }
+    ],
+    keyUrl: 'https://openrouter.ai/keys',
+    keyHint: 'از OpenRouter دریافت کنید (شامل مدل‌های رایگان).'
+  }
+};
+
+let aiState = { full: null, brief: null, previewVersion: 'full', generating: false };
+
+function loadAISettings(){
+  try{
+    const raw = localStorage.getItem(AI_SETTINGS_KEY);
+    if(raw) return JSON.parse(raw);
+  }catch(e){}
+  return { provider: 'hormoz', apiKey: '', model: 'deepseek/deepseek-v4.1-flash' };
+}
+function saveAISettings(s){
+  try{ localStorage.setItem(AI_SETTINGS_KEY, JSON.stringify(s)); return true; }
+  catch(e){ toast('⚠️ خطا در ذخیره تنظیمات'); return false; }
+}
+function initAI(){
+  const settings = loadAISettings();
+  const providerSel = $('#aiProvider');
+  if(!providerSel) return;
+  if(providerSel.options.length === 0){
+    providerSel.innerHTML = Object.keys(AI_PROVIDERS).map(k => {
+      const p = AI_PROVIDERS[k];
+      return `<option value="${k}">${p.label} ${p.free ? '(رایگان)' : '(پولی)'}</option>`;
+    }).join('');
+  }
+  providerSel.value = settings.provider;
+  $('#aiApiKey').value = settings.apiKey || '';
+  onAIProviderChange(settings.model);
+  updateAIStatusBadge();
+}
+function onAIProviderChange(selectedModel){
+  const provider = $('#aiProvider').value;
+  const cfg = AI_PROVIDERS[provider];
+  const modelSel = $('#aiModel');
+  modelSel.innerHTML = cfg.models.map(m => `<option value="${m.value}">${m.label}</option>`).join('');
+  if(selectedModel && cfg.models.some(m => m.value === selectedModel)){
+    modelSel.value = selectedModel;
+  }
+  $('#aiKeyHint').textContent = cfg.keyHint;
+  $('#aiKeyLink').href = cfg.keyUrl;
+}
+function updateAIStatusBadge(){
+  const s = loadAISettings();
+  const badge = $('#aiStatusBadge');
+  if(s.apiKey && s.model){
+    badge.textContent = 'آماده';
+    badge.className = 'badge ai-on';
+  } else {
+    badge.textContent = 'متصل نشده';
+    badge.className = 'badge ai-off';
+  }
+}
+function saveAIConfig(){
+  const provider = $('#aiProvider').value;
+  const model = $('#aiModel').value;
+  const apiKey = $('#aiApiKey').value.trim();
+  if(!apiKey){ toast('⚠️ کلید API را وارد کنید.'); return; }
+  if(saveAISettings({ provider, model, apiKey })){
+    toast('✅ تنظیمات ذخیره شد.');
+    updateAIStatusBadge();
+  }
+}
+function toggleApiKeyVisibility(){
+  const inp = $('#aiApiKey');
+  const btn = $('#apiKeyToggle');
+  if(inp.type === 'password'){ inp.type = 'text'; btn.textContent = '🙈'; }
+  else { inp.type = 'password'; btn.textContent = '👁'; }
+}
+
+/* ---------- فراخوانی API ---------- */
+async function callAI(provider, apiKey, model, prompt, systemPrompt){
+  if(provider === 'gemini'){
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
+    const body = {
+      contents: [{ role: 'user', parts: [{ text: (systemPrompt ? systemPrompt + '\n\n' : '') + prompt }] }],
+      generationConfig: {
+        temperature: 0.75,
+        maxOutputTokens: 8192,
+        responseMimeType: 'application/json'
+      }
+    };
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if(!res.ok){
+      const errText = await res.text().catch(() => '');
+      let errMsg = `HTTP ${res.status}`;
+      try { const j = JSON.parse(errText); errMsg = j.error?.message || errMsg; } catch(e){}
+      throw new Error(errMsg);
+    }
+    const data = await res.json();
+    if(data.promptFeedback && data.promptFeedback.blockReason){
+      throw new Error('درخواست مسدود شد: ' + data.promptFeedback.blockReason);
+    }
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    if(!text) throw new Error('پاسخ خالی از هوش مصنوعی');
+    return text;
+  }
+
+  // OpenAI-compatible (openai, groq, openrouter, hormoz)
+  const urls = {
+    openai: 'https://api.openai.com/v1/chat/completions',
+    groq: 'https://api.groq.com/openai/v1/chat/completions',
+    openrouter: 'https://openrouter.ai/api/v1/chat/completions',
+    hormoz: 'https://api.hormouz.net/v1/chat/completions'
+  };
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${apiKey}`
+  };
+  
+  if(provider === 'openrouter'){
+    headers['HTTP-Referer'] = location.origin || 'https://localhost';
+    headers['X-Title'] = 'Article Bank';
+  }
+  
+  const body = {
+    model,
+    messages: [
+      { role: 'system', content: systemPrompt || '' },
+      { role: 'user', content: prompt }
+    ],
+    temperature: 0.75,
+    max_tokens: 8192
+  };
+  
+  if(provider === 'openai' || provider === 'groq' || provider === 'hormoz'){
+    body.response_format = { type: 'json_object' };
+  }
+  
+  const res = await fetch(urls[provider], {
+    method: 'POST', headers, body: JSON.stringify(body)
+  });
+  
+  if(!res.ok){
+    const errText = await res.text().catch(() => '');
+    let errMsg = `HTTP ${res.status}`;
+    try { const j = JSON.parse(errText); errMsg = j.error?.message || errMsg; } catch(e){}
+    throw new Error(errMsg);
+  }
+  
+  const data = await res.json();
+  const text = data.choices?.[0]?.message?.content || '';
+  if(!text) throw new Error('پاسخ خالی از هوش مصنوعی');
+  return text;
+}
+
+/* ---------- پارس پاسخ ---------- */
+function parseAIResponse(text){
+  let cleaned = String(text).trim();
+  cleaned = cleaned.replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '').trim();
+  const firstBrace = cleaned.indexOf('{');
+  const lastBrace = cleaned.lastIndexOf('}');
+  if(firstBrace === -1 || lastBrace === -1) throw new Error('پاسخ JSON معتبر نبود');
+  const jsonStr = cleaned.substring(firstBrace, lastBrace + 1);
+  try { return JSON.parse(jsonStr); }
+  catch(e){ throw new Error('خطا در خواندن JSON: ' + e.message); }
+}
+function normalizeAIArticle(o){
+  return {
+    intro:      dedupeArticle(String(o.intro || '').trim()),
+    abstract:   dedupeArticle(String(o.abstract || '').trim()),
+    body:       dedupeArticle(String(o.body || '').trim()),
+    conclusion: dedupeArticle(String(o.conclusion || '').trim()),
+    refs:       String(o.refs || '').trim()
+  };
+}
+
+/* ---------- ساخت prompt ---------- */
+function buildAIPrompt(topic, extra){
+  let p = `موضوع مقاله: «${topic}»\n\n`;
+  if(extra) p += `توضیحات تکمیلی کاربر: ${extra}\n\n`;
+  p += `یک مقاله علمی-پژوهشی جامع و ارزشمند به زبان فارسی روان و آکادمیک درباره این موضوع بنویسید.\n\n`;
+  p += `ساختار الزامی هر دو نسخه:\n`;
+  p += `مقدمه، چکیده، متن، نتیجه‌گیری، منابع\n\n`;
+  p += `محتوای «متن» باید شامل این ۹ بخش باشد و هر بخش دقیقاً با «بخش N: عنوان» شروع شود:\n`;
+  p += `بخش ۱: تاریخچه و خاستگاه موضوع\n`;
+  p += `بخش ۲: مهم‌ترین اصل بنیادین و فلسفه وجودی\n`;
+  p += `بخش ۳: زمان بروز و ظهور در ایران\n`;
+  p += `بخش ۴: نقاط قوت\n`;
+  p += `بخش ۵: نقاط ضعف\n`;
+  p += `بخش ۶: موانع گسترش و پیشرفت\n`;
+  p += `بخش ۷: مزایای اصلی\n`;
+  p += `بخش ۸: مزیت رقابتی\n`;
+  p += `بخش ۹: جمع‌بندی و چشم‌انداز آینده\n\n`;
+  p += `الزامات:\n`;
+  p += `• نسخه کامل: هر بخش ۲-۳ پاراگراف جامع و تحلیلی. مجموع متن حداقل ۱۸۰۰ کلمه.\n`;
+  p += `• نسخه مختصر: هر بخش یک پاراگراف کوتاه و نکات کلیدی. مجموع متن ۴۰۰-۶۰۰ کلمه.\n`;
+  p += `• مقدمه نسخه مختصر باید خلاصه‌ای از مقدمه نسخه کامل باشد (نکات کلیدی، بدون تکرار).\n`;
+  p += `• از تکرار جمله‌ها و حاشیه‌روی اکیداً پرهیز شود.\n`;
+  p += `• زبان رسمی، روان و بدون شکسته‌نویسی.\n`;
+  p += `• منابع: حداقل ۵ منبع با فرمت فارسی استاندارد (شماره. نام، سال. عنوان. ناشر).\n`;
+  p += `• در متن مقاله هیچ‌گاه به «هوش مصنوعی» اشاره نشود.\n`;
+  p += `• از مارکر تصویر یا HTML استفاده نشود؛ فقط متن ساده فارسی.\n\n`;
+  p += `پاسخ را دقیقاً در قالب JSON زیر و بدون هیچ متن اضافی برگردان:\n`;
+  p += `{"full":{"intro":"...","abstract":"...","body":"بخش ۱: ...\\n\\n...\\n\\nبخش ۲: ...","conclusion":"...","refs":"۱. ...\\n۲. ..."},"brief":{"intro":"...","abstract":"...","body":"بخش ۱: ...\\n\\nبخش ۲: ...","conclusion":"...","refs":"۱. ...\\n۲. ..."}}`;
+  return p;
+}
+
+/* ---------- تولید ---------- */
+async function generateAIArticle(){
+  if(aiState.generating){ toast('در حال تولید...'); return; }
+  const topic = $('#aiTopic').value.trim();
+  if(!topic){ toast('⚠️ موضوع را وارد کنید.'); $('#aiTopic').focus(); return; }
+  const settings = loadAISettings();
+  if(!settings.apiKey){ toast('⚠️ ابتدا کلید API را در تنظیمات وارد کنید.'); $('#aiSettingsDetails').open = true; return; }
+  if(!settings.model){ toast('⚠️ مدل را انتخاب کنید.'); return; }
+
+  aiState.generating = true;
+  const btn = $('#aiGenerateBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ در حال تولید...';
+  $('#aiStatusText').textContent = 'در حال ارسال درخواست به هوش مصنوعی...';
+  showOverlay('🤖 هوش مصنوعی در حال تولید مقاله است…\n(ممکن است ۳۰ تا ۹۰ ثانیه طول بکشد)');
+
+  try {
+    const prompt = buildAIPrompt(topic, $('#aiExtra').value.trim());
+    const systemPrompt = 'شما یک نویسنده حرفه‌ای مقالات علمی-پژوهشی فارسی هستید. فقط JSON معتبر برگردان.';
+    $('#aiStatusText').textContent = '⏳ در انتظار پاسخ از ' + AI_PROVIDERS[settings.provider].label + '...';
+    const raw = await callAI(settings.provider, settings.apiKey, settings.model, prompt, systemPrompt);
+    $('#aiStatusText').textContent = 'در حال پردازش پاسخ...';
+    const parsed = parseAIResponse(raw);
+    if(!parsed.full || !parsed.brief){
+      throw new Error('پاسخ هوش مصنوعی ناقص است (فیلد full یا brief موجود نیست)');
+    }
+    aiState.full = normalizeAIArticle(parsed.full);
+    aiState.brief = normalizeAIArticle(parsed.brief);
+    aiState.previewVersion = 'full';
+    renderAIPreview('full');
+    $('#aiPreviewCard').classList.remove('hidden');
+    $('#aiPreviewCard').scrollIntoView({behavior: 'smooth', block: 'start'});
+    $('#aiStatusText').textContent = '✅ مقاله با موفقیت تولید شد';
+    toast('✅ مقاله در دو نسخه تولید شد.');
+  } catch(e){
+    console.error(e);
+    toast('⛔ خطا: ' + e.message);
+    $('#aiStatusText').textContent = '❌ ' + e.message;
+  } finally {
+    aiState.generating = false;
+    btn.disabled = false;
+    btn.textContent = '🚀 تولید مقاله (کامل + مختصر)';
+    hideOverlay();
+  }
+}
+
+/* ---------- پیش‌نمایش AI ---------- */
+function renderAIPreview(version){
+  aiState.previewVersion = version;
+  $('#aiPvFullBtn').classList.toggle('active', version === 'full');
+  $('#aiPvBriefBtn').classList.toggle('active', version === 'brief');
+  const data = version === 'full' ? aiState.full : aiState.brief;
+  if(!data) return;
+  const para = t => String(t||'').split(/\n+/).filter(s=>s.trim()).map(s => {
+    if(/^بخش\s/.test(s)) return `<h5 class="sub-heading" style="font-size:13.5px;color:var(--primary-dark);margin:14px 0 6px">${esc(s)}</h5>`;
+    return '<p>'+esc(s)+'</p>';
+  }).join('');
+  const words = [data.intro, data.abstract, data.body, data.conclusion].join(' ').split(/\s+/).filter(Boolean).length;
+  const estPages = Math.ceil(words / 300);
+  $('#aiPreviewBody').innerHTML = `
+    <div class="meta">${version === 'full' ? 'نسخه کامل' : 'نسخه مختصر'} · ${faNum(words)} کلمه${version === 'full' ? ' · حدود ' + faNum(estPages) + ' صفحه' : ''}</div>
+    <h4>مقدمه</h4>${para(data.intro)}
+    <h4>چکیده</h4>${para(data.abstract)}
+    <h4>متن</h4>${para(data.body)}
+    <h4>نتیجه‌گیری</h4>${para(data.conclusion)}
+    <h4>منابع</h4>${para(data.refs)}`;
+}
+
+function saveAIArticle(){
+  if(!aiState.full || !aiState.brief){ toast('⚠️ مقاله‌ای برای ذخیره وجود ندارد.'); return; }
+  const topic = $('#aiTopic').value.trim() || 'مقاله هوش مصنوعی';
+  const newArt = {
+    id: uid(),
+    title: topic,
+    nature: 'علمی-پژوهشی',
+    thanks: 'از تمامی پژوهشگران و نویسندگانی که آثارشان مبنای تحلیل این مقاله بوده است، سپاسگزاریم.',
+    intro: aiState.full.intro,
+    abstract: aiState.full.abstract,
+    body: aiState.full.body,
+    conclusion: aiState.full.conclusion,
+    refs: aiState.full.refs,
+    briefData: {
+      intro: aiState.brief.intro,
+      abstract: aiState.brief.abstract,
+      body: aiState.brief.body,
+      conclusion: aiState.brief.conclusion,
+      refs: aiState.brief.refs
+    },
+    brief: aiState.brief.abstract + '\n\n' + aiState.brief.conclusion,
+    images: [],
+    createdAt: Date.now(),
+    source: 'ai-generated'
+  };
+  DB.articles.unshift(newArt);
+  if(!saveDB()){ DB.articles = DB.articles.filter(x => x.id !== newArt.id); return; }
+  toast('✅ مقاله به بانک اضافه شد.');
+  $('#aiTopic').value = '';
+  $('#aiExtra').value = '';
+  discardAIArticle();
+  switchTab('bank');
+}
+function discardAIArticle(){
+  aiState.full = null;
+  aiState.brief = null;
+  aiState.previewVersion = 'full';
+  $('#aiPreviewCard').classList.add('hidden');
+  $('#aiStatusText').textContent = '';
+}
+async function testAIConnection(){
+  const settings = loadAISettings();
+  const key = $('#aiApiKey').value.trim() || settings.apiKey;
+  if(!key){ toast('⚠️ ابتدا کلید API را وارد کنید.'); return; }
+  const provider = $('#aiProvider').value;
+  const model = $('#aiModel').value;
+  toast('در حال تست اتصال...');
+  try {
+    const res = await callAI(
+      provider, key, model,
+      'Return ONLY this JSON: {"status":"ok","message":"اتصال موفق"}',
+      'You are a test API. Return only valid JSON.'
+    );
+    parseAIResponse(res);
+    toast('✅ اتصال موفق!');
+  } catch(e){
+    toast('❌ ' + e.message);
+  }
 }
 
 /* ============================================================
@@ -1233,7 +1618,6 @@ function saveAdmin(){
   if(!name){ toast('⚠️ نام را وارد کنید.'); return; }
   if(user.length < 3){ toast('⚠️ نام کاربری حداقل ۳ کاراکتر.'); return; }
   if(!/^[a-zA-Z0-9_.-]+$/.test(user)){ toast('⚠️ نام کاربری فقط حروف/اعداد انگلیسی.'); return; }
-
   if(editingAdminId){
     const idx = DB.admins.findIndex(x => x.id === editingAdminId);
     if(idx < 0) return;
@@ -1351,7 +1735,7 @@ function clearBismillahSelection(){
 }
 
 /* ============================================================
-   PDF Export
+   خروجی PDF
    ============================================================ */
 let expState = { articleId:null, version:'full', type:'student', mode:'single', collectors:[''], bismillahImageId:null, loadedCollectorId:null };
 
@@ -1394,8 +1778,7 @@ function setType(t){
   expState.type = t;
   expState.loadedCollectorId = null;
   $$('#typePills .pill').forEach(p => p.classList.toggle('active', p.dataset.t === t));
-  renderTypeFields();
-  renderSavedCollectors();
+  renderTypeFields(); renderSavedCollectors();
 }
 function setCollectorMode(m){
   expState.mode = m;
@@ -1404,8 +1787,7 @@ function setCollectorMode(m){
   $('#modeMulti').classList.toggle('active', m === 'multi');
   if(m === 'single') expState.collectors = [expState.collectors[0] || ''];
   else if(expState.collectors.length < 2) expState.collectors.push('');
-  renderCollectors();
-  renderSavedCollectors();
+  renderCollectors(); renderSavedCollectors();
 }
 function renderCollectors(){
   const box = $('#collectorList');
@@ -1434,7 +1816,7 @@ function renderTypeFields(){
   </div>`;
 }
 
-/* ---------- سابقه مشخصات ---------- */
+/* ---------- سابقه گردآورنده ---------- */
 function renderSavedCollectors(){
   const tb = $('#savedCollectorsBody');
   if(!tb) return;
@@ -1464,15 +1846,14 @@ function loadSavedCollector(id){
   $$('#typePills .pill').forEach(el => el.classList.toggle('active', el.dataset.t === p.type));
   $('#modeSingle').classList.toggle('active', expState.mode === 'single');
   $('#modeMulti').classList.toggle('active', expState.mode === 'multi');
-  renderCollectors();
-  renderTypeFields();
+  renderCollectors(); renderTypeFields();
   const fields = p.fields || {};
   Object.keys(fields).forEach(k => {
     const el = document.getElementById('tf_' + k);
     if(el) el.value = fields[k] || '';
   });
   renderSavedCollectors();
-  toast('✅ مشخصات بارگذاری شد. می‌توانید ویرایش کنید.');
+  toast('✅ مشخصات بارگذاری شد.');
 }
 function saveCollectorToHistory(){
   const collectors = expState.collectors.map(c => c.trim()).filter(Boolean);
@@ -1485,7 +1866,6 @@ function saveCollectorToHistory(){
   const typeLabel = TYPE_LABELS[expState.type];
   const label = collectors.join(' و ') + ' (' + typeLabel + ')';
   const profile = { id: 'col_' + uid(), label, type: expState.type, typeLabel, mode: expState.mode, collectors, fields, createdAt: Date.now() };
-
   if(expState.loadedCollectorId){
     const idx = DB.savedCollectors.findIndex(c => c.id === expState.loadedCollectorId);
     if(idx > -1){
@@ -1514,20 +1894,17 @@ function deleteSavedCollector(id){
   DB.savedCollectors = DB.savedCollectors.filter(c => c.id !== id);
   if(!saveDB()){ DB.savedCollectors = backup; return; }
   if(expState.loadedCollectorId === id) expState.loadedCollectorId = null;
-  renderSavedCollectors();
-  toast('🗑 سابقه حذف شد.');
+  renderSavedCollectors(); toast('🗑 سابقه حذف شد.');
 }
 function clearExportFields(){
   if(!confirm('همه فیلدهای وارد شده پاک شوند؟')) return;
   expState.collectors = [''];
   expState.loadedCollectorId = null;
-  renderCollectors();
-  renderTypeFields();
-  renderSavedCollectors();
+  renderCollectors(); renderTypeFields(); renderSavedCollectors();
   toast('🗑 فیلدها پاک شدند.');
 }
 
-/* ---------- ساخت سند چاپ ---------- */
+/* ---------- سند چاپ ---------- */
 function buildPrintDocument(){
   const a = DB.articles.find(x => x.id === expState.articleId);
   if(!a) throw new Error('مقاله یافت نشد');
@@ -1564,7 +1941,6 @@ function buildPrintDocument(){
   }
 
   const e = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-
   const rp = (text) => {
     if(!text) return '';
     const parts = String(text).split(/(\[\[IMG:[a-zA-Z0-9_]+\]\])/g);
@@ -1601,7 +1977,7 @@ function buildPrintDocument(){
 
   if(showBismillah){
     const bImg = expState.bismillahImageId ? DB.bismillahImages.find(i => i.id === expState.bismillahImageId) : null;
-    if(bImg) body += `<div class="page bismillah-img"><img src="${bImg.data}" alt="بسم الله الرحمن الرحیم"></div>`;
+    if(bImg) body += `<div class="page bismillah-img"><img src="${bImg.data}" alt="بسم الله"></div>`;
     else     body += `<div class="page bismillah">بِسْمِ اللهِ الرَّحْمنِ الرَّحِیم</div>`;
   }
   if(showThanks) body += `<div class="page section"><h2 class="section-title">سپاسگزاری</h2><div class="section-body">${rp(a.thanks)}</div></div>`;
@@ -1609,22 +1985,19 @@ function buildPrintDocument(){
   if(isBrief){
     const bd = a.briefData;
     if(bd){
-      /* ترتیب: مقدمه ← چکیده ← متن ← نتیجه‌گیری ← منابع */
       if(bd.intro)      body += `<div class="page section"><h2 class="section-title">مقدمه</h2><div class="section-body">${rp(bd.intro)}</div></div>`;
       if(bd.abstract)   body += `<div class="page section"><h2 class="section-title">چکیده</h2><div class="section-body">${rp(bd.abstract)}</div></div>`;
       if(bd.body)       body += `<div class="page section"><h2 class="section-title">متن</h2><div class="section-body">${rp(bd.body)}</div></div>`;
       if(bd.conclusion) body += `<div class="page section"><h2 class="section-title">نتیجه‌گیری</h2><div class="section-body">${rp(bd.conclusion)}</div></div>`;
       if(bd.refs)       body += `<div class="page section"><h2 class="section-title">منابع</h2><div class="section-body">${rp(bd.refs)}</div></div>`;
     } else {
-      const b = a.brief || a.abstract || '';
       if(a.intro)      body += `<div class="page section"><h2 class="section-title">مقدمه</h2><div class="section-body">${rp(summarizeText(a.intro, 1/3))}</div></div>`;
-      if(b)            body += `<div class="page section"><h2 class="section-title">چکیده</h2><div class="section-body">${rp(b)}</div></div>`;
+      if(a.abstract)   body += `<div class="page section"><h2 class="section-title">چکیده</h2><div class="section-body">${rp(a.abstract)}</div></div>`;
       if(a.body)       body += `<div class="page section"><h2 class="section-title">متن</h2><div class="section-body">${rp(summarizeText(a.body, 1/3))}</div></div>`;
       if(a.conclusion) body += `<div class="page section"><h2 class="section-title">نتیجه‌گیری</h2><div class="section-body">${rp(a.conclusion)}</div></div>`;
       if(a.refs)       body += `<div class="page section"><h2 class="section-title">منابع</h2><div class="section-body">${rp(a.refs)}</div></div>`;
     }
   } else {
-    /* ترتیب: مقدمه ← چکیده ← متن ← نتیجه‌گیری ← منابع */
     if(a.intro)      body += `<div class="page section"><h2 class="section-title">مقدمه</h2><div class="section-body">${rp(a.intro)}</div></div>`;
     if(a.abstract)   body += `<div class="page section"><h2 class="section-title">چکیده</h2><div class="section-body">${rp(a.abstract)}</div></div>`;
     if(a.body)       body += `<div class="page section"><h2 class="section-title">متن</h2><div class="section-body">${rp(a.body)}</div></div>`;
@@ -1642,8 +2015,6 @@ function buildPrintDocument(){
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{font-family:Vazirmatn,'Iranian Sans',Tahoma,Arial,sans-serif;font-size:12pt;line-height:2;color:#000;direction:rtl;background:#fff}
 .page:not(:last-child){page-break-after:always;break-after:page}
-
-/* ---- جلد ---- */
 .cover{height:246mm;display:flex;flex-direction:column;justify-content:space-between;text-align:center}
 .cover-top{padding-top:28mm}
 .cover-title{font-size:25pt;font-weight:900;line-height:1.65;margin:0 0 18mm;word-wrap:break-word;overflow-wrap:break-word}
@@ -1651,58 +2022,22 @@ html,body{font-family:Vazirmatn,'Iranian Sans',Tahoma,Arial,sans-serif;font-size
 .cover-info>div{margin-bottom:3mm}
 .cover-bottom{font-size:13pt;font-weight:700;line-height:2.05;padding-bottom:2mm}
 .cover-bottom>div{margin-bottom:2mm}
-
-/* ---- بسم‌الله ---- */
 .bismillah{height:246mm;display:flex;align-items:center;justify-content:center;font-size:24pt;font-weight:700}
 .bismillah-img{height:246mm;display:flex;align-items:center;justify-content:center}
 .bismillah-img img{max-width:90%;max-height:90%;object-fit:contain}
-
-/* ---- سرفصل‌ها ---- */
-.section-title{
-  font-size:16pt;font-weight:800;text-align:center;
-  margin:0 0 8mm;padding-bottom:3mm;border-bottom:1.5px solid #333;
-  page-break-after:avoid;break-after:avoid;
-  page-break-inside:avoid;break-inside:avoid;
-}
-
-/* ---- پاراگراف‌ها ---- */
-.section-body > p{
-  font-size:12pt;line-height:2.1;
-  text-align:justify;text-align-last:right;text-justify:inter-word;
-  margin:0 0 5mm;
-  orphans:2;widows:2;
-  page-break-inside:avoid;break-inside:avoid;
-  word-wrap:break-word;overflow-wrap:break-word;
-}
+.section-title{font-size:16pt;font-weight:800;text-align:center;margin:0 0 8mm;padding-bottom:3mm;border-bottom:1.5px solid #333;page-break-after:avoid;break-after:avoid;page-break-inside:avoid;break-inside:avoid}
+.section-body > p{font-size:12pt;line-height:2.1;text-align:justify;text-align-last:right;text-justify:inter-word;margin:0 0 5mm;orphans:2;widows:2;page-break-inside:avoid;break-inside:avoid;word-wrap:break-word;overflow-wrap:break-word}
 .section-body > p:last-child{margin-bottom:0}
-
-/* ---- زیرعنوان‌ها (بخش N) ---- */
-.section-body > h3.sub-title{
-  font-size:13pt;font-weight:800;color:#000;
-  margin:8mm 0 3mm;padding-right:0;
-  text-align:right;
-  page-break-after:avoid;break-after:avoid;
-  page-break-inside:avoid;break-inside:avoid;
-}
+.section-body > h3.sub-title{font-size:13pt;font-weight:800;color:#000;margin:8mm 0 3mm;text-align:right;page-break-after:avoid;break-after:avoid;page-break-inside:avoid;break-inside:avoid}
 .section-body > h3.sub-title + p{margin-top:0}
-
-/* ---- تصاویر ---- */
-.section-body figure.article-img{
-  margin:5mm auto;text-align:center;
-  page-break-inside:avoid;break-inside:avoid;
-}
-.section-body figure.article-img img{
-  max-width:100%;max-height:100mm;height:auto;
-  display:inline-block;border-radius:3px;
-}
-
+.section-body figure.article-img{margin:5mm auto;text-align:center;page-break-inside:avoid;break-inside:avoid}
+.section-body figure.article-img img{max-width:100%;max-height:100mm;height:auto;display:inline-block;border-radius:3px}
 @media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style>
 </head>
 <body>${body}</body></html>`;
 }
 
-/* ---------- چاپ ---------- */
 function generatePDF(){
   const a = DB.articles.find(x => x.id === expState.articleId);
   if(!a){ toast('مقاله یافت نشد.'); return; }
@@ -1711,21 +2046,14 @@ function generatePDF(){
   try { doc = buildPrintDocument(); }
   catch(err){ toast('⛔ خطا: ' + err.message); return; }
   closeModal('exportModal');
-  $('#overlay').classList.remove('hidden');
+  showOverlay('در حال آماده‌سازی سند چاپ…');
 
   let win = null;
   try { win = window.open('', '_blank', 'width=1000,height=800'); } catch(e){ win = null; }
-
   if(!win){ printViaIframe(doc); return; }
-
   try {
-    win.document.open();
-    win.document.write(doc);
-    win.document.close();
-  } catch(e){
-    printViaIframe(doc);
-    return;
-  }
+    win.document.open(); win.document.write(doc); win.document.close();
+  } catch(e){ printViaIframe(doc); return; }
   waitForPrint(win);
 }
 function waitForPrint(win){
@@ -1735,7 +2063,7 @@ function waitForPrint(win){
     attempts++;
     let ready = false, imgsReady = true;
     try {
-      if(win.closed){ $('#overlay').classList.add('hidden'); return; }
+      if(win.closed){ hideOverlay(); return; }
       ready = win.document.readyState === 'complete';
       if(ready){
         const imgs = win.document.images;
@@ -1747,7 +2075,7 @@ function waitForPrint(win){
     if((ready && (imgsReady || attempts > 30)) || attempts >= maxAttempts){
       setTimeout(() => {
         try { win.focus(); win.print(); } catch(e){}
-        $('#overlay').classList.add('hidden');
+        hideOverlay();
         toast('📄 در پنجره چاپ، «Save as PDF» را انتخاب کنید.');
       }, 600);
       return;
@@ -1758,25 +2086,14 @@ function waitForPrint(win){
 }
 function printViaIframe(doc){
   const iframe = document.createElement('iframe');
-  iframe.style.position = 'fixed';
-  iframe.style.right = '0';
-  iframe.style.bottom = '0';
-  iframe.style.width = '0';
-  iframe.style.height = '0';
-  iframe.style.border = '0';
-  iframe.style.visibility = 'hidden';
+  iframe.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
   document.body.appendChild(iframe);
-
   try {
     const iframeDoc = iframe.contentWindow.document;
-    iframeDoc.open();
-    iframeDoc.write(doc);
-    iframeDoc.close();
+    iframeDoc.open(); iframeDoc.write(doc); iframeDoc.close();
   } catch(e){
     toast('⛔ ساخت پیش‌نمایش ناموفق.');
-    document.body.removeChild(iframe);
-    $('#overlay').classList.add('hidden');
-    return;
+    document.body.removeChild(iframe); hideOverlay(); return;
   }
   let attempts = 0;
   const tryPrint = () => {
@@ -1795,7 +2112,7 @@ function printViaIframe(doc){
         catch(e){ toast('⚠️ لطفاً پاپ‌آپ را برای این سایت مجاز کنید.'); }
         setTimeout(() => {
           if(iframe.parentNode) document.body.removeChild(iframe);
-          $('#overlay').classList.add('hidden');
+          hideOverlay();
           toast('📄 در پنجره چاپ، «Save as PDF» را انتخاب کنید.');
         }, 2000);
       }, 600);
@@ -1819,6 +2136,7 @@ document.addEventListener('keydown', e => { if(e.key === 'Escape') $$('.modal').
   }
   updateWordCount();
   renderArticleImages();
+  initAI();
 })();
 
 if('serviceWorker' in navigator){
