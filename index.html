@@ -131,8 +131,9 @@ details.ai-settings summary::-webkit-details-marker{display:none}
 details.ai-settings summary::before{content:'▸ ';color:var(--primary)}
 details.ai-settings[open] summary::before{content:'▾ '}
 details.ai-settings[open] summary{margin-bottom:14px}
-.debug-panel{background:#0f172a;color:#38bdf8;font-family:ui-monospace,monospace;font-size:12px;padding:16px;border-radius:12px;margin-top:20px;max-height:400px;overflow-y:auto;direction:ltr;text-align:left;line-height:1.5}
-.debug-panel h4{color:#fff;margin-bottom:10px;font-size:13px;border-bottom:1px solid #334155;padding-bottom:5px}
+/* استایل‌های پنل دیباگ دائمی */
+.debug-panel{background:#0f172a;color:#38bdf8;font-family:ui-monospace,monospace;font-size:12px;padding:16px;border-radius:12px;margin-top:20px;max-height:350px;overflow-y:auto;direction:ltr;text-align:left;line-height:1.5;border:2px solid #334155}
+.debug-panel h4{color:#fff;margin-bottom:10px;font-size:13px;border-bottom:1px solid #334155;padding-bottom:5px;display:flex;justify-content:space-between;align-items:center}
 .debug-line{margin-bottom:6px;word-break:break-all;}
 .debug-error{color:#f87171}
 .debug-success{color:#4ade80}
@@ -310,12 +311,15 @@ details.ai-settings[open] summary{margin-bottom:14px}
           <span id="aiStatusText" class="hint" style="align-self:center"></span>
         </div>
 
-        <div id="debugPanelWrapper" class="hidden" style="margin-top:20px">
+        <!-- پنل دیباگ دائمی (همیشه باز) -->
+        <div id="debugPanelWrapper" style="margin-top:20px">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-            <h3 style="font-size:14px;color:var(--danger)">🚨 پنل دیباگ (برای تشخیص خطا)</h3>
-            <button class="btn ghost xs" onclick="document.getElementById('debugPanelWrapper').classList.add('hidden')">بستن پنل</button>
+            <h3 style="font-size:14px;color:var(--danger)">🚨 پنل دیباگ (مشاهده زنده ارتباط با سرور)</h3>
+            <button class="btn ghost xs" onclick="clearDebug()">🗑 پاک کردن لاگ</button>
           </div>
-          <div id="debugOutput" class="debug-panel"></div>
+          <div id="debugOutput" class="debug-panel">
+            <div style="color:#94a3b8">در انتظار برای شروع...</div>
+          </div>
         </div>
       </div>
 
@@ -434,8 +438,15 @@ function closeModal(id){ document.getElementById(id).classList.remove('show'); }
 function showOverlay(msg){ $('#overlayMsg').textContent = msg; $('#overlay').classList.remove('hidden'); }
 function hideOverlay(){ $('#overlay').classList.add('hidden'); }
 
+/* ================= لاگ دیباگ دائمی ================= */
+function clearDebug() {
+  $('#debugOutput').innerHTML = '<div style="color:#94a3b8">لاگ پاک شد. در انتظار...</div>';
+}
 function logDebug(msg, type = 'info') {
   const out = $('#debugOutput'); if (!out) return;
+  // پاک کردن متن اولیه
+  if(out.innerHTML.includes('در انتظار') || out.innerHTML.includes('لاگ پاک شد')) out.innerHTML = '';
+  
   const line = document.createElement('div'); line.className = 'debug-line';
   const time = new Date().toLocaleTimeString('fa-IR');
   let color = '#94a3b8';
@@ -445,7 +456,6 @@ function logDebug(msg, type = 'info') {
   line.innerHTML = `<span style="color:${color}">[${time}] ${msg}</span>`;
   out.appendChild(line); out.scrollTop = out.scrollHeight;
 }
-function showDebug() { $('#debugPanelWrapper').classList.remove('hidden'); $('#debugOutput').innerHTML = ''; }
 
 function doLogin(){
   const u = $('#loginUser').value.trim(), p = $('#loginPass').value;
@@ -632,7 +642,8 @@ function initAI(){
 }
 
 async function callAI(prompt, systemPrompt){
-  showDebug(); logDebug('شروع درخواست به DeepSeek از طریق پروکسی اختصاصی...');
+  clearDebug();
+  logDebug('شروع درخواست به DeepSeek از طریق پروکسی اختصاصی...');
   
   // آدرس پروکسی اختصاصی شما
   const WORKER_PROXY_URL = 'https://deepseek.mehradkhaliliparsa6490.workers.dev/'; 
@@ -651,18 +662,28 @@ async function callAI(prompt, systemPrompt){
     model,
     messages: [{ role: 'system', content: systemPrompt || '' }, { role: 'user', content: prompt }],
     temperature: 0.7, max_tokens: 8000, response_format: { type: 'json_object' }
+    // stream: false (پیش‌فرض)
   };
 
   logDebug(`URL: ${url}`);
   logDebug(`Model: ${model}`);
+  logDebug('در حال ارسال درخواست...');
   try {
     const res = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
-    logDebug(`Status: ${res.status}`, res.ok ? 'success' : 'error');
+    logDebug(`Status: ${res.status} ${res.statusText}`, res.ok ? 'success' : 'error');
+    
     const textData = await res.text();
-    if (!res.ok) { logDebug(`خطای سرور: ${textData}`, 'error'); throw new Error(`HTTP ${res.status}`); }
+    logDebug(`دریافت پاسخ (${textData.length} کاراکتر).`);
+
+    if (!res.ok) { 
+      logDebug(`خطای سرور: ${textData}`, 'error'); 
+      throw new Error(`HTTP ${res.status}`); 
+    }
+    
     const data = JSON.parse(textData);
     const text = data.choices?.[0]?.message?.content || '';
     if (!text) throw new Error('پاسخ خالی بود');
+    logDebug('پردازش پاسخ با موفقیت انجام شد.', 'success');
     return text;
   } catch (error) {
     logDebug(`❌ خطا: ${error.message}`, 'error');
@@ -691,10 +712,12 @@ function buildAIPrompt(topic, extra){
 async function generateAIArticle(){
   if(aiState.generating) return;
   const topic = $('#aiTopic').value.trim(); if(!topic){ toast('موضوع را وارد کنید'); return; }
+  if(!$('#aiApiKey').value.trim()){ toast('کلید API هرمز را وارد کنید'); $('#aiSettingsDetails').open = true; return; }
+  
   aiState.generating = true;
   const btn = $('#aiGenerateBtn'); btn.disabled = true; btn.textContent = '⏳ در حال تولید...';
   $('#aiStatusText').textContent = 'در حال ارتباط با سرور...';
-  showOverlay('🤖 هوش مصنوعی در حال تولید مقاله است…');
+  showOverlay('🤖 هوش مصنوعی در حال تولید مقاله است…\n(ممکن است ۳۰ تا ۶۰ ثانیه طول بکشد)');
 
   try {
     const prompt = buildAIPrompt(topic, $('#aiExtra').value.trim());
@@ -703,6 +726,7 @@ async function generateAIArticle(){
     aiState.full = parsed.full; aiState.brief = parsed.brief;
     renderAIPreview('full'); $('#aiPreviewCard').classList.remove('hidden');
     $('#aiStatusText').textContent = '✅ تولید موفق';
+    toast('✅ مقاله تولید شد');
   } catch(e){
     $('#aiStatusText').textContent = '❌ خطا (پنل دیباگ را بررسی کنید)';
   } finally {
@@ -722,7 +746,7 @@ function saveAIArticle(){
   DB.articles.unshift({ id: uid(), title, nature: 'علمی-پژوهشی', thanks: 'سپاسگزاری...', intro: aiState.full.intro, abstract: aiState.full.abstract, body: aiState.full.body, conclusion: aiState.full.conclusion, refs: aiState.full.refs, briefData: { intro: aiState.brief.intro, abstract: aiState.brief.abstract, body: aiState.brief.body, conclusion: aiState.brief.conclusion, refs: aiState.brief.refs }, images: [], createdAt: Date.now() });
   saveDB(); discardAIArticle(); switchTab('bank'); toast('✅ ذخیره شد');
 }
-function discardAIArticle(){ aiState.full = null; aiState.brief = null; $('#aiPreviewCard').classList.add('hidden'); $('#debugPanelWrapper').classList.add('hidden'); $('#aiStatusText').textContent = ''; }
+function discardAIArticle(){ aiState.full = null; aiState.brief = null; $('#aiPreviewCard').classList.add('hidden'); }
 
 if(sessionStorage.getItem('loggedIn')){ $('#loginScreen').classList.add('hidden'); $('#app').classList.remove('hidden'); renderTable(); initAI(); }
 </script>
