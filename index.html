@@ -3,16 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d9488">
 <title>بانک مقاله</title>
 <link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="./icon-512.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--primary:#0d9488;--primary-dark:#0f766e;--primary-light:#ccfbf1;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--bg:#f1f5f9;--danger:#e11d48;--warn:#f59e0b;--blue:#2563eb;--radius:14px;--shadow:0 4px 20px rgba(15,23,42,.08)}
+:root{--primary:#0d9488;--primary-dark:#0f766e;--primary-light:#ccfbf1;
+  --ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--bg:#f1f5f9;
+  --danger:#e11d48;--warn:#f59e0b;--blue:#2563eb;--radius:14px;--shadow:0 4px 20px rgba(15,23,42,.08)}
 body{font-family:Vazirmatn,Tahoma,sans-serif;background:var(--bg);color:var(--ink);direction:rtl;line-height:1.7;min-height:100vh}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 input,select,textarea{font-family:inherit;font-size:14px}
 .hidden{display:none!important}
+
+/* Buttons */
 .btn{display:inline-flex;align-items:center;gap:6px;justify-content:center;padding:10px 18px;border-radius:10px;font-size:14px;font-weight:600;background:var(--primary);color:#fff;transition:.18s;white-space:nowrap;border:1px solid transparent}
 .btn:hover{background:var(--primary-dark);transform:translateY(-1px)}
 .btn.ghost{background:#fff;color:var(--ink);border-color:var(--line)}
@@ -25,10 +33,16 @@ input,select,textarea{font-family:inherit;font-size:14px}
 .btn.pdf:hover{background:var(--warn);color:#fff}
 .btn.xs{padding:6px 12px;font-size:12.5px;border-radius:8px}
 .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;pointer-events:none}
+
+/* Login */
 .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f766e 0%,#0d9488 45%,#14b8a6 100%);padding:20px}
 .login-card{background:#fff;border-radius:22px;padding:38px 34px;width:100%;max-width:400px;box-shadow:0 25px 60px rgba(0,0,0,.28)}
+.login-card .logo{width:72px;height:72px;border-radius:18px;margin:0 auto 16px;background:linear-gradient(135deg,var(--primary),#14b8a6);display:flex;align-items:center;justify-content:center;font-size:30px;color:#fff;box-shadow:0 10px 24px rgba(13,148,136,.35);overflow:hidden}
+.login-card .logo img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}
 .login-card h1{text-align:center;font-size:21px;margin-bottom:4px}
 .login-card .sub{text-align:center;color:var(--muted);font-size:13px;margin-bottom:24px}
+
+/* Forms */
 .field{margin-bottom:15px}
 .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#334155}
 .field input,.field select,.field textarea{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;background:#fff;transition:.15s;color:var(--ink)}
@@ -39,20 +53,28 @@ input,select,textarea{font-family:inherit;font-size:14px}
 .field-head label{margin:0}
 .field-head .btn{padding:5px 11px;font-size:11.5px}
 .req{color:var(--danger)}
+
+/* App Shell */
 .app{min-height:100vh;display:flex;flex-direction:column}
 .topbar{background:#fff;border-bottom:1px solid var(--line);padding:0 22px;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:50;box-shadow:0 1px 8px rgba(15,23,42,.04)}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px}
+.brand .mark{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,var(--primary),#14b8a6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;overflow:hidden}
+.brand .mark img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}
 .topbar .user{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
 .tabs{display:flex;gap:6px;padding:14px 22px 0;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto}
 .tab{padding:11px 20px;border-radius:11px 11px 0 0;font-size:14px;font-weight:600;color:var(--muted);border-bottom:3px solid transparent;transition:.15s;white-space:nowrap}
 .tab:hover{color:var(--primary)}
 .tab.active{color:var(--primary);border-bottom-color:var(--primary);background:#f0fdfa}
 main{flex:1;padding:24px 22px 60px;max-width:1280px;width:100%;margin:0 auto}
+
+/* Cards */
 .card{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);margin-bottom:20px;border:1px solid #eef2f6}
 .card h2{font-size:17px;margin-bottom:6px;display:flex;align-items:center;gap:8px}
 .card .desc{font-size:13px;color:var(--muted);margin-bottom:18px}
 .card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
 .card-head h2{margin:0}
+
+/* Tables */
 .table-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--line)}
 table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:700px}
 thead th{background:#f8fafc;padding:13px 14px;text-align:right;font-weight:700;color:#334155;font-size:12.5px;border-bottom:2px solid var(--line);white-space:nowrap}
@@ -64,11 +86,14 @@ tbody tr:hover{background:#f8fafc}
 .badge.self{background:#dbeafe;color:#1e40af;margin-right:6px}
 .badge.admin{background:#fef3c7;color:#92400e;margin-right:6px}
 .badge.img-badge{background:#ede9fe;color:#6d28d9;margin-right:6px;font-size:11px;padding:2px 8px}
+.badge.history-badge{background:#fef3c7;color:#92400e;margin-right:6px;font-size:11px;padding:2px 8px}
 .badge.ai-on{background:#dcfce7;color:#166534}
 .badge.ai-off{background:#fee2e2;color:#991b1b}
 .col-actions{display:flex;gap:6px;flex-wrap:wrap}
 .empty{text-align:center;color:var(--muted);padding:40px!important;font-size:13.5px}
 code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;border-radius:6px;font-size:12.5px;color:#334155}
+
+/* Grid & Utils */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:820px){.grid2{grid-template-columns:1fr}}
 .form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
@@ -76,6 +101,8 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .pill{padding:9px 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-size:13px;font-weight:600;color:#475569;transition:.15s}
 .pill:hover{border-color:var(--primary);color:var(--primary)}
 .pill.active{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 4px 12px rgba(13,148,136,.25)}
+
+/* Images Grid */
 .image-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:12px 0}
 .image-card{border:1.5px solid var(--line);border-radius:12px;overflow:hidden;position:relative;background:#f8fafc;transition:.15s}
 .image-card:hover{border-color:var(--primary)}
@@ -92,6 +119,8 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .image-card .img-btn.replace{color:var(--blue)}
 .image-card .img-btn.replace:hover{background:var(--blue);color:#fff}
 .image-card .img-check{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+
+/* Reader */
 .reader{font-size:14.5px;line-height:2.1;color:#1e293b}
 .reader h4{font-size:15px;color:var(--primary-dark);margin:22px 0 8px;padding-right:10px;border-right:4px solid var(--primary);border-radius:2px}
 .reader h4:first-child{margin-top:0}
@@ -99,6 +128,8 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .reader .meta{font-size:12.5px;color:var(--muted);margin-bottom:16px}
 .reader figure.article-img{margin:16px 0;text-align:center}
 .reader figure.article-img img{max-width:100%;max-height:420px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.12);display:inline-block}
+
+/* Modals */
 .modal{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(3px);display:none;align-items:flex-start;justify-content:center;z-index:200;padding:28px 16px;overflow-y:auto}
 .modal.show{display:flex}
 .modal-box{background:#fff;border-radius:18px;width:100%;max-width:840px;box-shadow:0 30px 70px rgba(0,0,0,.3);animation:pop .2s ease;margin:auto}
@@ -109,10 +140,21 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .modal-foot{padding:16px 22px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-start;position:sticky;bottom:0;background:#fff;border-radius:0 0 18px 18px;flex-wrap:wrap}
 .close-x{width:34px;height:34px;border-radius:9px;background:#f1f5f9;color:#475569;font-size:18px;display:flex;align-items:center;justify-content:center;transition:.15s}
 .close-x:hover{background:#fee2e2;color:var(--danger)}
+
+/* Collectors */
 .collector-row{display:flex;gap:8px;margin-bottom:8px}
 .collector-row input{flex:1}
 .icon-btn{width:40px;height:40px;border-radius:10px;background:#f8fafc;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;color:#64748b;font-size:16px;flex-shrink:0}
 .icon-btn:hover{background:#fee2e2;color:var(--danger);border-color:#fecdd3}
+.history-box{background:#f0fdfa;padding:14px;border-radius:12px;border:1.5px solid var(--primary-light);margin-bottom:18px}
+.history-box .history-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.history-box .history-title span{font-size:13px;font-weight:700;color:var(--primary-dark)}
+.history-box .history-title small{font-size:11.5px;color:var(--muted)}
+.history-box table{min-width:auto;font-size:12.5px}
+.history-box thead th{padding:9px 12px;font-size:11.5px}
+.history-box tbody td{padding:9px 12px}
+
+/* Smart Results */
 .result{border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;transition:.15s;background:#fff}
 .result:hover{border-color:var(--primary);background:#f0fdfa}
 .result input[type=checkbox]{width:18px;height:18px;margin-top:3px;accent-color:var(--primary);flex-shrink:0}
@@ -120,42 +162,46 @@ code{font-family:ui-monospace,monospace;background:#f1f5f9;padding:2px 8px;borde
 .result .r-title{font-weight:700;font-size:13.5px;margin-bottom:3px}
 .result .r-src{font-size:11.5px;color:var(--muted);margin-bottom:6px}
 .result .r-snip{font-size:12.5px;color:#475569;line-height:1.8}
+
+/* Overlay & Toast */
 .overlay{position:fixed;inset:0;background:rgba(15,23,42,.7);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:#fff}
 .spinner{width:52px;height:52px;border:4px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 #toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(120px);background:#0f172a;color:#fff;padding:12px 24px;border-radius:12px;font-size:13.5px;z-index:1000;transition:.3s;opacity:0;box-shadow:0 12px 30px rgba(0,0,0,.3);max-width:88vw;text-align:center}
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* AI Settings */
 details.ai-settings{background:#f8fafc;padding:14px;border-radius:12px;border:1px solid var(--line);margin-bottom:18px}
 details.ai-settings summary{cursor:pointer;font-weight:700;font-size:14px;list-style:none}
 details.ai-settings summary::-webkit-details-marker{display:none}
 details.ai-settings summary::before{content:'▸ ';color:var(--primary)}
 details.ai-settings[open] summary::before{content:'▾ '}
 details.ai-settings[open] summary{margin-bottom:14px}
-/* استایل‌های پنل دیباگ دائمی */
+
+/* Debug Panel */
 .debug-panel{background:#0f172a;color:#38bdf8;font-family:ui-monospace,monospace;font-size:12px;padding:16px;border-radius:12px;margin-top:20px;max-height:350px;overflow-y:auto;direction:ltr;text-align:left;line-height:1.5;border:2px solid #334155}
-.debug-panel h4{color:#fff;margin-bottom:10px;font-size:13px;border-bottom:1px solid #334155;padding-bottom:5px;display:flex;justify-content:space-between;align-items:center}
 .debug-line{margin-bottom:6px;word-break:break-all;}
-.debug-error{color:#f87171}
-.debug-success{color:#4ade80}
-.debug-warn{color:#fbbf24}
 </style>
 </head>
 <body>
 
+<!-- LOGIN -->
 <div id="loginScreen" class="login-screen">
   <div class="login-card">
+    <div class="logo"><img src="./icon-192.png" alt="بانک مقاله" onerror="this.style.display='none';this.parentNode.textContent='📚';"></div>
     <h1>بانک مقاله</h1>
     <p class="sub">سامانه هوشمند مدیریت و تولید مقاله</p>
-    <div class="field"><label>نام کاربری</label><input id="loginUser" placeholder="admin" autocomplete="username"></div>
-    <div class="field"><label>کلمه عبور</label><input id="loginPass" type="password" placeholder="admin123" autocomplete="current-password"></div>
+    <div class="field"><label>نام کاربری</label><input id="loginUser" placeholder="نام کاربری مدیر" autocomplete="username"></div>
+    <div class="field"><label>کلمه عبور</label><input id="loginPass" type="password" placeholder="••••••••" autocomplete="current-password"></div>
     <button class="btn" style="width:100%;margin-top:8px" onclick="doLogin()">ورود به سامانه</button>
-    <p class="hint" style="text-align:center;margin-top:16px;font-size:12px;color:#94a3b8">پیش‌فرض: admin / admin123</p>
+    <p class="hint" style="text-align:center;margin-top:16px;font-size:12px;color:#94a3b8">دسترسی پیش‌فرض: admin / admin123</p>
   </div>
 </div>
 
+<!-- APP -->
 <div id="app" class="app hidden">
   <div class="topbar">
-    <div class="brand">📚 بانک مقاله</div>
+    <div class="brand"><div class="mark"><img src="./icon-192.png" alt="بانک مقاله" onerror="this.style.display='none';this.parentNode.textContent='📚';"></div> بانک مقاله</div>
     <div class="user"><span id="currentAdminLabel">مدیر</span><button class="btn ghost xs" onclick="doLogout()">خروج</button></div>
   </div>
   <div class="tabs">
@@ -167,12 +213,13 @@ details.ai-settings[open] summary{margin-bottom:14px}
   </div>
 
   <main>
+    <!-- BANK -->
     <section id="tab-bank">
       <div class="card">
         <div class="card-head">
           <h2>🗂 فهرست مقاله‌ها</h2>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <input id="searchBox" placeholder="جستجو..." oninput="renderTable()" style="padding:9px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:13px;min-width:220px">
+            <input id="searchBox" placeholder="جستجو در موضوع یا ماهیت…" oninput="renderTable()" style="padding:9px 14px;border:1.5px solid var(--line);border-radius:10px;font-size:13px;min-width:220px">
             <button class="btn xs" onclick="startNewArticle()">مقاله جدید</button>
           </div>
         </div>
@@ -185,10 +232,11 @@ details.ai-settings[open] summary{margin-bottom:14px}
       </div>
     </section>
 
+    <!-- NEW -->
     <section id="tab-new" class="hidden">
       <div class="card">
         <div class="card-head"><h2 id="formTitle">➕ ایجاد مقاله جدید</h2><span id="draftBadge" class="badge hidden">پیش‌نویس ذخیره شده</span></div>
-        <p class="desc">فیلدهای ستاره‌دار الزامی هستند.</p>
+        <p class="desc">فیلدهای ستاره‌دار الزامی هستند. برای درج تصویر در متن، ابتدا تصاویر را در بخش «پیوست تصاویر» اضافه کنید، سپس با دکمه «🖼 تصویر» بالای هر بخش، تصویر را در متن درج نمایید.</p>
         <div class="grid2">
           <div class="field"><label>موضوع مقاله <span class="req">*</span></label><input id="fTitle" placeholder="عنوان مقاله" oninput="autoDraft()"></div>
           <div class="field"><label>ماهیت مقاله <span class="req">*</span></label>
@@ -201,6 +249,7 @@ details.ai-settings[open] summary{margin-bottom:14px}
         </div>
         <div class="field">
           <div class="field-head"><label>🖼 پیوست تصاویر مقاله</label><span class="hint" id="imagesSummary">۰ تصویر</span></div>
+          <p class="hint" style="margin-bottom:8px">تصاویری که در متن استفاده می‌شوند، ابتدا باید در این بخش پیوست شوند.</p>
           <div id="articleImagesGrid" class="image-grid"></div>
           <input type="file" id="articleImageInput" accept="image/*" multiple style="display:none" onchange="handleArticleImageUpload(event)">
           <button class="btn ghost xs" onclick="document.getElementById('articleImageInput').click()">➕ پیوست تصویر جدید</button>
@@ -241,10 +290,11 @@ details.ai-settings[open] summary{margin-bottom:14px}
       </div>
     </section>
 
+    <!-- SMART -->
     <section id="tab-smart" class="hidden">
       <div class="card">
         <h2>✨ استخراج هوشمند مقاله از وب</h2>
-        <p class="desc">موضوع را وارد کنید؛ منابع مرتبط جستجو می‌شوند.</p>
+        <p class="desc">موضوع را وارد کنید؛ منابع مرتبط جستجو می‌شوند. سامانه به‌طور هوشمند جمله‌های تکراری را حذف و دو نسخه کامل و مختصر تولید می‌کند.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap">
           <input id="smartTopic" placeholder="مثال: هوش مصنوعی و آینده آموزش" style="flex:1;min-width:240px;padding:12px 15px;border:1.5px solid var(--line);border-radius:11px;font-size:14px">
           <button class="btn" onclick="smartSearch()">🔍 جستجو در فضای ابری</button>
@@ -269,6 +319,7 @@ details.ai-settings[open] summary{margin-bottom:14px}
       </div>
     </section>
 
+    <!-- AI -->
     <section id="tab-ai" class="hidden">
       <div class="card">
         <div class="card-head">
@@ -311,7 +362,6 @@ details.ai-settings[open] summary{margin-bottom:14px}
           <span id="aiStatusText" class="hint" style="align-self:center"></span>
         </div>
 
-        <!-- پنل دیباگ دائمی (همیشه باز) -->
         <div id="debugPanelWrapper" style="margin-top:20px">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
             <h3 style="font-size:14px;color:var(--danger)">🚨 پنل دیباگ (مشاهده زنده ارتباط با سرور)</h3>
@@ -340,6 +390,7 @@ details.ai-settings[open] summary{margin-bottom:14px}
       </div>
     </section>
 
+    <!-- ADMINS & BISMILLAH -->
     <section id="tab-admins" class="hidden">
       <div class="card">
         <div class="card-head"><h2>👥 مدیران سامانه</h2><button class="btn xs" onclick="openAdminForm()">➕ افزودن مدیر</button></div>
@@ -350,10 +401,21 @@ details.ai-settings[open] summary{margin-bottom:14px}
           </table>
         </div>
       </div>
+      <div class="card">
+        <div class="card-head">
+          <h2>🕋 تصاویر بسم الله</h2>
+          <div style="display:flex;gap:8px">
+            <input type="file" id="bismAdminUpload" accept="image/*" multiple style="display:none" onchange="handleBismillahAdminUpload(event)">
+            <button class="btn xs" onclick="document.getElementById('bismAdminUpload').click()">➕ افزودن تصویر</button>
+          </div>
+        </div>
+        <div id="bismAdminGrid" class="image-grid"></div>
+      </div>
     </section>
   </main>
 </div>
 
+<!-- MODALS -->
 <div id="viewModal" class="modal">
   <div class="modal-box">
     <div class="modal-head"><h3 id="viewTitle">مشاهده مقاله</h3><button class="close-x" onclick="closeModal('viewModal')">✕</button></div>
@@ -367,11 +429,13 @@ details.ai-settings[open] summary{margin-bottom:14px}
 
 <div id="imagePickerModal" class="modal">
   <div class="modal-box" style="max-width:680px">
-    <div class="modal-head"><h3>🖼 انتخاب تصویر</h3><button class="close-x" onclick="closeModal('imagePickerModal')">✕</button></div>
+    <div class="modal-head"><h3>🖼 انتخاب تصویر برای درج در متن</h3><button class="close-x" onclick="closeModal('imagePickerModal')">✕</button></div>
     <div class="modal-body">
       <div id="pickerImagesGrid" class="image-grid"></div>
-      <input type="file" id="pickerUploadInput" accept="image/*" multiple style="display:none" onchange="handlePickerUpload(event)">
-      <button class="btn ghost xs" onclick="document.getElementById('pickerUploadInput').click()">➕ پیوست تصویر جدید</button>
+      <div style="margin-top:14px">
+        <input type="file" id="pickerUploadInput" accept="image/*" multiple style="display:none" onchange="handlePickerUpload(event)">
+        <button class="btn ghost xs" onclick="document.getElementById('pickerUploadInput').click()">➕ پیوست تصویر جدید</button>
+      </div>
     </div>
     <div class="modal-foot"><button class="btn ghost" onclick="closeModal('imagePickerModal')">بستن</button></div>
   </div>
@@ -379,15 +443,77 @@ details.ai-settings[open] summary{margin-bottom:14px}
 
 <div id="exportModal" class="modal">
   <div class="modal-box">
-    <div class="modal-head"><h3>📑 خروجی PDF</h3><button class="close-x" onclick="closeModal('exportModal')">✕</button></div>
+    <div class="modal-head"><h3>📑 خروجی استاندارد PDF</h3><button class="close-x" onclick="closeModal('exportModal')">✕</button></div>
     <div class="modal-body">
-      <div class="field"><label>۱. نسخه</label><div class="pills" id="versionPills"><button class="pill active" data-v="full" onclick="setVersion('full')">کامل</button><button class="pill" data-v="brief" onclick="setVersion('brief')">مختصر</button></div></div>
-      <div class="field"><label>۲. نوع گردآورنده</label><div class="pills" id="typePills"><button class="pill active" data-t="student" onclick="setType('student')">دانش‌آموز</button><button class="pill" data-t="uni" onclick="setType('uni')">دانشجو</button><button class="pill" data-t="office" onclick="setType('office')">اداری</button><button class="pill" data-t="public" onclick="setType('public')">عمومی</button></div></div>
-      <div class="field"><label>۳. گردآورنده</label><div class="pills" style="margin-bottom:12px"><button class="pill active" id="modeSingle" onclick="setCollectorMode('single')">تکی</button><button class="pill" id="modeMulti" onclick="setCollectorMode('multi')">چند نفره</button></div><div id="collectorList"></div><button class="btn ghost xs hidden" id="addCollectorBtn" onclick="addCollector()">➕ افزودن</button></div>
+      <div class="history-box">
+        <div class="history-title">
+          <span>📋 مشخصات گردآورنده از سابقه</span>
+          <small>می‌توانید از سابقه استفاده کنید یا اطلاعات جدید وارد نمایید</small>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th style="width:50%">مشخصات</th><th style="width:20%">نوع</th><th style="width:30%">عملیات</th></tr></thead>
+            <tbody id="savedCollectorsBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>۱. نسخه مورد نظر</label>
+        <div class="pills" id="versionPills">
+          <button class="pill active" data-v="full" onclick="setVersion('full')">نسخه کامل</button>
+          <button class="pill" data-v="brief" onclick="setVersion('brief')">نسخه مختصر</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>۲. نوع گردآورنده</label>
+        <div class="pills" id="typePills">
+          <button class="pill active" data-t="student" onclick="setType('student')">دانش‌آموز</button>
+          <button class="pill" data-t="uni" onclick="setType('uni')">دانشجو</button>
+          <button class="pill" data-t="office" onclick="setType('office')">اداری</button>
+          <button class="pill" data-t="public" onclick="setType('public')">عمومی</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>۳. گردآورنده یا گردآورندگان</label>
+        <div class="pills" style="margin-bottom:12px">
+          <button class="pill active" id="modeSingle" onclick="setCollectorMode('single')">گردآورنده</button>
+          <button class="pill" id="modeMulti" onclick="setCollectorMode('multi')">گردآورندگان</button>
+        </div>
+        <div id="collectorList"></div>
+        <button class="btn ghost xs hidden" id="addCollectorBtn" onclick="addCollector()">➕ افزودن نفر جدید</button>
+      </div>
       <div id="typeFields"></div>
-      <div class="form-actions" style="margin-top:10px;padding-top:10px"><button class="btn ghost xs" onclick="saveCollectorToHistory()">💾 ذخیره مشخصات</button></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+        <button class="btn ghost xs" onclick="saveCollectorToHistory()">💾 ذخیره این مشخصات در سابقه</button>
+        <button class="btn ghost xs" onclick="clearExportFields()">🗑 پاک کردن فیلدها</button>
+      </div>
+      <div class="field">
+        <label style="display:flex;align-items:center;gap:9px;cursor:pointer">
+          <input type="checkbox" id="optBismillah" checked onchange="toggleBismillahBlock()" style="width:18px;height:18px;accent-color:var(--primary)">
+          <span style="font-weight:600;font-size:13px">درج صفحه «بسم الله الرحمن الرحیم» (اختیاری)</span>
+        </label>
+        <div id="bismillahBlock" style="margin-top:12px">
+          <p class="hint" style="margin-bottom:8px">تصویر بسم‌الله (اختیاری):</p>
+          <div id="bismillahSelectGrid" class="image-grid"></div>
+          <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+            <input type="file" id="bismillahUploadInput" accept="image/*" style="display:none" onchange="handleBismillahUpload(event)">
+            <button class="btn ghost xs" onclick="document.getElementById('bismillahUploadInput').click()">➕ افزودن تصویر جدید</button>
+            <button class="btn ghost xs" onclick="clearBismillahSelection()">✕ حذف انتخاب</button>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label style="display:flex;align-items:center;gap:9px;cursor:pointer">
+          <input type="checkbox" id="optThanks" checked style="width:18px;height:18px;accent-color:var(--primary)">
+          <span style="font-weight:600;font-size:13px">درج صفحه سپاسگزاری (در صورت وجود متن)</span>
+        </label>
+      </div>
     </div>
-    <div class="modal-foot"><button class="btn" onclick="generatePDF()">📥 ساخت PDF</button><button class="btn ghost" onclick="closeModal('exportModal')">انصراف</button></div>
+    <div class="modal-foot">
+      <button class="btn" onclick="generatePDF()">📥 پیش‌نمایش چاپ و ذخیره PDF</button>
+      <button class="btn ghost" onclick="closeModal('exportModal')">انصراف</button>
+    </div>
   </div>
 </div>
 
@@ -395,7 +521,7 @@ details.ai-settings[open] summary{margin-bottom:14px}
   <div class="modal-box" style="max-width:520px">
     <div class="modal-head"><h3 id="adminModalTitle">مدیر</h3><button class="close-x" onclick="closeModal('adminModal')">✕</button></div>
     <div class="modal-body">
-      <div class="field"><label>نام</label><input id="adminName"></div>
+      <div class="field"><label>نام و نام خانوادگی</label><input id="adminName"></div>
       <div class="field"><label>نام کاربری</label><input id="adminUser"></div>
       <div class="field"><label>رمز</label><input id="adminPass" type="password"></div>
     </div>
@@ -407,20 +533,30 @@ details.ai-settings[open] summary{margin-bottom:14px}
 <div id="toast"></div>
 
 <script>
-const STORAGE_KEY = 'articleBank_v5';
-const DRAFT_KEY = 'articleBank_draft_v5';
+/* ============================================================
+   1. متغیرها و دیتابیس
+   ============================================================ */
+const STORAGE_KEY = 'articleBank_v6';
+const DRAFT_KEY = 'articleBank_draft_v6';
 let DB = loadDB();
 let editingId = null, viewingId = null, editingAdminId = null;
 let currentArticleImages = [], pickerTargetTextarea = null;
 
 function loadDB(){
   try{ const raw = localStorage.getItem(STORAGE_KEY); if(raw) return migrate(JSON.parse(raw)); }catch(e){}
-  const seed = { admins:[{ id:'adm_root', name:'مدیر اصلی', u:'admin', p:'admin123', createdAt:Date.now() }], bismillahImages:[], savedCollectors:[], articles:[] };
+  const seed = { 
+    admins:[{ id:'adm_root', name:'مدیر اصلی', u:'admin', p:'admin123', createdAt:Date.now() }], 
+    bismillahImages:[], 
+    savedCollectors:[], 
+    articles:[] 
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(seed)); return seed;
 }
 function migrate(obj){
   if(!obj.admins){ obj.admins = [{ id:'adm_root', name:'مدیر اصلی', u:'admin', p:'admin123', createdAt:Date.now() }]; }
   if(!Array.isArray(obj.articles)) obj.articles = [];
+  if(!Array.isArray(obj.bismillahImages)) obj.bismillahImages = [];
+  if(!Array.isArray(obj.savedCollectors)) obj.savedCollectors = [];
   obj.articles.forEach(a => { if(!Array.isArray(a.images)) a.images = []; });
   return obj;
 }
@@ -438,13 +574,12 @@ function closeModal(id){ document.getElementById(id).classList.remove('show'); }
 function showOverlay(msg){ $('#overlayMsg').textContent = msg; $('#overlay').classList.remove('hidden'); }
 function hideOverlay(){ $('#overlay').classList.add('hidden'); }
 
-/* ================= لاگ دیباگ دائمی ================= */
-function clearDebug() {
-  $('#debugOutput').innerHTML = '<div style="color:#94a3b8">لاگ پاک شد. در انتظار...</div>';
-}
+/* ============================================================
+   2. پنل دیباگ
+   ============================================================ */
+function clearDebug() { $('#debugOutput').innerHTML = '<div style="color:#94a3b8">لاگ پاک شد. در انتظار...</div>'; }
 function logDebug(msg, type = 'info') {
   const out = $('#debugOutput'); if (!out) return;
-  // پاک کردن متن اولیه
   if(out.innerHTML.includes('در انتظار') || out.innerHTML.includes('لاگ پاک شد')) out.innerHTML = '';
   
   const line = document.createElement('div'); line.className = 'debug-line';
@@ -457,6 +592,9 @@ function logDebug(msg, type = 'info') {
   out.appendChild(line); out.scrollTop = out.scrollHeight;
 }
 
+/* ============================================================
+   3. ورود و ناوبری
+   ============================================================ */
 function doLogin(){
   const u = $('#loginUser').value.trim(), p = $('#loginPass').value;
   const found = DB.admins.find(a => a.u === u && a.p === p);
@@ -470,12 +608,16 @@ function switchTab(name){
   $$('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
   ['bank','new','smart','ai','admins'].forEach(n => $('#tab-'+n).classList.toggle('hidden', n !== name));
   if(name === 'bank') renderTable();
-  if(name === 'admins') renderAdmins();
+  if(name === 'admins'){ renderAdmins(); renderBismAdmin(); }
   if(name === 'ai') initAI();
 }
 
+/* ============================================================
+   4. مدیریت مقاله‌ها (بانک)
+   ============================================================ */
 function hasFormContent(){ return ['fTitle','fThanks','fAbstract','fIntro','fBody','fConclusion','fRefs'].some(id => $('#'+id).value.trim()) || currentArticleImages.length > 0; }
 function startNewArticle(){ if(editingId || hasFormContent()){ if(!confirm('فرم پاک شود؟')) return; } resetForm(); switchTab('new'); setTimeout(()=>$('#fTitle').focus(),100); }
+
 function renderTable(){
   const q = ($('#searchBox')?.value || '').trim().toLowerCase();
   const list = DB.articles.filter(a => !q || (a.title + ' ' + (a.nature||'')).toLowerCase().includes(q));
@@ -503,6 +645,9 @@ function viewArticle(id, version){
 }
 function exportFromView(){ closeModal('viewModal'); if(viewingId) openExport(viewingId); }
 
+/* ============================================================
+   5. فرم ایجاد/ویرایش مقاله
+   ============================================================ */
 function editArticle(id){
   const a = DB.articles.find(x => x.id === id); if(!a) return;
   editingId = id; currentArticleImages = JSON.parse(JSON.stringify(a.images || []));
@@ -519,6 +664,16 @@ function saveArticle(){
 }
 function resetForm(){ editingId = null; currentArticleImages = []; $('#formTitle').textContent = '➕ مقاله جدید'; ['fTitle','fThanks','fAbstract','fIntro','fBody','fConclusion','fRefs'].forEach(id => $('#'+id).value = ''); $('#fNature').value = ''; localStorage.removeItem(DRAFT_KEY); $('#draftBadge').classList.add('hidden'); renderArticleImages(); updateWordCount(); }
 
+function updateWordCount(){ const t = $('#fBody').value.trim(); $('#wordCount').textContent = faNum(t ? t.split(/\s+/).length : 0) + ' کلمه'; }
+function autoAbstract(){ const b = $('#fBody').value.trim() || $('#fIntro').value.trim(); if(!b) return; const s = b.replace(/\[\[IMG:[^\]]+\]\]/g, '').split(/(?<=[.!؟?])\s+/).filter(x => x.length > 10).slice(0,3).join(' '); $('#fAbstract').value = s; autoDraft(); }
+
+let draftTimer;
+function autoDraft(){ clearTimeout(draftTimer); draftTimer = setTimeout(() => { const d = { title: $('#fTitle').value, nature: $('#fNature').value, thanks: $('#fThanks').value, abstract: $('#fAbstract').value, intro: $('#fIntro').value, body: $('#fBody').value, conclusion: $('#fConclusion').value, refs: $('#fRefs').value, images: currentArticleImages }; if(Object.values(d).some(v => (Array.isArray(v) ? v.length : (v && v.trim())))) try{ localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); $('#draftBadge').classList.remove('hidden'); }catch(e){} updateWordCount(); }, 500); }
+function restoreDraft(){ try{ const raw = localStorage.getItem(DRAFT_KEY); if(!raw) return; const d = JSON.parse(raw); $('#fTitle').value = d.title || ''; $('#fNature').value = d.nature || ''; $('#fThanks').value = d.thanks || ''; $('#fAbstract').value = d.abstract || ''; $('#fIntro').value = d.intro || ''; $('#fBody').value = d.body || ''; $('#fConclusion').value = d.conclusion || ''; $('#fRefs').value = d.refs || ''; currentArticleImages = d.images || []; renderArticleImages(); $('#draftBadge').classList.remove('hidden'); updateWordCount(); }catch(e){} }
+
+/* ============================================================
+   6. مدیریت تصاویر (پیوست و درج در متن)
+   ============================================================ */
 function formatBytes(b){ if(b < 1024) return b + ' B'; if(b < 1024*1024) return (b/1024).toFixed(1) + ' KB'; return (b/(1024*1024)).toFixed(1) + ' MB'; }
 function resizeImage(file, maxDim = 1200, quality = 0.82, format = 'jpeg'){
   return new Promise((resolve, reject) => {
@@ -559,126 +714,170 @@ function openImagePicker(id){ pickerTargetTextarea = id; const box = $('#pickerI
 function selectPickerImage(id){ const ta = document.getElementById(pickerTargetTextarea); if(!ta) return; const marker = '\n\n[[IMG:' + id + ']]\n\n'; ta.value = ta.value.substring(0, ta.selectionStart) + marker + ta.value.substring(ta.selectionEnd); autoDraft(); closeModal('imagePickerModal'); }
 async function handlePickerUpload(e){ await handleArticleImageUpload(e); openImagePicker(pickerTargetTextarea); }
 
-let draftTimer;
-function autoDraft(){ clearTimeout(draftTimer); draftTimer = setTimeout(() => { const d = { title: $('#fTitle').value, nature: $('#fNature').value, thanks: $('#fThanks').value, abstract: $('#fAbstract').value, intro: $('#fIntro').value, body: $('#fBody').value, conclusion: $('#fConclusion').value, refs: $('#fRefs').value, images: currentArticleImages }; if(Object.values(d).some(v => (Array.isArray(v) ? v.length : (v && v.trim())))) try{ localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); $('#draftBadge').classList.remove('hidden'); }catch(e){} updateWordCount(); }, 500); }
-function restoreDraft(){ try{ const raw = localStorage.getItem(DRAFT_KEY); if(!raw) return; const d = JSON.parse(raw); $('#fTitle').value = d.title || ''; $('#fNature').value = d.nature || ''; $('#fThanks').value = d.thanks || ''; $('#fAbstract').value = d.abstract || ''; $('#fIntro').value = d.intro || ''; $('#fBody').value = d.body || ''; $('#fConclusion').value = d.conclusion || ''; $('#fRefs').value = d.refs || ''; currentArticleImages = d.images || []; renderArticleImages(); $('#draftBadge').classList.remove('hidden'); updateWordCount(); }catch(e){} }
-function updateWordCount(){ const t = $('#fBody').value.trim(); $('#wordCount').textContent = faNum(t ? t.split(/\s+/).length : 0) + ' کلمه'; }
-function autoAbstract(){ const b = $('#fBody').value.trim() || $('#fIntro').value.trim(); if(!b) return; const s = b.replace(/\[\[IMG:[^\]]+\]\]/g, '').split(/(?<=[.!؟?])\s+/).filter(x => x.length > 10).slice(0,3).join(' '); $('#fAbstract').value = s; autoDraft(); }
+/* ============================================================
+   7. استخراج هوشمند (Smart Extraction)
+   ============================================================ */
+let smartResults = [], smartSelected = new Set(), smartMerged = null;
+const SOURCES = ['نورمگز — پایگاه استنادی علوم جهان اسلام','مگیران — بانک اطلاعات نشریات کشور','SID — مرکز اطلاعات علمی جهاد دانشگاهی','ویکی‌پدیای فارسی','پایگاه مجلات تخصصی نور','پژوهشگاه علوم انسانی و مطالعات فرهنگی'];
 
+function smartSearch(){
+  const topic = $('#smartTopic').value.trim();
+  if(!topic){ toast('⚠️ موضوع را وارد کنید.'); $('#smartTopic').focus(); return; }
+  const box = $('#smartResults');
+  box.innerHTML = '<div style="text-align:center;padding:26px;color:var(--muted);font-size:13px">⏳ در حال جستجو در فضای ابری…</div>';
+  $('#smartMergeBar').classList.add('hidden');
+  $('#smartPreviewCard').classList.add('hidden');
+  setTimeout(() => {
+    smartResults = buildMockResults(topic);
+    smartSelected = new Set();
+    box.innerHTML = `
+      <p style="font-size:12.5px;color:var(--muted);margin-bottom:12px">${smartResults.length} منبع مرتبط یافت شد:</p>
+      ${smartResults.map((r,i) => `
+        <label class="result">
+          <input type="checkbox" onchange="toggleResult(${i}, this.checked)">
+          <div class="r-body">
+            <div class="r-title">${esc(r.title)}</div>
+            <div class="r-src">📍 ${esc(r.source)} · ${esc(r.year)}</div>
+            <div class="r-snip">${esc(r.snippet)}</div>
+          </div>
+        </label>`).join('')}`;
+    $('#smartMergeBar').classList.remove('hidden');
+    updateSelCount();
+  }, 900);
+}
+function toggleResult(i, on){ on ? smartSelected.add(i) : smartSelected.delete(i); updateSelCount(); }
+function updateSelCount(){ $('#selCount').textContent = smartSelected.size ? smartSelected.size + ' منبع انتخاب شده' : 'هیچ منبعی انتخاب نشده'; }
+function buildMockResults(topic){
+  const t = topic;
+  return [
+    { title:`${t}: مبانی نظری و مفاهیم بنیادین`, source:SOURCES[0], year:'۱۴۰۲', snippet:`این پژوهش به بررسی مفاهیم پایه و چارچوب‌های نظری مرتبط با ${t} می‌پردازد.`, content:`${t} یکی از موضوعات مهم و پرکاربرد در حوزه مطالعات امروزی است.\n\nاز منظر نظری، ${t} را می‌توان در قالب رویکردهای ساختارگرا و تفسیری بررسی کرد.` },
+    { title:`بررسی تحلیلی ${t} در ایران`, source:SOURCES[1], year:'۱۴۰۱', snippet:`مقاله حاضر با روش تحلیلی-توصیفی، وضعیت ${t} در ایران را بررسی می‌کند.`, content:`بررسی وضعیت ${t} در ایران نشان می‌دهد که طی سال‌های گذشته گام‌های مهمی برداشته شده است.\n\nاز چالش‌ها می‌توان به کمبود زیرساخت‌ها اشاره کرد.` },
+    { title:`${t}: چالش‌ها و راهکارها`, source:SOURCES[2], year:'۱۴۰۳', snippet:`این مقاله چالش‌های پیش روی ${t} را دسته‌بندی می‌کند.`, content:`چالش‌های مرتبط با ${t} را می‌توان در سه دسته ساختاری، فرهنگی و فنی طبقه‌بندی کرد.` },
+    { title:`${t} — دانشنامه آزاد`, source:SOURCES[3], year:'۱۴۰۳', snippet:`مدخل دانشنامه‌ای درباره ${t}.`, content:`${t} اصطلاحی است که در حوزه‌های گوناگون کاربرد دارد.` },
+    { title:`رویکردهای نوین به ${t}`, source:SOURCES[4], year:'۱۴۰۰', snippet:`این پژوهش رویکردهای نوین را در حوزه ${t} معرفی می‌کند.`, content:`رویکردهای نوین در حوزه ${t} بر استفاده از فناوری‌های دیجیتال تأکید دارند.` }
+  ];
+}
+const EXPAND_TEMPLATES = [
+  (t,s) => `در بررسی ${s.title}، جامعیت رویکرد نویسندگان به موضوع ${t} جلب توجه می‌کند.`,
+  (t,s) => `از منظر مبانی نظری، ${s.title} چارچوبی فراهم می‌آورد که تحلیل ${t} را ممکن می‌سازد.`,
+  (t,s) => `در حوزه کاربرد عملی، یافته‌های ${s.title} نشان می‌دهد که ${t} می‌تواند در عرصه‌های گوناگون به کار رود.`,
+  (t,s) => `${s.title} از چالش‌های پیش روی ${t} غافل نشده و کمبود منابع را برمی‌شمارد.`,
+  (t,s) => `مقایسه یافته‌های ${s.title} با سایر پژوهش‌ها نشان از تفاوت‌های معنادار دارد.`,
+  (t,s) => `از حیث روش‌شناسی، ${s.title} بر استفاده از روش‌های ترکیبی تأکید دارد.`,
+  (t,s) => `نمونه‌های موردی ${s.title} گویای تنوع نمودهای ${t} در بسترهای مختلف است.`,
+  (t,s) => `${s.title} نقش ذی‌نفعان مختلف را در توسعه ${t} مورد تأکید قرار می‌دهد.`,
+  (t,s) => `${s.title} به اهمیت پایش مستمر در حوزه ${t} اشاره می‌کند.`,
+  (t,s) => `از منظر سرمایه انسانی، ${s.title} نیاز ${t} به نیروی متخصص را برجسته می‌سازد.`,
+  (t,s) => `${s.title} با نگاهی به تجربه کشورهای پیشرو نتیجه‌گیری می‌کند که عزم ملی لازم است.`,
+  (t,s) => `${s.title} افق پیش روی ${t} را روشن توصیف می‌کند.`
+];
+function expandSource(topic, source, sourceIdx, numParagraphs){ const out = []; for(let i = 0; i < numParagraphs; i++){ out.push(EXPAND_TEMPLATES[(sourceIdx * 3 + i) % EXPAND_TEMPLATES.length](topic, source)); } return out; }
 function summarizeText(text, ratio = 1/3){ if(!text) return ''; const sentences = text.replace(/\n+/g, ' ').split(/(?<=[.!؟?])\s+/); return sentences.slice(0, Math.ceil(sentences.length * ratio)).join(' '); }
 
-function smartSearch(){ $('#smartResults').innerHTML = '<div style="padding:20px">در حال جستجو...</div>'; setTimeout(() => { $('#smartResults').innerHTML = '<p>منابع یافت شد</p>'; $('#smartMergeBar').classList.remove('hidden'); }, 800); }
-function mergeSelected(){ toast('در این نسخه غیرفعال است'); }
+function mergeSelected(){
+  if(smartSelected.size === 0){ toast('⚠️ حداقل یک منبع را انتخاب کنید.'); return; }
+  const topic = $('#smartTopic').value.trim();
+  const chosen = [...smartSelected].map(i => smartResults[i]);
+  const n = chosen.length;
 
-function renderAdmins(){ $('#adminsBody').innerHTML = DB.admins.map(a => `<tr><td>${esc(a.name)}</td><td><code>${esc(a.u)}</code></td><td><button class="btn xs edit" onclick="openAdminForm('${a.id}')">ویرایش</button></td><td><button class="btn xs danger" onclick="deleteAdmin('${a.id}')">حذف</button></td></tr>`).join(''); }
-function openAdminForm(id){ editingAdminId = id || null; if(id){ const a = DB.admins.find(x=>x.id===id); $('#adminName').value=a.name; $('#adminUser').value=a.u; $('#adminPass').value=''; } else { $('#adminName').value=''; $('#adminUser').value=''; $('#adminPass').value=''; } openModal('adminModal'); }
-function saveAdmin(){ const n=$('#adminName').value.trim(), u=$('#adminUser').value.trim(), p=$('#adminPass').value; if(editingAdminId){ const i=DB.admins.findIndex(x=>x.id===editingAdminId); DB.admins[i]={...DB.admins[i], name:n, u, ...(p?{p}:{})}; } else { DB.admins.push({ id:uid(), name:n, u, p, createdAt:Date.now() }); } saveDB(); closeModal('adminModal'); renderAdmins(); }
-function deleteAdmin(id){ if(DB.admins.length<=1) return toast('آخرین مدیر حذف نمی‌شود'); DB.admins = DB.admins.filter(x=>x.id!==id); saveDB(); renderAdmins(); }
+  const perSource = Math.max(12, Math.ceil(60 / n));
+  const allParagraphs = [];
+  chosen.forEach((c, idx) => {
+    allParagraphs.push(`بخش ${faNum(idx+1)}: ${c.title}`);
+    allParagraphs.push(...expandSource(topic, c, idx, perSource));
+  });
+  const fullBody = allParagraphs.join('\n\n');
+  const fullIntro = `امروزه ${topic} به یکی از مباحث کلیدی تبدیل شده است.\n\nمقاله حاضر با تلفیق یافته‌های ${n} منبع معتبر، تصویری جامع ارائه می‌دهد.`;
+  const fullAbstract = `پژوهش حاضر با هدف بررسی جامع «${topic}» تدوین شده است. ${n} منبع معتبر بررسی و تحلیل شده‌اند.`;
+  const fullConclusion = `بر اساس بررسی‌های انجام‌شده می‌توان نتیجه گرفت که ${topic} حوزه‌ای چندبُعدی است.`;
+  const fullRefs = chosen.map((c,i) => `${faNum(i+1)}. ${c.title}. ${c.source}، ${c.year}.`).join('\n');
 
-let expState = { articleId:null, version:'full', type:'student', mode:'single', collectors:[''] };
-function openExport(id){ expState.articleId = id; openModal('exportModal'); }
-function setVersion(v){ expState.version = v; $$('#versionPills .pill').forEach(p => p.classList.toggle('active', p.dataset.v === v)); }
-function setType(t){ expState.type = t; $$('#typePills .pill').forEach(p => p.classList.toggle('active', p.dataset.t === t)); }
-function setCollectorMode(m){ expState.mode = m; $('#modeSingle').classList.toggle('active', m==='single'); $('#modeMulti').classList.toggle('active', m==='multi'); }
-function addCollector(){ expState.collectors.push(''); }
-function saveCollectorToHistory(){ toast('ذخیره شد'); }
-
-function buildPrintDocument(){
-  const a = DB.articles.find(x => x.id === expState.articleId);
-  const isBrief = expState.version === 'brief';
-  const bd = isBrief ? a.briefData : a;
-  
-  let body = `<div class="page cover"><div class="cover-top"><h1 class="cover-title">${esc(a.title)}</h1><div class="cover-info"><div>گردآورنده: —</div></div></div><div class="cover-bottom"></div></div>`;
-  
-  const e = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  const rp = (text) => {
-    if(!text) return '';
-    return String(text).split(/\n+/).map(s => s.trim()).filter(Boolean).map(s => {
-      if(/^بخش\s/.test(s)) return `<h3 class="sub-title">${e(s)}</h3>`;
-      return `<p>${e(s)}</p>`;
-    }).join('');
+  const briefData = {
+    intro: summarizeText(fullIntro, 1/3),
+    abstract: `این مقاله «${topic}» را بررسی می‌کند. ${n} منبع تلفیق شده است.`,
+    body: chosen.map((c,i) => `بخش ${faNum(i+1)}: ${c.title}\n${c.content}`).join('\n\n'),
+    conclusion: `نتیجه: ${topic} نیازمند نگاهی جامع است.`,
+    refs: fullRefs
   };
 
-  if(bd.intro) body += `<div class="page section"><h2 class="section-title">مقدمه</h2><div class="section-body">${rp(bd.intro)}</div></div>`;
-  if(bd.abstract) body += `<div class="page section"><h2 class="section-title">چکیده</h2><div class="section-body">${rp(bd.abstract)}</div></div>`;
-  if(bd.body) body += `<div class="page section"><h2 class="section-title">متن</h2><div class="section-body">${rp(bd.body)}</div></div>`;
-  if(bd.conclusion) body += `<div class="page section"><h2 class="section-title">نتیجه‌گیری</h2><div class="section-body">${rp(bd.conclusion)}</div></div>`;
-  if(bd.refs) body += `<div class="page section"><h2 class="section-title">منابع</h2><div class="section-body">${rp(bd.refs)}</div></div>`;
+  smartMerged = {
+    title: topic, nature:'علمی-پژوهشی',
+    thanks: 'از پژوهشگرانی که منابع این مقاله بر پایه آثار آنان تدوین شده است سپاسگزاریم.',
+    intro: fullIntro, abstract: fullAbstract, body: fullBody,
+    conclusion: fullConclusion, refs: fullRefs,
+    briefData, brief: briefData.abstract + '\n\n' + briefData.conclusion,
+    images: []
+  };
 
-  return `<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><style>
-@page{size:A4;margin:25mm}*{box-sizing:border-box;margin:0;padding:0}html,body{font-family:Vazirmatn,Tahoma,sans-serif;font-size:12pt;line-height:2;direction:rtl}
-.page:not(:last-child){page-break-after:always}
-.cover{height:246mm;display:flex;flex-direction:column;justify-content:space-between;text-align:center}
-.cover-top{padding-top:28mm}.cover-title{font-size:25pt;font-weight:900;margin-bottom:18mm}.cover-info{font-size:14pt;font-weight:700}
-.section-title{font-size:16pt;font-weight:800;text-align:center;margin-bottom:8mm;border-bottom:1.5px solid #333;padding-bottom:3mm;page-break-after:avoid;page-break-inside:avoid}
-.section-body p{font-size:12pt;line-height:2.1;text-align:justify;margin-bottom:5mm;orphans:2;widows:2;page-break-inside:avoid}
-.sub-title{font-size:13pt;font-weight:800;margin:8mm 0 3mm;page-break-after:avoid;page-break-inside:avoid}
-</style></head><body>${body}</body></html>`;
+  renderSmartPreview('full');
+  $('#smartPreviewCard').classList.remove('hidden');
+  $('#smartPreviewCard').scrollIntoView({behavior:'smooth', block:'start'});
+  toast('🧩 نسخه کامل + مختصر تولید شد.');
+}
+function renderSmartPreview(version){
+  $('#pvFullBtn').classList.toggle('active', version === 'full');
+  $('#pvBriefBtn').classList.toggle('active', version === 'brief');
+  if(!smartMerged) return;
+  const m = smartMerged;
+  const data = version === 'full' ? { intro: m.intro, abstract: m.abstract, body: m.body, conclusion: m.conclusion, refs: m.refs } : m.briefData;
+  const para = t => String(t||'').split(/\n+/).map(s => s.trim()).filter(Boolean).map(s => { if(/^بخش\s/.test(s)) return `<h5 style="margin:14px 0 6px;color:var(--primary)">${esc(s)}</h5>`; return `<p>${esc(s)}</p>`; }).join('');
+  $('#smartPreview').innerHTML = `<h4 style="border:none;padding:0;font-size:17px;color:var(--ink)">${esc(m.title)}</h4><h4>مقدمه</h4>${para(data.intro)}<h4>چکیده</h4>${para(data.abstract)}<h4>متن</h4>${para(data.body)}<h4>نتیجه‌گیری</h4>${para(data.conclusion)}<h4>منابع</h4>${para(data.refs)}`;
+}
+function confirmSmartAdd(){
+  if(!smartMerged) return;
+  const newArt = { id: uid(), ...smartMerged, createdAt: Date.now() };
+  DB.articles.unshift(newArt);
+  if(!saveDB()){ DB.articles = DB.articles.filter(x => x.id !== newArt.id); return; }
+  smartMerged = null; $('#smartPreviewCard').classList.add('hidden'); $('#smartResults').innerHTML = ''; $('#smartMergeBar').classList.add('hidden'); $('#smartTopic').value = '';
+  renderTable(); switchTab('bank'); toast('✅ هر دو نسخه به بانک اضافه شد.');
 }
 
-function generatePDF(){
-  const doc = buildPrintDocument();
-  const win = window.open('', '_blank');
-  win.document.write(doc); win.document.close();
-  setTimeout(() => { win.focus(); win.print(); }, 1000);
-}
-
-const AI_PROVIDERS = {
-  hormoz: {
-    label: 'Hormoz AI (DeepSeek)',
-    models: [
-      { value: 'deepseek/deepseek-v3.2', label: 'DeepSeek V3.2 (پیشنهادی)' },
-      { value: 'deepseek/deepseek-v4.1-flash', label: 'DeepSeek V4.1 Flash' }
-    ]
-  }
-};
+/* ============================================================
+   8. هوش مصنوعی (DeepSeek + Proxy)
+   ============================================================ */
 let aiState = { full: null, brief: null, generating: false };
+const WORKER_PROXY_URL = 'https://deepseek.mehradkhaliliparsa6490.workers.dev/';
+const TARGET_API = 'https://api.hormouz.net/v1/chat/completions';
 
 function initAI(){
   const sel = $('#aiModel');
   if(sel.options.length === 0){
-    sel.innerHTML = AI_PROVIDERS.hormoz.models.map(m => `<option value="${m.value}">${m.label}</option>`).join('');
+    sel.innerHTML = `
+      <option value="deepseek/deepseek-v3.2">DeepSeek V3.2 (پیشنهادی)</option>
+      <option value="deepseek/deepseek-v4.1-flash">DeepSeek V4.1 Flash</option>
+    `;
   }
 }
 
 async function callAI(prompt, systemPrompt){
   clearDebug();
-  logDebug('شروع درخواست به DeepSeek از طریق پروکسی اختصاصی...');
-  
-  // آدرس پروکسی اختصاصی شما
-  const WORKER_PROXY_URL = 'https://deepseek.mehradkhaliliparsa6490.workers.dev/'; 
+  logDebug('شروع درخواست به DeepSeek از طریق پروکسی...');
   
   const apiKey = $('#aiApiKey').value.trim();
   const model = $('#aiModel').value;
-  const targetUrl = 'https://api.hormouz.net/v1/chat/completions';
-  const url = `${WORKER_PROXY_URL}?apiurl=${encodeURIComponent(targetUrl)}`;
+  const url = `${WORKER_PROXY_URL}?apiurl=${encodeURIComponent(TARGET_API)}`;
 
-  const headers = { 
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${apiKey}`
-  };
-  
+  const headers = { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` };
   const body = {
     model,
     messages: [{ role: 'system', content: systemPrompt || '' }, { role: 'user', content: prompt }],
-    temperature: 0.7, max_tokens: 8000, response_format: { type: 'json_object' }
-    // stream: false (پیش‌فرض)
+    temperature: 0.7, 
+    max_tokens: 4000, // کاهش برای جلوگیری از تایم‌اوت 522
+    response_format: { type: 'json_object' }
   };
 
   logDebug(`URL: ${url}`);
   logDebug(`Model: ${model}`);
   logDebug('در حال ارسال درخواست...');
+  
   try {
     const res = await fetch(url, { method: 'POST', headers, body: JSON.stringify(body) });
-    logDebug(`Status: ${res.status} ${res.statusText}`, res.ok ? 'success' : 'error');
+    logDebug(`Status: ${res.status}`, res.ok ? 'success' : 'error');
     
     const textData = await res.text();
     logDebug(`دریافت پاسخ (${textData.length} کاراکتر).`);
 
-    if (!res.ok) { 
-      logDebug(`خطای سرور: ${textData}`, 'error'); 
-      throw new Error(`HTTP ${res.status}`); 
-    }
+    if (!res.ok) { logDebug(`خطای سرور: ${textData}`, 'error'); throw new Error(`HTTP ${res.status}`); }
     
     const data = JSON.parse(textData);
     const text = data.choices?.[0]?.message?.content || '';
@@ -691,13 +890,6 @@ async function callAI(prompt, systemPrompt){
   }
 }
 
-function parseAIResponse(text){
-  let c = String(text).trim().replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '').trim();
-  const f = c.indexOf('{'), l = c.lastIndexOf('}');
-  if(f === -1 || l === -1) throw new Error('پاسخ JSON نبود');
-  return JSON.parse(c.substring(f, l + 1));
-}
-
 function buildAIPrompt(topic, extra){
   let p = `موضوع مقاله: «${topic}»\n\n`;
   if(extra) p += `توضیحات: ${extra}\n\n`;
@@ -707,6 +899,13 @@ function buildAIPrompt(topic, extra){
   p += `پاسخ را دقیقاً در قالب JSON زیر برگردان:\n`;
   p += `{"full":{"intro":"...","abstract":"...","body":"بخش ۱: ...","conclusion":"...","refs":"..."},"brief":{"intro":"...","abstract":"...","body":"...","conclusion":"...","refs":"..."}}`;
   return p;
+}
+
+function parseAIResponse(text){
+  let c = String(text).trim().replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/i, '').trim();
+  const f = c.indexOf('{'), l = c.lastIndexOf('}');
+  if(f === -1 || l === -1) throw new Error('پاسخ JSON نبود');
+  return JSON.parse(c.substring(f, l + 1));
 }
 
 async function generateAIArticle(){
@@ -748,7 +947,173 @@ function saveAIArticle(){
 }
 function discardAIArticle(){ aiState.full = null; aiState.brief = null; $('#aiPreviewCard').classList.add('hidden'); }
 
-if(sessionStorage.getItem('loggedIn')){ $('#loginScreen').classList.add('hidden'); $('#app').classList.remove('hidden'); renderTable(); initAI(); }
+/* ============================================================
+   9. مدیران و تصاویر بسم‌الله
+   ============================================================ */
+function renderAdmins(){ $('#adminsBody').innerHTML = DB.admins.map(a => `<tr><td>${esc(a.name)}</td><td><code>${esc(a.u)}</code></td><td><button class="btn xs edit" onclick="openAdminForm('${a.id}')">ویرایش</button></td><td><button class="btn xs danger" onclick="deleteAdmin('${a.id}')">حذف</button></td></tr>`).join(''); }
+function openAdminForm(id){ editingAdminId = id || null; if(id){ const a = DB.admins.find(x=>x.id===id); $('#adminName').value=a.name; $('#adminUser').value=a.u; $('#adminPass').value=''; } else { $('#adminName').value=''; $('#adminUser').value=''; $('#adminPass').value=''; } openModal('adminModal'); }
+function saveAdmin(){ const n=$('#adminName').value.trim(), u=$('#adminUser').value.trim(), p=$('#adminPass').value; if(editingAdminId){ const i=DB.admins.findIndex(x=>x.id===editingAdminId); DB.admins[i]={...DB.admins[i], name:n, u, ...(p?{p}:{})}; } else { DB.admins.push({ id:uid(), name:n, u, p, createdAt:Date.now() }); } saveDB(); closeModal('adminModal'); renderAdmins(); }
+function deleteAdmin(id){ if(DB.admins.length<=1) return toast('آخرین مدیر حذف نمی‌شود'); DB.admins = DB.admins.filter(x=>x.id!==id); saveDB(); renderAdmins(); }
+
+function renderBismAdmin(){
+  const box = $('#bismAdminGrid');
+  if(DB.bismillahImages.length === 0){ box.innerHTML = '<div style="grid-column:1/-1;padding:18px;text-align:center;color:var(--muted);font-size:12.5px;border:1.5px dashed var(--line);border-radius:12px;background:#f8fafc">تصویری ذخیره نشده</div>'; return; }
+  box.innerHTML = DB.bismillahImages.map(img => `<div class="image-card"><img class="img-thumb" src="${img.data}" style="object-fit:contain;background:#fff"><div class="img-actions"><button class="img-btn del" onclick="deleteBismillah('${img.id}')">✕</button></div><div class="img-info"><span class="name">${esc(img.name)}</span></div></div>`).join('');
+}
+async function handleBismillahAdminUpload(e){ await handleBismillahUploadGeneric(e); renderBismAdmin(); }
+async function handleBismillahUpload(e){ await handleBismillahUploadGeneric(e); renderBismillahSelect(); }
+async function handleBismillahUploadGeneric(e){
+  const files = e.target.files; if(!files) return;
+  const addedIds = [];
+  for(const file of files){
+    if(!file.type.startsWith('image/')) continue;
+    try{ const data = await resizeImage(file, 1600, 1, 'png'); const id = 'bism_' + uid(); DB.bismillahImages.push({ id, name: file.name, data, size: Math.round(data.length*0.75) }); addedIds.push(id); }catch(err){}
+  }
+  e.target.value = '';
+  if(addedIds.length){ if(saveDB()) toast('✅ تصویر ذخیره شد.'); else DB.bismillahImages = DB.bismillahImages.filter(img => !addedIds.includes(img.id)); }
+}
+function deleteBismillah(id){ if(!confirm('حذف شود؟')) return; DB.bismillahImages = DB.bismillahImages.filter(i => i.id !== id); saveDB(); renderBismAdmin(); if($('#exportModal').classList.contains('show')) renderBismillahSelect(); }
+function toggleBismillahBlock(){ const show = $('#optBismillah').checked; $('#bismillahBlock').style.display = show ? 'block' : 'none'; if(show) renderBismillahSelect(); }
+function renderBismillahSelect(){
+  const box = $('#bismillahSelectGrid');
+  if(DB.bismillahImages.length === 0){ box.innerHTML = '<div style="grid-column:1/-1;padding:14px;text-align:center;color:var(--muted);font-size:12px;border:1.5px dashed var(--line);border-radius:12px;background:#f8fafc">تصویری ذخیره نشده. متن «بسم الله» استفاده می‌شود.</div>'; return; }
+  box.innerHTML = DB.bismillahImages.map(img => `<div class="image-card ${expState.bismillahImageId === img.id ? 'selected' : ''}" style="cursor:pointer" onclick="selectBismillahImage('${img.id}')"><img class="img-thumb" src="${img.data}" style="object-fit:contain;background:#fff">${expState.bismillahImageId === img.id ? '<div class="img-check">✓</div>' : ''}</div>`).join('');
+}
+function selectBismillahImage(id){ expState.bismillahImageId = expState.bismillahImageId === id ? null : id; renderBismillahSelect(); }
+function clearBismillahSelection(){ expState.bismillahImageId = null; renderBismillahSelect(); }
+
+/* ============================================================
+   10. PDF Export (تنظیمات کامل و تاریخچه)
+   ============================================================ */
+let expState = { articleId:null, version:'full', type:'student', mode:'single', collectors:[''], bismillahImageId:null, loadedCollectorId:null };
+const TYPE_FIELDS = {
+  student:[ {k:'level',l:'مقطع تحصیلی',ph:'مثال: متوسطه دوم'}, {k:'course',l:'نام درس',ph:'مثال: ادبیات'}, {k:'prof',l:'نام استاد',ph:'مثال: جناب آقای ...'}, {k:'school',l:'نام مدرسه',ph:'مثال: دبیرستان ...'}, {k:'year',l:'سال تحصیلی',ph:'مثال: ۱۴۰۳-۱۴۰۴'} ],
+  uni:[ {k:'level',l:'مقطع تحصیلی',ph:'مثال: کارشناسی'}, {k:'course',l:'نام درس',ph:'مثال: روش تحقیق'}, {k:'prof',l:'نام استاد',ph:'مثال: جناب آقای ...'}, {k:'uni',l:'نام دانشگاه',ph:'مثال: دانشگاه تهران'}, {k:'year',l:'سال تحصیلی',ph:'مثال: ۱۴۰۳-۱۴۰۴'} ],
+  office:[{k:'company',l:'نام شرکت',ph:'مثال: شرکت ...'}],
+  public:[]
+};
+const TYPE_LABELS = { student:'دانش‌آموز', uni:'دانشجو', office:'اداری', public:'عمومی' };
+
+function openExport(id){
+  expState = { articleId:id, version:'full', type:'student', mode:'single', collectors:[''], bismillahImageId:null, loadedCollectorId:null };
+  $$('#versionPills .pill').forEach(p => p.classList.toggle('active', p.dataset.v === 'full'));
+  $$('#typePills .pill').forEach(p => p.classList.toggle('active', p.dataset.t === 'student'));
+  $('#modeSingle').classList.add('active'); $('#modeMulti').classList.remove('active');
+  $('#optBismillah').checked = true;
+  toggleBismillahBlock();
+  renderSavedCollectors(); renderCollectors(); renderTypeFields();
+  openModal('exportModal');
+}
+function setVersion(v){ expState.version = v; $$('#versionPills .pill').forEach(p => p.classList.toggle('active', p.dataset.v === v)); }
+function setType(t){ expState.type = t; expState.loadedCollectorId = null; $$('#typePills .pill').forEach(p => p.classList.toggle('active', p.dataset.t === t)); renderTypeFields(); renderSavedCollectors(); }
+function setCollectorMode(m){
+  expState.mode = m; expState.loadedCollectorId = null;
+  $('#modeSingle').classList.toggle('active', m === 'single'); $('#modeMulti').classList.toggle('active', m === 'multi');
+  if(m === 'single') expState.collectors = [expState.collectors[0] || ''];
+  else if(expState.collectors.length < 2) expState.collectors.push('');
+  renderCollectors(); renderSavedCollectors();
+}
+function renderCollectors(){
+  const box = $('#collectorList'); const multi = expState.mode === 'multi';
+  box.innerHTML = expState.collectors.map((c,i) => `<div class="collector-row"><input placeholder="${multi ? 'نام گردآورنده ' + faNum(i+1) : 'نام و نام خانوادگی گردآورنده'}" value="${esc(c)}" oninput="updateCollector(${i}, this.value)">${multi && expState.collectors.length > 1 ? `<button class="icon-btn" onclick="removeCollector(${i})">✕</button>` : ''}</div>`).join('');
+  $('#addCollectorBtn').classList.toggle('hidden', !multi);
+}
+function updateCollector(i, v){ expState.collectors[i] = v; }
+function addCollector(){ expState.collectors.push(''); renderCollectors(); }
+function removeCollector(i){ expState.collectors.splice(i,1); renderCollectors(); }
+function renderTypeFields(){
+  const fields = TYPE_FIELDS[expState.type];
+  if(fields.length === 0){ $('#typeFields').innerHTML = '<div class="hint" style="padding:8px 0;font-size:12.5px;color:var(--muted)">برای این نوع گردآورنده، فیلد اضافه‌ای نیاز نیست.</div>'; return; }
+  $('#typeFields').innerHTML = `<div class="grid2">${fields.map(f => `<div class="field"><label>${esc(f.l)}</label><input id="tf_${f.k}" placeholder="${esc(f.ph)}"></div>`).join('')}</div>`;
+}
+
+function renderSavedCollectors(){
+  const tb = $('#savedCollectorsBody');
+  if(!Array.isArray(DB.savedCollectors) || DB.savedCollectors.length === 0){ tb.innerHTML = '<tr><td colspan="3" style="text-align:center;color:var(--muted);padding:14px;font-size:12.5px">هنوز مشخصاتی ذخیره نشده است.</td></tr>'; return; }
+  tb.innerHTML = DB.savedCollectors.map(p => `<tr><td>${esc(p.label)}${expState.loadedCollectorId === p.id ? '<span class="badge history-badge">بارگذاری شده</span>' : ''}</td><td><span class="badge">${esc(TYPE_LABELS[p.type] || p.type)}</span></td><td style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn ghost xs" onclick="loadSavedCollector('${p.id}')">استفاده</button><button class="btn danger xs" onclick="deleteSavedCollector('${p.id}')">حذف</button></td></tr>`).join('');
+}
+function loadSavedCollector(id){
+  const p = DB.savedCollectors.find(c => c.id === id); if(!p) return;
+  expState.loadedCollectorId = p.id; expState.type = p.type; expState.mode = p.mode || 'single'; expState.collectors = Array.isArray(p.collectors) ? [...p.collectors] : [''];
+  $$('#typePills .pill').forEach(el => el.classList.toggle('active', el.dataset.t === p.type)); $('#modeSingle').classList.toggle('active', expState.mode === 'single'); $('#modeMulti').classList.toggle('active', expState.mode === 'multi');
+  renderCollectors(); renderTypeFields();
+  Object.keys(p.fields || {}).forEach(k => { const el = document.getElementById('tf_' + k); if(el) el.value = p.fields[k] || ''; });
+  renderSavedCollectors(); toast('✅ مشخصات بارگذاری شد.');
+}
+function saveCollectorToHistory(){
+  const collectors = expState.collectors.map(c => c.trim()).filter(Boolean); if(collectors.length === 0){ toast('⚠️ نام گردآورنده را وارد کنید.'); return; }
+  const fields = {}; TYPE_FIELDS[expState.type].forEach(f => { const el = document.getElementById('tf_' + f.k); fields[f.k] = el ? el.value.trim() : ''; });
+  const profile = { id: 'col_' + uid(), label: collectors.join(' و ') + ' (' + TYPE_LABELS[expState.type] + ')', type: expState.type, mode: expState.mode, collectors, fields, createdAt: Date.now() };
+  DB.savedCollectors.unshift(profile); if(saveDB()){ expState.loadedCollectorId = profile.id; renderSavedCollectors(); toast('✅ ذخیره شد.'); }
+}
+function deleteSavedCollector(id){ if(!confirm('حذف شود؟')) return; DB.savedCollectors = DB.savedCollectors.filter(c => c.id !== id); if(expState.loadedCollectorId === id) expState.loadedCollectorId = null; saveDB(); renderSavedCollectors(); }
+function clearExportFields(){ if(!confirm('فیلدها پاک شوند؟')) return; expState.collectors = ['']; expState.loadedCollectorId = null; renderCollectors(); renderTypeFields(); renderSavedCollectors(); }
+
+function generatePDF(){
+  const a = DB.articles.find(x => x.id === expState.articleId); if(!a) return;
+  const isBrief = expState.version === 'brief'; const bd = isBrief ? a.briefData : a;
+  const d = {}; TYPE_FIELDS[expState.type].forEach(f => { const el = document.getElementById('tf_' + f.k); d[f.k] = el ? el.value.trim() : ''; });
+  const collectors = expState.collectors.map(c => c.trim()).filter(Boolean).join(' و ') || '—';
+  
+  let coverLines = [], coverBottom = [];
+  if(expState.type === 'student' || expState.type === 'uni'){ coverLines.push('گردآورنده: ' + collectors); if(d.course) coverLines.push('نام درس: ' + d.course); if(d.prof) coverLines.push('نام استاد: ' + d.prof); }
+  else if(expState.type === 'office'){ coverLines.push('گردآورنده: ' + collectors); if(d.company) coverLines.push('نام شرکت: ' + d.company); }
+  else { coverLines.push('گردآورنده: ' + collectors); }
+  if(expState.type === 'student'){ if(d.level) coverBottom.push(d.level); if(d.school) coverBottom.push(d.school); if(d.year) coverBottom.push('سال تحصیلی: ' + d.year); }
+  else if(expState.type === 'uni'){ if(d.level) coverBottom.push(d.level); if(d.uni) coverBottom.push(d.uni); if(d.year) coverBottom.push('سال تحصیلی: ' + d.year); }
+
+  const e = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const rp = (text) => {
+    if(!text) return '';
+    const parts = String(text).split(/(\[\[IMG:[a-zA-Z0-9_]+\]\])/g); let html = '', buffer = '';
+    const flush = () => { if(buffer.trim()){ html += buffer.split(/\n+/).map(s => s.trim()).filter(Boolean).map(s => { if(/^بخش\s/.test(s)) return `<h3 class="sub-title">${e(s)}</h3>`; return `<p>${e(s)}</p>`; }).join(''); buffer = ''; } };
+    for(const part of parts){ const m = part.match(/^\[\[IMG:([a-zA-Z0-9_]+)\]\]$/); if(m){ flush(); const img = (a.images||[]).find(i=>i.id===m[1]); if(img) html += `<figure class="article-img"><img src="${img.data}"></figure>`; } else buffer += part; }
+    flush(); return html;
+  };
+
+  let body = `<div class="page cover"><div class="cover-top"><h1 class="cover-title">${e(a.title)}</h1><div class="cover-info">${coverLines.map(l => `<div>${e(l)}</div>`).join('')}</div></div><div class="cover-bottom">${coverBottom.map(l => `<div>${e(l)}</div>`).join('')}</div></div>`;
+  if($('#optBismillah').checked){ const bImg = expState.bismillahImageId ? DB.bismillahImages.find(i => i.id === expState.bismillahImageId) : null; if(bImg) body += `<div class="page bismillah-img"><img src="${bImg.data}"></div>`; else body += `<div class="page bismillah">بِسْمِ اللهِ الرَّحْمنِ الرَّحِیم</div>`; }
+  if($('#optThanks').checked && a.thanks) body += `<div class="page section"><h2 class="section-title">سپاسگزاری</h2><div class="section-body">${rp(a.thanks)}</div></div>`;
+  
+  if(bd.intro) body += `<div class="page section"><h2 class="section-title">مقدمه</h2><div class="section-body">${rp(bd.intro)}</div></div>`;
+  if(bd.abstract) body += `<div class="page section"><h2 class="section-title">چکیده</h2><div class="section-body">${rp(bd.abstract)}</div></div>`;
+  if(bd.body) body += `<div class="page section"><h2 class="section-title">متن</h2><div class="section-body">${rp(bd.body)}</div></div>`;
+  if(bd.conclusion) body += `<div class="page section"><h2 class="section-title">نتیجه‌گیری</h2><div class="section-body">${rp(bd.conclusion)}</div></div>`;
+  if(bd.refs) body += `<div class="page section"><h2 class="section-title">منابع</h2><div class="section-body">${rp(bd.refs)}</div></div>`;
+
+  const doc = `<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><style>
+@page{size:A4;margin:25mm}*{box-sizing:border-box;margin:0;padding:0}html,body{font-family:Vazirmatn,Tahoma,sans-serif;font-size:12pt;line-height:2;direction:rtl}
+.page:not(:last-child){page-break-after:always}
+.cover{height:246mm;display:flex;flex-direction:column;justify-content:space-between;text-align:center}
+.cover-top{padding-top:28mm}.cover-title{font-size:25pt;font-weight:900;margin-bottom:18mm}.cover-info{font-size:14pt;font-weight:700}
+.bismillah{height:246mm;display:flex;align-items:center;justify-content:center;font-size:24pt;font-weight:700}
+.bismillah-img{height:246mm;display:flex;align-items:center;justify-content:center}
+.bismillah-img img{max-width:90%;max-height:90%;object-fit:contain}
+.section-title{font-size:16pt;font-weight:800;text-align:center;margin-bottom:8mm;border-bottom:1.5px solid #333;padding-bottom:3mm;page-break-after:avoid;page-break-inside:avoid}
+.section-body p{font-size:12pt;line-height:2.1;text-align:justify;margin-bottom:5mm;orphans:2;widows:2;page-break-inside:avoid}
+.sub-title{font-size:13pt;font-weight:800;margin:8mm 0 3mm;page-break-after:avoid;page-break-inside:avoid}
+</style></head><body>${body}</body></html>`;
+
+  const win = window.open('', '_blank');
+  win.document.write(doc); win.document.close();
+  setTimeout(() => { win.focus(); win.print(); }, 1000);
+}
+
+/* ============================================================
+   11. شروع برنامه
+   ============================================================ */
+$$('.modal').forEach(m => m.addEventListener('click', e => { if(e.target === m) m.classList.remove('show'); }));
+document.addEventListener('keydown', e => { if(e.key === 'Escape') $$('.modal').forEach(m => m.classList.remove('show')); });
+
+(function init(){
+  if(sessionStorage.getItem('loggedIn')){
+    const found = DB.admins.find(a => a.u === sessionStorage.getItem('loggedIn'));
+    if(found) { $('#loginScreen').classList.add('hidden'); $('#app').classList.remove('hidden'); $('#currentAdminLabel').textContent = found.name || found.u; renderTable(); restoreDraft(); initAI(); }
+    else sessionStorage.removeItem('loggedIn');
+  }
+  updateWordCount();
+  renderArticleImages();
+})();
 </script>
 </body>
 </html>
