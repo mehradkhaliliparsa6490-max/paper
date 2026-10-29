@@ -53,7 +53,8 @@ td{padding:10px 12px;border-bottom:1px solid #f1f5f9}
 .reader{font-size:14.5px;line-height:2.1}
 .reader h4{font-size:15px;color:var(--pd);margin:20px 0 8px;padding-right:10px;border-right:4px solid var(--p)}
 .reader h5{margin:14px 0 6px;color:var(--p);font-size:14px}
-.reader p{margin-bottom:10px;text-align:justify}
+.reader p{margin-bottom:10px;text-align:justify;text-align-last:start;overflow-wrap:anywhere}
+.reader .u{text-align:right;text-align-last:right;unicode-bidi:plaintext;font-size:12.5px}
 .modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:flex-start;justify-content:center;z-index:200;padding:24px 14px;overflow-y:auto}
 .modal.show{display:flex}
 .mb{background:#fff;border-radius:16px;width:100%;max-width:760px;margin:auto}
@@ -213,11 +214,20 @@ function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');cl
 const openModal=id=>document.getElementById(id).classList.add('show'), closeModal=id=>document.getElementById(id).classList.remove('show');
 const showOv=m=>{$('#ovMsg').textContent=m;$('#ov').classList.remove('hidden')}, hideOv=()=>$('#ov').classList.add('hidden');
 const clean=t=>String(t||'').replace(/\[\[IMG:[^\]]+\]\]/g,'');
-const para=(t,m)=>String(t||'').split(/(\[\[IMG:[a-zA-Z0-9_]+\]\])/g).map(p=>{const k=p.match(/^\[\[IMG:([a-zA-Z0-9_]+)\]\]$/);if(k){const i=m&&m[k[1]];return i?`<figure class="fg"><img src="${i.data}"></figure>`:''}return p.split(/\n+/).map(x=>x.trim()).filter(Boolean).map(x=>/^بخش\s/.test(x)?`<h5>${esc(x)}</h5>`:`<p>${esc(x)}</p>`).join('')}).join('');
+const isH=x=>/^بخش\s+[\d۰-۹]+\s*[:：]/.test(x);
+const sents=t=>String(t||'').replace(/\s+/g,' ').trim().split(/(?<=[.!؟?])\s+/).filter(Boolean);
+const firstS=(t,n)=>sents(clean(t)).slice(0,n).join(' ');
+function lineHTML(x,pdf){
+  if(isH(x))return pdf?`<h3 class="st" dir="rtl">${esc(x)}</h3>`:`<h5 dir="rtl">${esc(x)}</h5>`;
+  if(/^https?:\/\/\S+$/.test(x))return `<p class="u" dir="ltr">${esc(x)}</p>`;
+  return `<p dir="${/[\u0600-\u06FF]/.test(x)?'rtl':'ltr'}">${esc(x)}</p>`;
+}
+function summP(t,r=1/3){return clean(t).split(/\n+/).map(x=>x.trim()).filter(Boolean).map(l=>{if(isH(l))return l;const q=sents(l);return q.slice(0,Math.max(1,Math.ceil(q.length*r))).join(' ')}).join('\n')}
+const para=(t,m)=>String(t||'').split(/(\[\[IMG:[a-zA-Z0-9_]+\]\])/g).map(p=>{const k=p.match(/^\[\[IMG:([a-zA-Z0-9_]+)\]\]$/);if(k){const i=m&&m[k[1]];return i?`<figure class="fg"><img src="${i.data}"></figure>`:''}return p.split(/\n+/).map(x=>x.trim()).filter(Boolean).map(x=>lineHTML(x,false)).join('')}).join('');
 function summ(t,r=1/3){const s=clean(t).replace(/\n+/g,' ').split(/(?<=[.!؟?])\s+/);return s.slice(0,Math.max(1,Math.ceil(s.length*r))).join(' ')}
 function version(a,v){
   if(v!=='brief')return a;
-  return a.briefData||{intro:summ(a.intro),abstract:a.abstract,body:summ(a.body),conclusion:a.conclusion,refs:a.refs};
+  return a.briefData||{intro:summP(a.intro),abstract:a.abstract,body:summP(a.body),conclusion:summP(a.conclusion,.6),refs:a.refs};
 }
 function sections(d,m){
   let h='';
@@ -271,8 +281,8 @@ function saveArticle(){
   const d={title,nature:$('#fNature').value,thanks:$('#fThanks').value.trim(),abstract:$('#fAbstract').value.trim(),intro:$('#fIntro').value.trim(),body:$('#fBody').value.trim(),conclusion:$('#fConclusion').value.trim(),refs:$('#fRefs').value.trim(),images:currentImages};
   if(editingId){const i=DB.articles.findIndex(x=>x.id===editingId);const old=DB.articles[i];
     // اگر متن کامل تغییر کرده، نسخه مختصر قدیمی (که از AI آمده) معتبر نیست
-    const changed=old.body!==d.body||old.intro!==d.intro; DB.articles[i]={...old,...d,briefData:changed?undefined:old.briefData};}
-  else DB.articles.unshift({id:uid(),...d,images:[],createdAt:Date.now()});
+    const changed=['body','intro','abstract','conclusion','refs'].some(k=>(old[k]||'')!==d[k]); DB.articles[i]={...old,...d,briefData:changed?undefined:old.briefData};}
+  else DB.articles.unshift({id:uid(),...d,createdAt:Date.now()});
   if(!saveDB())return; resetForm(); switchTab('bank'); toast('✅ ذخیره شد');
 }
 function resetForm(){editingId=null;currentImages=[];renderArticleImages();$('#ft').textContent='➕ مقاله جدید';FIELDS.forEach(i=>$('#'+i).value='');$('#fNature').value='';localStorage.removeItem(DRAFT);$('#draftB').classList.add('hidden');wordCount()}
@@ -331,28 +341,36 @@ async function smartAuto(){
   $$('#smartResults input[type=checkbox]').forEach((c,i)=>c.checked=smartSelected.has(i));
   updateSel(); await mergeLocal();
 }
+const tidy=t=>String(t||'').replace(/\{\\displaystyle[^}]*\}/g,'').replace(/\[\s*[\d۰-۹]+\s*\]/g,'').replace(/[ \t]+/g,' ').replace(/ ?\n ?/g,'\n').replace(/\n{2,}/g,'\n').trim();
 async function mergeLocal(){
   if(!smartSelected.size)return toast('⚠️ حداقل یک منبع انتخاب کنید');
   const topic=$('#smartTopic').value.trim(), sel=[...smartSelected].map(i=>smartResults[i]);
   showOv('📥 در حال دریافت متن کامل منابع…');
   try{
-    const secs=[], leads=[];
+    const secs=[], leads=[], seen={};
     for(const r of sel){
       let t=r.content; if(r.lang){try{t=await fullWiki(r)}catch(e){}}
-      const parts=t.split(/\n=+\s*(.+?)\s*=+\s*\n/); // [lead, h1, t1, h2, t2…]
-      if(parts[0].trim())leads.push({title:r.title,text:parts[0].trim()});
-      for(let i=1;i<parts.length;i+=2){const h=parts[i].trim(),b=(parts[i+1]||'').trim();if(b.length>80&&!SKIP.test(h))secs.push({h,t:cut(b,1300)})}
+      const parts=String(t).split(/\n=+\s*(.+?)\s*=+\s*\n/); // [lead, h1, t1, h2, t2…]
+      const lead=tidy(parts[0]); if(lead)leads.push({title:r.title,text:lead});
+      for(let i=1;i<parts.length;i+=2){
+        const h=parts[i].trim(), b=tidy(parts[i+1]);
+        if(b.length<80||SKIP.test(h))continue;
+        if(seen[h]!==undefined){const e=secs[seen[h]];if(e.t.length<1500)e.t+='\n'+cut(b,Math.min(800,1800-e.t.length));continue}
+        seen[h]=secs.length;secs.push({h,t:cut(b,1300)});
+      }
     }
     if(!leads.length)throw new Error('متن قابل استخراج نبود');
-    const intro=cut(leads[0].text,1100);
-    const body=[...leads.slice(1).map(l=>({h:'درباره «'+l.title+'»',t:cut(l.text,900)})),...secs].slice(0,12)
-      .map((s,i)=>`بخش ${i+1}: ${s.h}\n${s.t}`).join('\n\n');
-    const abstract=summ(intro,.5);
-    const conclusion=summ(leads.map(l=>cut(l.text,300)).join(' '),1);
-    const refs=sel.map(r=>`${r.title} — ${r.source}${r.url?' — '+r.url:''}`).join('\n');
-    const full={intro,abstract,body,conclusion,refs};
-    smartMerged={title:topic,nature:'مروری',thanks:'',...full,
-      briefData:{intro:summ(intro,.6),abstract,body:body.split('\n\n').slice(0,4).map(p=>{const [h,...t]=p.split('\n');return h+'\n'+summ(t.join(' '),.4)}).join('\n\n'),conclusion:summ(conclusion,.6),refs},images:[]};
+    const intro=cut(leads[0].text,1200);
+    const all=[...leads.slice(1).map(l=>({h:'درباره «'+l.title+'»',t:cut(l.text,900)})),...secs].slice(0,12);
+    const mk=list=>list.map((x,i)=>`بخش ${faNum(i+1)}: ${x.h}\n${x.t}`).join('\n\n');
+    // نسخه مختصر: حداکثر ۵ بخش پراکنده در کل مقاله، هر کدام ۲ جمله اول، با شماره‌گذاری مجدد
+    const pick=all.length<=5?all:[0,1,2,3,4].map(k=>all[Math.round(k*(all.length-1)/4)]);
+    const brSecs=[...new Set(pick)].map(x=>({h:x.h,t:firstS(x.t,2)}));
+    const abstract=firstS(intro,3);
+    const conclusion=all.slice(0,3).map(x=>firstS(x.t,1)).filter(Boolean).join(' ');
+    const refs=sel.map(r=>`${r.title} — ${r.source}`+(r.url?'\n'+r.url:'')).join('\n');
+    smartMerged={title:topic,nature:'مروری',thanks:'',intro,abstract,body:mk(all),conclusion,refs,
+      briefData:{intro:firstS(intro,3),abstract:firstS(intro,2),body:mk(brSecs),conclusion:firstS(conclusion,2),refs},images:[]};
     renderSmart('full');$('#smartPrev').classList.remove('hidden');
     toast('✅ مقاله ساخته شد؛ پیش‌نمایش را بررسی کنید');
   }catch(e){toast('❌ '+e.message)}finally{hideOv()}
@@ -447,7 +465,7 @@ function addAdmin(){
   const p=prompt('رمز عبور:');if(!p)return;
   DB.admins.push({id:uid(),name:name.trim(),u:u.trim(),p,createdAt:Date.now()});saveDB();renderAdmins();
 }
-function delAdmin(id){if(DB.admins.length<=1)return toast('آخرین مدیر قابل حذف نیست');if(!confirm('حذف شود؟'))return;DB.admins=DB.admins.filter(a=>a.id!==id);saveDB();renderAdmins()}
+function delAdmin(id){const me=DB.admins.find(a=>a.id===id);if(me&&me.u===sessionStorage.getItem('loggedIn'))return toast('مدیری که وارد شده قابل حذف نیست');if(DB.admins.length<=1)return toast('آخرین مدیر قابل حذف نیست');if(!confirm('حذف شود؟'))return;DB.admins=DB.admins.filter(a=>a.id!==id);saveDB();renderAdmins()}
 
 /* ===== خروجی PDF ===== */
 const TF={
@@ -470,7 +488,7 @@ function generatePDF(){
   if(ex.t==='office'&&d.company)top.push('نام شرکت: '+d.company);
   if(ex.t==='student'||ex.t==='uni'){if(d.level)bot.push(d.level);if(d.school||d.uni)bot.push(d.school||d.uni);if(d.year)bot.push('سال تحصیلی: '+d.year)}
   const M=imgMap(a.images);
-  const rp=t=>String(t||'').split(/(\[\[IMG:[a-zA-Z0-9_]+\]\])/g).map(p=>{const k=p.match(/^\[\[IMG:([a-zA-Z0-9_]+)\]\]$/);if(k){const i=M[k[1]];return i?`<figure class="fg"><img src="${i.data}"></figure>`:''}return p.split(/\n+/).map(x=>x.trim()).filter(Boolean).map(x=>/^بخش\s/.test(x)?`<h3 class="st">${esc(x)}</h3>`:`<p>${esc(x)}</p>`).join('')}).join('');
+  const rp=t=>String(t||'').split(/(\[\[IMG:[a-zA-Z0-9_]+\]\])/g).map(p=>{const k=p.match(/^\[\[IMG:([a-zA-Z0-9_]+)\]\]$/);if(k){const i=M[k[1]];return i?`<figure class="fg"><img src="${i.data}"></figure>`:''}return p.split(/\n+/).map(x=>x.trim()).filter(Boolean).map(x=>lineHTML(x,true)).join('')}).join('');
   const sec=(t,x)=>x?`<div class="page"><h2 class="sh">${t}</h2>${rp(x)}</div>`:'';
   let b=`<div class="page cover"><div><h1 class="ct">${esc(a.title)}</h1><div class="ci">${top.map(l=>`<div>${esc(l)}</div>`).join('')}</div></div><div class="ci">${bot.map(l=>`<div>${esc(l)}</div>`).join('')}</div></div>`;
   if($('#optBism').checked){const bi=DB.bismillahImages.find(i=>i.id===bismSel);b+=bi?`<div class="page bism"><img src="${bi.data}" style="max-width:90%;max-height:90%;object-fit:contain"></div>`:'<div class="page bism">بِسْمِ اللهِ الرَّحْمنِ الرَّحِیم</div>'}
@@ -480,10 +498,10 @@ function generatePDF(){
 .page:not(:last-child){page-break-after:always}.cover{height:246mm;display:flex;flex-direction:column;justify-content:space-between;text-align:center;padding-top:28mm}
 .ct{font-size:25pt;font-weight:900;margin-bottom:18mm}.ci{font-size:14pt;font-weight:700}.bism{height:246mm;display:flex;align-items:center;justify-content:center;font-size:24pt;font-weight:700}
 .sh{font-size:16pt;font-weight:800;text-align:center;margin-bottom:8mm;border-bottom:1.5px solid #333;padding-bottom:3mm}
-p{text-align:justify;margin-bottom:5mm;orphans:2;widows:2}.st{font-size:13pt;font-weight:800;margin:8mm 0 3mm;page-break-after:avoid}.fg{margin:6mm 0;text-align:center;page-break-inside:avoid}.fg img{max-width:100%;max-height:120mm}`;
+html,body{direction:rtl;text-align:right}p{text-align:justify;text-align-last:start;margin-bottom:5mm;orphans:2;widows:2;overflow-wrap:anywhere;hyphens:none}.u{text-align:right;text-align-last:right;font-size:10.5pt;unicode-bidi:plaintext}.st{font-size:13pt;font-weight:800;margin:8mm 0 3mm;page-break-after:avoid}.fg{margin:6mm 0;text-align:center;page-break-inside:avoid}.fg img{max-width:100%;max-height:120mm}`;
   const w=window.open('','_blank'); if(!w)return toast('⚠️ پنجره باز نشد؛ مسدودکننده پاپ‌آپ را غیرفعال کنید');
   w.document.write(`<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="UTF-8"><title>${esc(a.title)}</title><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css"><style>${css}</style></head><body>${b}</body></html>`);
-  w.document.close(); setTimeout(()=>{w.focus();w.print()},1200);
+  w.document.close(); let done=false;const go=()=>{if(done)return;done=true;w.focus();w.print()};((w.document.fonts&&w.document.fonts.ready)||Promise.resolve()).then(()=>setTimeout(go,500));setTimeout(go,5000);
 }
 
 /* ===== شروع ===== */
